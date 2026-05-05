@@ -1,6 +1,6 @@
 # rudraanshpatel.github.io
  
-Personal portfolio website of **Rudraansh Patel** — CSE student, software engineer, and competitive programmer.
+Personal portfolio website of **Rudraansh Patel** — software engineer and competitive programmer.
  
 🌐 **Live at [rudraanshpatel.in](https://rudraanshpatel.in)**
  
