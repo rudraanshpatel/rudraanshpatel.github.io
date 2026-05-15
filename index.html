@@ -3,9 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <meta name="description" content="Portfolio of Rudraansh Patel">
+  <title>Rudraansh Patel</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <p>This website is under construction</p>
+  <div class="theme-toggle">
+    <span id="theme-label">Light</span>
+    <label class="switch">
+      <input type="checkbox" id="theme-switch">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <h1>Rudraansh Patel</h1>
+  <p>Portfolio coming soon<span class="dots"></span></p>
+
+  <script>
+    const toggle = document.getElementById('theme-switch');
+    const label = document.getElementById('theme-label');
+    const saved = localStorage.getItem('theme');
+
+    function applyTheme(isLight) {
+      document.body.classList.toggle('light', isLight);
+      toggle.checked = isLight;
+      label.textContent = isLight ? 'Dark' : 'Light';
+    }
+
+    applyTheme(saved === 'light');
+
+    toggle.addEventListener('change', () => {
+      const isLight = toggle.checked;
+      applyTheme(isLight);
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+  </script>
 </body>
 </html>
