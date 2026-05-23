@@ -131,6 +131,7 @@ input:checked + .slider::before {
   font-family: inherit;
   opacity: 0.85;
 }
+
 .title {
       font-size: 18px;
       color: #f4ede1;
