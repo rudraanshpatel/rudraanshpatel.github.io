@@ -1,0 +1,71 @@
+# .github/workflows/update-leetcode.yml
+# Fetches LeetCode's full problem list and commits it as problems.json.
+# Runs weekly + on-demand. Server-side fetch — no CORS issues.
+
+name: Update LeetCode problems
+
+on:
+  # Run every Monday at 03:00 UTC
+  schedule:
+    - cron: "0 3 * * 1"
+  # Allow manual runs from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write     # needed so the action can commit back
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Fetch problems from LeetCode
+        run: |
+          # LeetCode's own endpoint works fine server-to-server.
+          # We pretend to be a browser; otherwise it sometimes 403s.
+          curl -sSL \
+            -H "User-Agent: Mozilla/5.0 (compatible; rudraanshpatel.in updater)" \
+            -H "Accept: application/json" \
+            "https://leetcode.com/api/problems/all/" \
+            > raw.json
+
+          # Sanity check: file should be substantial, not an error page.
+          size=$(wc -c < raw.json)
+          echo "Fetched $size bytes"
+          if [ "$size" -lt 100000 ]; then
+            echo "::error::Response too small, likely an error page"
+            head -c 500 raw.json
+            exit 1
+          fi
+
+      - name: Build slim problems.json
+        run: |
+          # Strip the response down to {id: slug} for every public problem.
+          # jq is preinstalled on ubuntu-latest runners.
+          jq '[
+            .stat_status_pairs[]
+            | select(.paid_only == false)
+            | {
+                id:   .stat.frontend_question_id,
+                slug: .stat.question__title_slug
+              }
+          ] | sort_by(.id)
+            | { updated: (now | todate), count: length, problems: . }' \
+            raw.json > problems.json
+
+          rm raw.json
+          echo "Built problems.json with $(jq '.count' problems.json) problems"
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add problems.json
+          if git diff --staged --quiet; then
+            echo "No changes — nothing to commit"
+          else
+            git commit -m "chore: refresh LeetCode problems.json"
+            git push
+          fi
