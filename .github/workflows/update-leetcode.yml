@@ -44,11 +44,11 @@ jobs:
         run: |
           jq '[
             .stat_status_pairs[]
-            
             | {
-                id:    .stat.frontend_question_id,
-                title: .stat.question__title,
-                slug:  .stat.question__title_slug
+                id:      .stat.frontend_question_id,
+                title:   .stat.question__title,
+                slug:    .stat.question__title_slug,
+                premium: .paid_only
               }
           ] | sort_by(.id)
             | { updated: (now | todate), count: length, problems: . }' \
