@@ -110,3 +110,24 @@ input:checked + .slider::before {
   75%  { content: '....'; }
   100% { content: ''; }
 }
+
+/* Little hint line under "coming soon" */
+.hint {
+  margin-top: 1.2rem;
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+.hint a {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--subtext);
+  padding-bottom: 1px;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+.hint a:hover {
+  border-bottom-color: var(--text);
+}
+.hint code {
+  font-family: inherit;
+  opacity: 0.85;
+}
