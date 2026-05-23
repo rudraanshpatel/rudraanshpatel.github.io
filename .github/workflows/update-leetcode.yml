@@ -48,6 +48,13 @@ jobs:
                 id:      .stat.frontend_question_id,
                 title:   .stat.question__title,
                 slug:    .stat.question__title_slug,
+                difficulty: (
+                  if   .difficulty.level == 1 then "Easy"
+                  elif .difficulty.level == 2 then "Medium"
+                  elif .difficulty.level == 3 then "Hard"
+                  else "Unknown"
+                  end
+                ),
                 premium: .paid_only
               }
           ] | sort_by(.id)
