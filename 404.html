@@ -121,9 +121,38 @@
           return r.json();
         })
         .then(function (data) {
-          // The proxy returns { questionFrontendId, titleSlug, ... }
-          var slug = data && (data.titleSlug || data.title_slug);
+          // The proxy's response shape has changed before and may again.
+          // Rather than guess at field names, walk the whole object and
+          // pick the first string that looks like a LeetCode slug.
+          // Slugs are lowercase letters, digits, and hyphens; at least
+          // two parts joined by a hyphen (e.g. "two-sum", "jump-game",
+          // "longest-substring-without-repeating-characters").
+          var SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)+$/;
+          var slug = null;
+          (function walk(node) {
+            if (slug || node == null) return;
+            if (typeof node === 'string') {
+              if (SLUG_RE.test(node)) slug = node;
+              return;
+            }
+            if (typeof node !== 'object') return;
+            // Prefer obvious key names first so we don't accidentally
+            // grab a slug from a "similarProblems" list or anything
+            // nested deep.
+            var preferred = ['titleSlug', 'title_slug', 'slug', 'questionTitleSlug'];
+            for (var i = 0; i < preferred.length; i++) {
+              var v = node[preferred[i]];
+              if (typeof v === 'string' && SLUG_RE.test(v)) { slug = v; return; }
+            }
+            // Fall back to a recursive walk.
+            for (var k in node) {
+              if (Object.prototype.hasOwnProperty.call(node, k)) walk(node[k]);
+              if (slug) return;
+            }
+          })(data);
+
           if (!slug) {
+            console.warn('[lc-redirect] no slug found in response:', data);
             statusEl.textContent = 'no such problem (#' + n + ')';
             setTimeout(showNotFound, 1200);
             return;
