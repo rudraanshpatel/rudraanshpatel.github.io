@@ -42,19 +42,18 @@ jobs:
 
       - name: Build slim problems.json
         run: |
-          # Strip the response down to {id: slug} for every public problem.
-          # jq is preinstalled on ubuntu-latest runners.
           jq '[
             .stat_status_pairs[]
             | select(.paid_only == false)
             | {
-                id:   .stat.frontend_question_id,
-                slug: .stat.question__title_slug
+                id:    .stat.frontend_question_id,
+                title: .stat.question__title,
+                slug:  .stat.question__title_slug
               }
           ] | sort_by(.id)
             | { updated: (now | todate), count: length, problems: . }' \
             raw.json > problems.json
-
+            
           rm raw.json
           echo "Built problems.json with $(jq '.count' problems.json) problems"
 
