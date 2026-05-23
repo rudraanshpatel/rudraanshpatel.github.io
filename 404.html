@@ -1,67 +1,59 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Not found — rudraanshpatel.in</title>
-  <style>
-    :root { color-scheme: light dark; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #0e0e12;
-      color: #f4ede1;
-      text-align: center;
-      padding: 24px;
-    }
-    .wrap { max-width: 480px; }
-    h1 { font-size: 64px; margin: 0 0 8px; font-weight: 300; letter-spacing: -0.02em; }
-    p { color: rgba(244,237,225,0.6); margin: 0 0 24px; line-height: 1.6; }
-    a { color: #ff7a3d; text-decoration: none; border-bottom: 1px solid rgba(255,122,61,0.4); }
-    a:hover { border-bottom-color: #ff7a3d; }
-    .status {
-      font-family: ui-monospace, "SF Mono", Menlo, monospace;
-      font-size: 13px;
-      color: rgba(244,237,225,0.4);
-      margin-top: 16px;
-    }
-    .hidden { display: none; }
-  </style>
-</head>
 <body>
   <div class="wrap">
-    <!-- Default 404 view, hidden while we're redirecting -->
+    <!-- Default 404 view -->
     <div id="notFound" class="hidden">
       <h1>404</h1>
       <p>This page doesn't exist. Head <a href="/">home</a>, or try a problem number like <a href="/1">/1</a>.</p>
     </div>
 
-    <!-- Shown while we're looking up a LeetCode problem -->
+    <!-- Shown while looking up the problem -->
     <div id="redirecting">
       <h1 id="numLabel">…</h1>
       <p>Looking up LeetCode problem…</p>
       <div class="status" id="status"></div>
     </div>
+
+    <!-- Shown when the problem is premium -->
+    <div id="premium" class="hidden">
+      <h1 id="premiumNum">…</h1>
+      <p id="premiumTitle" class="title"></p>
+      <p>This is a LeetCode <strong>premium</strong> problem. Where would you like to go?</p>
+      <div class="choices">
+        <a id="goLeetcode" href="#" class="btn">Open on LeetCode</a>
+        <a id="goGoogle" href="#" class="btn btn--secondary">Search on Google</a>
+      </div>
+      <p class="footnote"><a href="/">← back home</a></p>
+    </div>
   </div>
 
   <script>
     (function () {
-      // ---- parse the path ----
-      // Accept "/1", "/1/", "/0042" — anything that's just digits.
       var path = window.location.pathname.replace(/^\/+|\/+$/g, '');
       var match = /^(\d+)$/.exec(path);
 
       var notFoundEl = document.getElementById('notFound');
       var redirectingEl = document.getElementById('redirecting');
+      var premiumEl = document.getElementById('premium');
       var numLabel = document.getElementById('numLabel');
       var statusEl = document.getElementById('status');
+      var premiumNum = document.getElementById('premiumNum');
+      var premiumTitle = document.getElementById('premiumTitle');
+      var goLeetcode = document.getElementById('goLeetcode');
+      var goGoogle = document.getElementById('goGoogle');
 
       function showNotFound() {
         redirectingEl.classList.add('hidden');
         notFoundEl.classList.remove('hidden');
+      }
+
+      function showPremium(entry) {
+        premiumNum.textContent = '#' + entry.id;
+        premiumTitle.textContent = entry.title;
+        goLeetcode.href = 'https://leetcode.com/problems/' + entry.slug + '/description/';
+        var q = encodeURIComponent('"' + entry.title + '" leetcode solution');
+        goGoogle.href = 'https://www.google.com/search?q=' + q;
+        redirectingEl.classList.add('hidden');
+        premiumEl.classList.remove('hidden');
       }
 
       function go(slug) {
@@ -77,29 +69,28 @@
       numLabel.textContent = '#' + n;
       statusEl.textContent = 'loading index…';
 
-      // Fetch our own problems.json — same origin, no CORS issues.
-      // Cache-bust with the deploy hash isn't necessary because the file
-      // changes weekly and GitHub Pages serves it with reasonable caching.
       fetch('/problems.json')
         .then(function (r) {
           if (!r.ok) throw new Error('HTTP ' + r.status);
           return r.json();
         })
         .then(function (data) {
-          // Find the slug for this problem number. Since problems.json
-          // is sorted by id, a binary search would be faster — but with
-          // ~3000 entries, a linear scan finishes in <1ms anyway.
           var problems = (data && data.problems) || [];
-          var match = null;
+          var entry = null;
           for (var i = 0; i < problems.length; i++) {
-            if (problems[i].id === n) { match = problems[i]; break; }
+            if (problems[i].id === n) { entry = problems[i]; break; }
           }
 
-          if (match && match.slug) {
-            go(match.slug);
-          } else {
+          if (!entry) {
             statusEl.textContent = 'no such problem (#' + n + ')';
             setTimeout(showNotFound, 1200);
+            return;
+          }
+
+          if (entry.premium) {
+            showPremium(entry);
+          } else {
+            go(entry.slug);
           }
         })
         .catch(function (err) {
@@ -110,4 +101,3 @@
     })();
   </script>
 </body>
-</html>
