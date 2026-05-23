@@ -49,18 +49,8 @@
 
   <script>
     (function () {
-      // ---- config ----
-      // LeetCode's own /api/problems/all/ no longer sends CORS headers, so
-      // browsers block it from any other origin. This community proxy is
-      // a tiny FastAPI wrapper that returns one problem at a time and
-      // does send Access-Control-Allow-Origin: *.
-      // Source: github.com/noworneverev/leetcode-api
-      var API = 'https://leetcode-api-pied.vercel.app/problem/';
-      var CACHE_KEY = 'lc_slug_map_v2';
-      var CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7d — individual slugs ~never change
-
       // ---- parse the path ----
-      // Accept "/1", "/1/", "/0042" — anything that's just digits after the slash.
+      // Accept "/1", "/1/", "/0042" — anything that's just digits.
       var path = window.location.pathname.replace(/^\/+|\/+$/g, '');
       var match = /^(\d+)$/.exec(path);
 
@@ -69,10 +59,13 @@
       var numLabel = document.getElementById('numLabel');
       var statusEl = document.getElementById('status');
 
-      function showNotFound(reason) {
+      function showNotFound() {
         redirectingEl.classList.add('hidden');
         notFoundEl.classList.remove('hidden');
-        if (reason) console.warn('[lc-redirect]', reason);
+      }
+
+      function go(slug) {
+        window.location.replace('https://leetcode.com/problems/' + slug + '/description/');
       }
 
       if (!match) {
@@ -80,89 +73,38 @@
         return;
       }
 
-      // strip leading zeros so "0042" -> 42
       var n = parseInt(match[1], 10);
       numLabel.textContent = '#' + n;
+      statusEl.textContent = 'loading index…';
 
-      // ---- per-problem slug cache (id -> slug) ----
-      function readMap() {
-        try {
-          var raw = localStorage.getItem(CACHE_KEY);
-          if (!raw) return {};
-          var parsed = JSON.parse(raw);
-          if (!parsed || !parsed.t || !parsed.map) return {};
-          if (Date.now() - parsed.t > CACHE_TTL_MS) return {};
-          return parsed.map;
-        } catch (e) { return {}; }
-      }
-
-      function writeMap(map) {
-        try {
-          localStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), map: map }));
-        } catch (e) { /* quota or disabled — fine */ }
-      }
-
-      function go(slug) {
-        window.location.replace('https://leetcode.com/problems/' + slug + '/description/');
-      }
-
-      var map = readMap();
-      if (map[n]) {
-        statusEl.textContent = 'cached';
-        go(map[n]);
-        return;
-      }
-
-      // ---- fetch this one problem ----
-      statusEl.textContent = 'fetching…';
-      fetch(API + n)
+      // Fetch our own problems.json — same origin, no CORS issues.
+      // Cache-bust with the deploy hash isn't necessary because the file
+      // changes weekly and GitHub Pages serves it with reasonable caching.
+      fetch('/problems.json')
         .then(function (r) {
           if (!r.ok) throw new Error('HTTP ' + r.status);
           return r.json();
         })
         .then(function (data) {
-          // The proxy's response shape has changed before and may again.
-          // Rather than guess at field names, walk the whole object and
-          // pick the first string that looks like a LeetCode slug.
-          // Slugs are lowercase letters, digits, and hyphens; at least
-          // two parts joined by a hyphen (e.g. "two-sum", "jump-game",
-          // "longest-substring-without-repeating-characters").
-          var SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)+$/;
-          var slug = null;
-          (function walk(node) {
-            if (slug || node == null) return;
-            if (typeof node === 'string') {
-              if (SLUG_RE.test(node)) slug = node;
-              return;
-            }
-            if (typeof node !== 'object') return;
-            // Prefer obvious key names first so we don't accidentally
-            // grab a slug from a "similarProblems" list or anything
-            // nested deep.
-            var preferred = ['titleSlug', 'title_slug', 'slug', 'questionTitleSlug'];
-            for (var i = 0; i < preferred.length; i++) {
-              var v = node[preferred[i]];
-              if (typeof v === 'string' && SLUG_RE.test(v)) { slug = v; return; }
-            }
-            // Fall back to a recursive walk.
-            for (var k in node) {
-              if (Object.prototype.hasOwnProperty.call(node, k)) walk(node[k]);
-              if (slug) return;
-            }
-          })(data);
+          // Find the slug for this problem number. Since problems.json
+          // is sorted by id, a binary search would be faster — but with
+          // ~3000 entries, a linear scan finishes in <1ms anyway.
+          var problems = (data && data.problems) || [];
+          var match = null;
+          for (var i = 0; i < problems.length; i++) {
+            if (problems[i].id === n) { match = problems[i]; break; }
+          }
 
-          if (!slug) {
-            console.warn('[lc-redirect] no slug found in response:', data);
+          if (match && match.slug) {
+            go(match.slug);
+          } else {
             statusEl.textContent = 'no such problem (#' + n + ')';
             setTimeout(showNotFound, 1200);
-            return;
           }
-          map[n] = slug;
-          writeMap(map);
-          go(slug);
         })
         .catch(function (err) {
-          statusEl.textContent = 'lookup failed — ' + err.message;
+          console.warn('[lc-redirect] failed:', err);
+          statusEl.textContent = 'lookup failed';
           setTimeout(showNotFound, 1500);
         });
     })();
