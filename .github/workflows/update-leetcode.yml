@@ -44,7 +44,7 @@ jobs:
         run: |
           jq '[
             .stat_status_pairs[]
-            | select(.paid_only == false)
+            
             | {
                 id:    .stat.frontend_question_id,
                 title: .stat.question__title,
