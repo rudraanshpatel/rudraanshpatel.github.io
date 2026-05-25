@@ -1,6 +1,6 @@
 {
-  "updated": "2026-05-23T09:58:16Z",
-  "count": 3935,
+  "updated": "2026-05-25T07:18:49Z",
+  "count": 3943,
   "problems": [
     {
       "id": 1,
@@ -27546,6 +27546,62 @@
       "slug": "power-update-after-k-th-largest-insertion-i",
       "difficulty": "Medium",
       "premium": true
+    },
+    {
+      "id": 3936,
+      "title": "Minimum Swaps to Move Zeros to End",
+      "slug": "minimum-swaps-to-move-zeros-to-end",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 3937,
+      "title": "Minimum Operations to Make Array Modulo Alternating I",
+      "slug": "minimum-operations-to-make-array-modulo-alternating-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3938,
+      "title": "Maximum Path Intersection Sum in a Grid",
+      "slug": "maximum-path-intersection-sum-in-a-grid",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3939,
+      "title": "Count Non Adjacent Subsets in a Rooted Tree",
+      "slug": "count-non-adjacent-subsets-in-a-rooted-tree",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 3940,
+      "title": "Limit Occurrences in Sorted Array",
+      "slug": "limit-occurrences-in-sorted-array",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 3941,
+      "title": "Password Strength",
+      "slug": "password-strength",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3942,
+      "title": "Minimum Operations to Sort a Permutation",
+      "slug": "minimum-operations-to-sort-a-permutation",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3943,
+      "title": "Number of Pairs After Increment",
+      "slug": "number-of-pairs-after-increment",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
