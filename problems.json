@@ -1,6 +1,6 @@
 {
-  "updated": "2026-05-25T07:18:49Z",
-  "count": 3943,
+  "updated": "2026-05-28T11:20:55Z",
+  "count": 3944,
   "problems": [
     {
       "id": 1,
@@ -27602,6 +27602,13 @@
       "slug": "number-of-pairs-after-increment",
       "difficulty": "Hard",
       "premium": false
+    },
+    {
+      "id": 3944,
+      "title": "Minimum Operations to Make Array Modulo Alternating II",
+      "slug": "minimum-operations-to-make-array-modulo-alternating-ii",
+      "difficulty": "Hard",
+      "premium": true
     }
   ]
 }
