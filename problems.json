@@ -1,6 +1,6 @@
 {
-  "updated": "2026-05-28T11:20:55Z",
-  "count": 3944,
+  "updated": "2026-06-01T08:39:02Z",
+  "count": 3948,
   "problems": [
     {
       "id": 1,
@@ -27609,6 +27609,34 @@
       "slug": "minimum-operations-to-make-array-modulo-alternating-ii",
       "difficulty": "Hard",
       "premium": true
+    },
+    {
+      "id": 3945,
+      "title": "Digit Frequency Score",
+      "slug": "digit-frequency-score",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 3946,
+      "title": "Maximum Number of Items From Sale I",
+      "slug": "maximum-number-of-items-from-sale-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3947,
+      "title": "Maximum Number of Items From Sale II",
+      "slug": "maximum-number-of-items-from-sale-ii",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3948,
+      "title": "Lexicographically Maximum MEX Array",
+      "slug": "lexicographically-maximum-mex-array",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
