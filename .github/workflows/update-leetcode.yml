@@ -1,13 +1,13 @@
 # .github/workflows/update-leetcode.yml
 # Fetches LeetCode's full problem list and commits it as problems.json.
-# Runs weekly + on-demand. Server-side fetch — no CORS issues.
+# Runs hourly + on-demand. Server-side fetch — no CORS issues.
 
 name: Update LeetCode problems
 
 on:
-  # Run every Monday at 03:00 UTC
+  # Run every hour
   schedule:
-    - cron: "0 3 * * 1"
+    - cron: "0 * * * *"
   # Allow manual runs from the Actions tab
   workflow_dispatch:
 
