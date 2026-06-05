@@ -1,6 +1,6 @@
 {
-  "updated": "2026-05-23T09:58:16Z",
-  "count": 3935,
+  "updated": "2026-06-01T08:39:02Z",
+  "count": 3948,
   "problems": [
     {
       "id": 1,
@@ -27546,6 +27546,97 @@
       "slug": "power-update-after-k-th-largest-insertion-i",
       "difficulty": "Medium",
       "premium": true
+    },
+    {
+      "id": 3936,
+      "title": "Minimum Swaps to Move Zeros to End",
+      "slug": "minimum-swaps-to-move-zeros-to-end",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 3937,
+      "title": "Minimum Operations to Make Array Modulo Alternating I",
+      "slug": "minimum-operations-to-make-array-modulo-alternating-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3938,
+      "title": "Maximum Path Intersection Sum in a Grid",
+      "slug": "maximum-path-intersection-sum-in-a-grid",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3939,
+      "title": "Count Non Adjacent Subsets in a Rooted Tree",
+      "slug": "count-non-adjacent-subsets-in-a-rooted-tree",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 3940,
+      "title": "Limit Occurrences in Sorted Array",
+      "slug": "limit-occurrences-in-sorted-array",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 3941,
+      "title": "Password Strength",
+      "slug": "password-strength",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3942,
+      "title": "Minimum Operations to Sort a Permutation",
+      "slug": "minimum-operations-to-sort-a-permutation",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3943,
+      "title": "Number of Pairs After Increment",
+      "slug": "number-of-pairs-after-increment",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 3944,
+      "title": "Minimum Operations to Make Array Modulo Alternating II",
+      "slug": "minimum-operations-to-make-array-modulo-alternating-ii",
+      "difficulty": "Hard",
+      "premium": true
+    },
+    {
+      "id": 3945,
+      "title": "Digit Frequency Score",
+      "slug": "digit-frequency-score",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 3946,
+      "title": "Maximum Number of Items From Sale I",
+      "slug": "maximum-number-of-items-from-sale-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3947,
+      "title": "Maximum Number of Items From Sale II",
+      "slug": "maximum-number-of-items-from-sale-ii",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3948,
+      "title": "Lexicographically Maximum MEX Array",
+      "slug": "lexicographically-maximum-mex-array",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
