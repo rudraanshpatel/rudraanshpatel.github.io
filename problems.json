@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-01T08:39:02Z",
-  "count": 3948,
+  "updated": "2026-06-05T15:35:12Z",
+  "count": 3949,
   "problems": [
     {
       "id": 1,
@@ -27637,6 +27637,13 @@
       "slug": "lexicographically-maximum-mex-array",
       "difficulty": "Hard",
       "premium": false
+    },
+    {
+      "id": 3949,
+      "title": "Subtree Inversion Sum II",
+      "slug": "subtree-inversion-sum-ii",
+      "difficulty": "Hard",
+      "premium": true
     }
   ]
 }
