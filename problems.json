@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-06T16:10:13Z",
-  "count": 3949,
+  "updated": "2026-06-06T18:10:29Z",
+  "count": 3953,
   "problems": [
     {
       "id": 1,
@@ -27644,6 +27644,34 @@
       "slug": "subtree-inversion-sum-ii",
       "difficulty": "Hard",
       "premium": true
+    },
+    {
+      "id": 3950,
+      "title": "Exactly One Consecutive Set Bits Pair",
+      "slug": "exactly-one-consecutive-set-bits-pair",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 3951,
+      "title": "Minimum Energy to Maintain Brightness",
+      "slug": "minimum-energy-to-maintain-brightness",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3952,
+      "title": "Maximum Total Value of Covered Indices",
+      "slug": "maximum-total-value-of-covered-indices",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3953,
+      "title": "Maximum Score with Co-Prime Element",
+      "slug": "maximum-score-with-co-prime-element",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
