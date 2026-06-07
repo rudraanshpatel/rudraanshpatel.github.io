@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-07T00:08:54Z",
-  "count": 3953,
+  "updated": "2026-06-07T05:25:29Z",
+  "count": 3957,
   "problems": [
     {
       "id": 1,
@@ -27670,6 +27670,34 @@
       "id": 3953,
       "title": "Maximum Score with Co-Prime Element",
       "slug": "maximum-score-with-co-prime-element",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 3954,
+      "title": "Sum of Compatible Numbers in Range I",
+      "slug": "sum-of-compatible-numbers-in-range-i",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 3955,
+      "title": "Valid Binary Strings With Cost Limit",
+      "slug": "valid-binary-strings-with-cost-limit",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3956,
+      "title": "Maximum Sum of M Non-Overlapping Subarrays I",
+      "slug": "maximum-sum-of-m-non-overlapping-subarrays-i",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 3957,
+      "title": "Maximum Sum of M Non-Overlapping Subarrays II",
+      "slug": "maximum-sum-of-m-non-overlapping-subarrays-ii",
       "difficulty": "Hard",
       "premium": false
     }
