@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-09T18:11:05Z",
-  "count": 3957,
+  "updated": "2026-06-09T21:01:57Z",
+  "count": 3958,
   "problems": [
     {
       "id": 1,
@@ -27700,6 +27700,13 @@
       "slug": "maximum-sum-of-m-non-overlapping-subarrays-ii",
       "difficulty": "Hard",
       "premium": false
+    },
+    {
+      "id": 3958,
+      "title": "Minimum Cost to Split into Ones II",
+      "slug": "minimum-cost-to-split-into-ones-ii",
+      "difficulty": "Medium",
+      "premium": true
     }
   ]
 }
