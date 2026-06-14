@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-14T00:12:25Z",
-  "count": 3958,
+  "updated": "2026-06-14T05:53:30Z",
+  "count": 3962,
   "problems": [
     {
       "id": 1,
@@ -27707,6 +27707,34 @@
       "slug": "minimum-cost-to-split-into-ones-ii",
       "difficulty": "Medium",
       "premium": true
+    },
+    {
+      "id": 3959,
+      "title": "Check Good Integer",
+      "slug": "check-good-integer",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 3960,
+      "title": "Frequency Balance Subarray",
+      "slug": "frequency-balance-subarray",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3961,
+      "title": "Maximize Sum of Device Ratings",
+      "slug": "maximize-sum-of-device-ratings",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3962,
+      "title": "Maximum Subarray Sum After at Most K Swaps",
+      "slug": "maximum-subarray-sum-after-at-most-k-swaps",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
