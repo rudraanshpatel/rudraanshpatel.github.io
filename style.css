@@ -1,0 +1,693 @@
+/* ═══════════════════════════════════════════════════════════
+   rudraanshpatel.in — shared stylesheet
+   Document-first design. Cream paper, Georgia, classic blue.
+   Mac OS 8 chunky scrollbars on bounded scroll widgets.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── DESIGN TOKENS ─── */
+:root {
+  /* surfaces */
+  --paper:        #eae8df;   /* warm grey (from SDE light mode) */
+  --paper-sunk:   #dedcd2;   /* slightly darker for callout boxes */
+  --paper-soft:   #e2e0d6;   /* hover row */
+  --sidebar-head: #0044bb;   /* blue heading bar on right sidebar (GCC-style) */
+  --ink:          #1a1a1a;   /* main text */
+  --ink-muted:    #555555;   /* secondary text */
+  --ink-dim:      #777777;   /* meta, dates */
+  --ink-faint:    #999999;   /* very low priority */
+
+  /* dividers */
+  --rule:         #d0cfc8;   /* hairline */
+  --rule-dotted:  #d8d6cc;   /* dotted divider */
+
+  /* links — classic web */
+  --link:         #0000ee;
+  --link-visited: #551a8b;
+  --link-hover-bg:#ffeb3b;   /* highlighter yellow */
+
+  /* Mac OS 8 scrollbar palette */
+  --m8-face:      #c0c0c0;   /* button face */
+  --m8-light:     #ffffff;   /* top/left bevel */
+  --m8-dark:      #808080;   /* bottom/right bevel */
+  --m8-darker:    #404040;   /* outer outline */
+  --m8-track:     #dddddd;   /* track fill */
+  --m8-thumb-tex: repeating-linear-gradient(
+                    90deg,
+                    #b8b8b8 0 1px,
+                    #c8c8c8 1px 2px
+                  );        /* fine vertical texture on thumb */
+
+  /* typography */
+  --serif: Georgia, 'Times New Roman', Times, serif;
+  --mono:  'Courier New', Courier, monospace;
+}
+
+/* ─── RESET ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 15px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--paper);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 2rem;
+}
+
+/* ─── LINKS ─── */
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:visited { color: var(--link-visited); }
+
+a:hover {
+  background: var(--link-hover-bg);
+  color: var(--link);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+}
+
+/* ─── TYPOGRAPHY ─── */
+h1 {
+  font-size: 1.9rem;
+  font-weight: bold;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.15rem;
+}
+
+h2 {
+  font-size: 0.82rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+h2 .more {
+  font-size: 0.7rem;
+  font-weight: normal;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: auto;
+}
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
+p { margin-bottom: 0.5rem; }
+p:last-child { margin-bottom: 0; }
+
+code, .mono, .meta, .year, .stack, .label {
+  font-family: var(--mono);
+}
+
+strong { font-weight: bold; }
+em { font-style: italic; }
+
+/* ─── DIVIDERS ─── */
+hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 0.7rem 0;
+}
+
+hr.thick { border-top-width: 2px; }
+hr.dotted { border-top: 1px dotted var(--rule-dotted); }
+
+/* ─── HEADER (used on index) ─── */
+.site-header {
+  margin-bottom: 0.6rem;
+}
+
+.site-header .role {
+  font-size: 0.92rem;
+  color: var(--ink-muted);
+  margin-top: 0.1rem;
+  margin-bottom: 0.4rem;
+}
+
+.site-header .contact {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+}
+
+.site-header .contact a { margin-right: 0.1rem; }
+
+/* ─── DATA TABLES ─── */
+.data {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.data td {
+  padding: 0.18rem 0.5rem 0.18rem 0;
+  vertical-align: top;
+  border-bottom: 1px dotted var(--rule-dotted);
+}
+
+.data tr:last-child td { border-bottom: none; }
+
+.data .year {
+  width: 60px;
+  color: var(--ink-dim);
+  font-size: 0.78rem;
+  white-space: nowrap;
+  padding-top: 0.25rem;
+}
+
+.data .name { width: 38%; }
+
+.data .stack {
+  color: var(--ink-muted);
+  font-size: 0.78rem;
+  padding-top: 0.25rem;
+}
+
+.data .links {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  text-align: right;
+  padding-top: 0.25rem;
+  white-space: nowrap;
+}
+
+.data.skills .label {
+  width: 60px;
+  color: var(--ink-dim);
+  font-size: 0.78rem;
+  padding-top: 0.2rem;
+}
+
+/* ─── MULTI-COLUMN HOMEPAGE GRID ─── */
+.col-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2rem;
+  row-gap: 0.5rem;
+}
+
+.col-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 1.5rem;
+  row-gap: 0.5rem;
+}
+
+.col-grid section,
+.col-grid-3 section {
+  break-inside: avoid;
+}
+
+/* link lists — for GCC-style directories */
+.link-list {
+  list-style: none;
+  font-size: 0.88rem;
+}
+
+.link-list li {
+  padding: 0.12rem 0;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.link-list li .meta {
+  color: var(--ink-dim);
+  font-size: 0.75rem;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* ─── MAC OS 8 SCROLLBAR (signature touch) ─── */
+/* Apply class .mac8 to any scrollable container */
+
+.mac8 {
+  border: 1px solid var(--m8-darker);
+  background: var(--paper);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.5rem 0.75rem;
+}
+
+/* Firefox */
+.mac8 {
+  scrollbar-color: var(--m8-face) var(--m8-track);
+  scrollbar-width: auto;
+}
+
+/* WebKit / Blink — chunky grey */
+.mac8::-webkit-scrollbar {
+  width: 15px;
+  background: var(--m8-track);
+}
+
+.mac8::-webkit-scrollbar-track {
+  background: var(--m8-track);
+  border-left: 1px solid var(--m8-darker);
+}
+
+.mac8::-webkit-scrollbar-thumb {
+  background-color: var(--m8-face);
+  background-image: var(--m8-thumb-tex);
+  border: 1px solid var(--m8-darker);
+  border-top-color: var(--m8-light);
+  border-left-color: var(--m8-light);
+  border-bottom-color: var(--m8-dark);
+  border-right-color: var(--m8-dark);
+  min-height: 30px;
+}
+
+.mac8::-webkit-scrollbar-thumb:active {
+  background-color: var(--m8-dark);
+}
+
+/* ─── GCC-STYLE 2+SIDEBAR LAYOUT ─── */
+/* Wide intro at top, then two content columns + narrow right sidebar */
+
+.gcc-intro {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: start;
+  margin-bottom: 0.5rem;
+}
+
+.gcc-intro .intro-prose { max-width: 70ch; }
+
+.gcc-intro .intro-mark {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--ink-dim);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.gcc-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 200px;
+  column-gap: 2rem;
+  row-gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.gcc-layout > section { break-inside: avoid; }
+
+/* Right-hand sidebar — stacked sections with blue heading bars */
+.gcc-sidebar {
+  font-size: 0.85rem;
+}
+
+.gcc-sidebar .side-section { margin-bottom: 0.8rem; }
+
+.gcc-sidebar .side-head {
+  background: var(--sidebar-head);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 0.85rem;
+  padding: 3px 8px;
+  letter-spacing: 0.3px;
+  margin-bottom: 0.3rem;
+}
+
+.gcc-sidebar ul {
+  list-style: none;
+  padding-left: 8px;
+}
+
+.gcc-sidebar li {
+  padding: 1px 0;
+  font-size: 0.85rem;
+}
+
+.gcc-sidebar a {
+  text-decoration: underline;
+}
+
+/* Override responsive — collapse sidebar last */
+@media (max-width: 900px) {
+  .gcc-layout { grid-template-columns: 1fr 1fr; }
+  .gcc-layout .gcc-sidebar {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .gcc-intro { grid-template-columns: 1fr; }
+  .gcc-intro .intro-mark { text-align: left; }
+  .gcc-layout { grid-template-columns: 1fr; }
+  .gcc-layout .gcc-sidebar { grid-template-columns: 1fr; }
+}
+
+/* ─── BLOCKS ─── */
+.block { margin-bottom: 0; }
+
+.lede {
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+.muted { color: var(--ink-faint); }
+.dim   { color: var(--ink-dim); }
+
+/* ─── DEEP / SUB-PAGES ─── */
+.deep-page { padding-top: 2rem; padding-bottom: 3rem; }
+
+.deep-page .breadcrumb {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--ink-dim);
+}
+
+.deep-page h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.deep-page > p {
+  margin-bottom: 1rem;
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+}
+
+.deep-page h2 {
+  font-size: 0.95rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.deep-page h3 {
+  font-size: 1.1rem;
+  margin-top: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.deep-page p {
+  margin-bottom: 0.8rem;
+}
+
+/* ─── PROJECT CARDS GRID (used on /projects) ─── */
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.project-card {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 1rem;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  padding: 0.9rem;
+  text-decoration: none;
+  color: inherit;
+  align-items: start;
+}
+
+.project-card:hover {
+  background: var(--paper-sunk);
+}
+
+.project-card:hover .project-card-title {
+  background: var(--link-hover-bg);
+}
+
+.project-card-thumb {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--paper-sunk);
+  border: 1px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--ink-muted);
+  text-align: center;
+  overflow: hidden;
+}
+
+.project-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.project-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+}
+
+.project-card-title {
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  line-height: 1.2;
+}
+
+.project-card-desc {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  line-height: 1.4;
+}
+
+.project-card-year {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: bold;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 2px 8px;
+  letter-spacing: 0.5px;
+  margin-top: 0.2rem;
+}
+
+/* Status tag — small badge near the title */
+.tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  padding: 1px 5px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  vertical-align: middle;
+  margin-left: 0.3rem;
+}
+
+.tag-live      { color: #006622; }
+.tag-active    { color: #0044bb; }
+.tag-archived  { color: var(--ink-dim); }
+.tag-planned   { color: #885500; }
+
+/* Planned cards — slightly dimmed */
+.project-card.planned {
+  border-style: dashed;
+  opacity: 0.85;
+}
+
+/* Tiny illustrative thumbs (CSS-only) when no screenshot yet */
+.thumb-diagram {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumb-row {
+  display: flex;
+  gap: 3px;
+}
+
+.thumb-box {
+  border: 1px dashed var(--ink-muted);
+  background: var(--paper);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  padding: 1px 4px;
+  color: var(--ink-muted);
+  min-width: 22px;
+  text-align: center;
+}
+
+.thumb-box.wide { min-width: 50px; }
+
+/* ─── DEEP PAGE: Project detail (per-project pages) ─── */
+.project-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.project-detail-header h3 { margin-bottom: 0; }
+
+.project-detail-meta {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.6rem;
+}
+
+.spec-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  align-items: start;
+}
+
+.spec-row .spec-label {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding-top: 0.15rem;
+}
+
+.spec-row .spec-body { font-size: 0.95rem; }
+.spec-row .spec-body p { margin-bottom: 0.4rem; }
+.spec-row .spec-body p:last-child { margin-bottom: 0; }
+
+.screenshot {
+  margin: 1rem 0;
+  border: 1px solid var(--rule);
+  background: var(--paper-sunk);
+  padding: 4px;
+  max-width: 100%;
+}
+
+.screenshot img { display: block; width: 100%; height: auto; }
+
+.screenshot-placeholder {
+  margin: 1rem 0;
+  border: 1px dashed var(--rule);
+  background: var(--paper-sunk);
+  padding: 2rem 1rem;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--ink-dim);
+}
+
+.project-links {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  margin-top: 0.6rem;
+}
+
+.project-links a { margin-right: 0.5rem; }
+
+/* Project group section heading — separates Featured / Earlier / Upcoming */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0 1rem;
+}
+
+.section-divider .section-label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--ink-dim);
+  white-space: nowrap;
+}
+
+.section-divider hr {
+  flex: 1;
+  margin: 0;
+  border-top: 1px solid var(--rule);
+}
+
+@media (max-width: 720px) {
+  .project-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .spec-row { grid-template-columns: 1fr; gap: 0.1rem; }
+  .spec-row .spec-label { font-size: 0.72rem; }
+}
+
+/* ─── FOOTER ─── */
+.site-footer {
+  margin-top: 1.2rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.78rem;
+  color: var(--ink-dim);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.site-footer .meta { font-family: var(--mono); font-size: 0.72rem; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 720px) {
+  .col-grid,
+  .col-grid-3 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  body { padding: 1rem 0.9rem; font-size: 14px; }
+  h1 { font-size: 1.5rem; }
+  .data { font-size: 0.82rem; }
+  .data .year { width: 50px; }
+  .data .stack { display: none; }
+  .data .name { width: auto; }
+}
+
+/* ─── PRINT ─── */
+@media print {
+  body { background: white; max-width: none; padding: 1rem; }
+  a { color: #000; }
+  a:hover { background: transparent; }
+  hr { border-color: #999; }
+  .mac8 { max-height: none !important; overflow: visible !important; border: none; }
+}

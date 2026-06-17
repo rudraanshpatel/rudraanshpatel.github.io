@@ -1,43 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio of Rudraansh Patel">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rudraansh Patel — engineering student at MANIT Bhopal, building backend systems in C++, Python, and SQL." />
+  <meta name="author" content="Rudraansh Patel" />
+
+  <meta property="og:title" content="Rudraansh Patel" />
+  <meta property="og:description" content="Engineering student building backend systems. C++ · Python · SQL." />
+  <meta property="og:url" content="https://rudraanshpatel.in" />
+  <meta property="og:type" content="website" />
+
   <title>Rudraansh Patel</title>
-  <link rel="stylesheet" href="styles.css">
+
+  <link rel="canonical" href="https://rudraanshpatel.in/" />
+
+  <!-- ─── CRITICAL CSS (inlined for first paint) ─── -->
+  <style>
+    :root{
+      --paper:#eae8df;--ink:#1a1a1a;--ink-muted:#555;--ink-dim:#777;
+      --rule:#d0cfc8;--rule-dotted:#d8d6cc;
+      --link:#0000ee;--link-visited:#551a8b;--link-hover-bg:#ffeb3b;
+      --sidebar-head:#0044bb;
+      --serif:Georgia,'Times New Roman',Times,serif;
+      --mono:'Courier New',Courier,monospace;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-size:15px;-webkit-text-size-adjust:100%}
+    body{font-family:var(--serif);font-size:1rem;line-height:1.5;color:var(--ink);background:var(--paper);max-width:1200px;margin:0 auto;padding:1.5rem 1.5rem 2rem}
+    a{color:var(--link);text-decoration:underline;text-underline-offset:2px}
+    a:visited{color:var(--link-visited)}
+    a:hover{background:var(--link-hover-bg);color:var(--link)}
+    h1{font-size:1.9rem;font-weight:bold;line-height:1.1;letter-spacing:-0.5px;margin-bottom:0.15rem}
+    h2{font-size:0.82rem;font-weight:bold;text-transform:uppercase;letter-spacing:2px;margin-bottom:0.5rem;display:flex;align-items:baseline;gap:0.5rem}
+    h2 .more{font-size:0.7rem;font-weight:normal;text-transform:none;letter-spacing:0;margin-left:auto}
+    p{margin-bottom:0.5rem}
+    .mono,.meta{font-family:var(--mono)}
+    .dim{color:var(--ink-dim)}
+    hr{border:none;border-top:1px solid var(--rule);margin:0.7rem 0}
+    .gcc-intro{display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:start;margin-bottom:0.5rem}
+    .gcc-intro .intro-prose{max-width:70ch}
+    .gcc-intro .intro-mark{font-family:var(--mono);font-size:0.75rem;color:var(--ink-dim);text-align:right;white-space:nowrap}
+    .gcc-layout{display:grid;grid-template-columns:1fr 1fr 200px;column-gap:2rem;row-gap:1rem;margin-top:0.5rem}
+    .gcc-sidebar{font-size:0.85rem}
+    .gcc-sidebar .side-head{background:var(--sidebar-head);color:#fff;font-weight:bold;font-size:0.85rem;padding:3px 8px;letter-spacing:0.3px;margin-bottom:0.3rem}
+    .gcc-sidebar .side-section{margin-bottom:0.8rem}
+    .gcc-sidebar ul{list-style:none;padding-left:8px}
+    .gcc-sidebar li{padding:1px 0;font-size:0.85rem}
+    @media (max-width:900px){.gcc-layout{grid-template-columns:1fr 1fr}.gcc-layout .gcc-sidebar{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem 1.5rem}}
+    @media (max-width:600px){.gcc-intro{grid-template-columns:1fr}.gcc-intro .intro-mark{text-align:left}.gcc-layout{grid-template-columns:1fr}.gcc-layout .gcc-sidebar{grid-template-columns:1fr}}
+  </style>
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="theme-toggle">
-    <span id="theme-label">Light</span>
-    <label class="switch">
-      <input type="checkbox" id="theme-switch">
-      <span class="slider"></span>
-    </label>
+
+  <!-- ─── INTRO BAND ─── -->
+  <header class="gcc-intro">
+    <div class="intro-prose">
+      <h1>Rudraansh Patel</h1>
+      <p class="role">
+        Final-year B.Tech at <strong>MANIT Bhopal</strong>, also doing
+        <strong>BS Data Science at IIT Madras</strong>.
+        Building things in C++, Python, and SQL.
+        Interested in backend systems, real-time architecture, and the unglamorous
+        infrastructure that holds products together.
+      </p>
+      <p class="contact mono">
+        <a href="mailto:rudraanshpatel@gmail.com">email</a> ·
+        <a href="https://github.com/rudraanshpatel">github</a> ·
+        <a href="https://linkedin.com/in/rudraanshpatel">linkedin</a> ·
+        <a href="https://leetcode.com/u/rudraanshpatel">leetcode</a> ·
+        <a href="https://codeforces.com/profile/UltaPanda">cf</a>
+      </p>
+    </div>
+    <div class="intro-mark">
+      rudraanshpatel.in<br/>
+      <span style="opacity:0.6;">v0.1 · 2026</span>
+    </div>
+  </header>
+
+  <hr />
+
+  <!-- ─── 2 + SIDEBAR LAYOUT ─── -->
+  <div class="gcc-layout">
+
+    <!-- ── COLUMN 1: Projects + Recent posts ── -->
+    <section>
+      <h2>Projects <a href="projects.html" class="more">[all →]</a></h2>
+      <table class="data">
+        <tr>
+          <td class="year">2026</td>
+          <td>
+            <strong><a href="projects.html#bulls-cows-multi">Bulls &amp; Cows Multiplayer</a></strong>
+            &nbsp;<span class="mono dim" style="font-size:0.78rem;">[FastAPI · WebSockets]</span><br/>
+            Real-time two-player guessing game. Originally a C++ CLI; rebuilt
+            to learn WebSocket lifecycle &amp; room state.
+            &nbsp;<span class="mono"><a href="#">live</a> · <a href="https://github.com/rudraanshpatel/bulls-and-cows-multiplayer">code</a></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="year">2023</td>
+          <td>
+            <strong><a href="projects.html#bulls-cows-cli">Bulls &amp; Cows CLI</a></strong>
+            &nbsp;<span class="mono dim" style="font-size:0.78rem;">[C++]</span><br/>
+            Terminal version. Built overnight from scratch — game loop, input
+            validation, scoring algorithm.
+            &nbsp;<span class="mono"><a href="https://github.com/rudraanshpatel/bulls-and-cows-cli">code</a></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="year">2020</td>
+          <td>
+            <strong><a href="projects.html#chemelement">ChemElement Finder</a></strong>
+            &nbsp;<span class="mono dim" style="font-size:0.78rem;">[Python · Tkinter]</span><br/>
+            Desktop app for all 118 chemical elements. First real project.
+            &nbsp;<span class="mono"><a href="https://github.com/rudraanshpatel/chemelement-finder">code</a></span>
+          </td>
+        </tr>
+      </table>
+
+      <h2 style="margin-top:1.5rem;">Recent posts <a href="blog.html" class="more">[blog →]</a></h2>
+      <div class="mac8" style="max-height: 140px;">
+        <ul class="link-list">
+          <li><a href="#">Building Bulls &amp; Cows Multiplayer</a> <span class="meta">Jun 01</span></li>
+          <li><a href="#">What GSIH 2026 taught me</a> <span class="meta">Jun 15</span></li>
+          <li><a href="#">Civil engineering to SWE: honest version</a> <span class="meta">Jul 01</span></li>
+          <li><a href="#">My 42-day DSA prep, honestly</a> <span class="meta">Jul 12</span></li>
+          <li><a href="#">Reading DDIA slowly</a> <span class="meta">Jul 20</span></li>
+          <li><a href="#">Why I rebuilt my portfolio</a> <span class="meta">Aug 02</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── COLUMN 2: Achievements / Now / Skills ── -->
+    <section>
+      <h2>Achievements</h2>
+      <table class="data">
+        <tr>
+          <td class="year">2026</td>
+          <td>
+            <strong>GS India Hackathon</strong> · 1602 / 15,953 (top 10%)<br/>
+            <span class="mono dim" style="font-size:0.78rem;">2 of 3 problems with perfect scores</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="year">2024–25</td>
+          <td>
+            <strong>SIH @ MANIT</strong> · Lead Organizer<br/>
+            <span class="mono dim" style="font-size:0.78rem;">87 → 172 teams · 2 → 7 finalists</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="year">live</td>
+          <td>
+            <strong>LeetCode</strong> · 125+ problems · weekly contests
+          </td>
+        </tr>
+      </table>
+
+      <h2 style="margin-top:1.5rem;">Now <a href="now.html" class="more">[more →]</a></h2>
+      <p style="font-size:0.9rem;">
+        Building <a href="projects.html#bulls-cows-multi">Bulls &amp; Cows Multiplayer</a>.
+        Working through Striver's TUF+ sheet. Training for a half marathon on Dec 13, 2026.
+        Reading <em>Designing Data-Intensive Applications</em>.
+      </p>
+      <p class="mono dim" style="font-size:0.75rem;">updated May 2026</p>
+
+      <h2 style="margin-top:1.5rem;">Skills</h2>
+      <table class="data skills">
+        <tr><td class="label">lang</td><td>C++ · Python · SQL</td></tr>
+        <tr><td class="label">tools</td><td>Git · FastAPI · SQLite · Linux</td></tr>
+        <tr><td class="label">cs</td><td>DSA · OOP · DBMS · OS · CN</td></tr>
+      </table>
+    </section>
+
+    <!-- ── COLUMN 3: Sidebar ── -->
+    <aside class="gcc-sidebar">
+
+      <div class="side-section">
+        <div class="side-head">About</div>
+        <ul>
+          <li><a href="now.html">Now</a></li>
+          <li><a href="#">Résumé</a></li>
+          <li><a href="#">Uses</a></li>
+        </ul>
+      </div>
+
+      <div class="side-section">
+        <div class="side-head">Writing</div>
+        <ul>
+          <li><a href="blog.html">All posts</a></li>
+          <li><a href="#">RSS feed</a></li>
+          <li><a href="#">LinkedIn series</a></li>
+        </ul>
+      </div>
+
+      <div class="side-section">
+        <div class="side-head">Coding</div>
+        <ul>
+          <li><a href="https://leetcode.com/u/rudraanshpatel">LeetCode</a></li>
+          <li><a href="https://codeforces.com/profile/UltaPanda">Codeforces</a></li>
+          <li><a href="https://takeuforward.org/profile/snailsort">TUF+</a></li>
+          <li><a href="https://github.com/rudraanshpatel">GitHub</a></li>
+        </ul>
+      </div>
+
+      <div class="side-section">
+        <div class="side-head">Elsewhere</div>
+        <ul>
+          <li><a href="https://linkedin.com/in/rudraanshpatel">LinkedIn</a></li>
+          <li><a href="#">YouTube</a></li>
+          <li><a href="mailto:rudraanshpatel@gmail.com">Email</a></li>
+        </ul>
+      </div>
+
+    </aside>
+
   </div>
 
-  <h1>Rudraansh Patel</h1>
-  <p>Portfolio coming soon<span class="dots"></span></p>
-  <p class="hint">shortcut: rudraanshpatel.in/n to jump to LeetCode problem <code>n</code></p>
+  <!-- ─── FOOTER ─── -->
+  <footer class="site-footer">
+    <span>rudraanshpatel.in · <a href="https://github.com/rudraanshpatel/portfolio">source</a> · 2026</span>
+    <span class="meta muted">readable, not impressive</span>
+  </footer>
 
-  <script>
-    const toggle = document.getElementById('theme-switch');
-    const label = document.getElementById('theme-label');
-    const saved = localStorage.getItem('theme');
-
-    function applyTheme(isLight) {
-      document.body.classList.toggle('light', isLight);
-      toggle.checked = isLight;
-      label.textContent = isLight ? 'Dark' : 'Light';
-    }
-
-    applyTheme(saved === 'light');
-
-    toggle.addEventListener('change', () => {
-      const isLight = toggle.checked;
-      applyTheme(isLight);
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    });
-  </script>
 </body>
 </html>
