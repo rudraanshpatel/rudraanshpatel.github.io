@@ -298,7 +298,24 @@ hr.dotted { border-top: 1px dotted var(--rule-dotted); }
   margin-bottom: 0.5rem;
 }
 
-.gcc-intro .intro-prose { max-width: 70ch; }
+.gcc-intro .intro-prose {
+  max-width: 70ch;
+}
+
+.intro-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+
+.intro-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
 
 .gcc-intro .intro-mark {
   font-family: var(--mono);
