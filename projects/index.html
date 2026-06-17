@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Projects by Rudraansh Patel — backend systems, real-time architecture, things built and shipped." />
+
+  <meta property="og:title" content="Projects — Rudraansh Patel" />
+  <meta property="og:description" content="Things I've built. Sorted newest first." />
+  <meta property="og:url" content="https://rudraanshpatel.in/projects" />
+
+  <title>Projects — Rudraansh Patel</title>
+  <link rel="canonical" href="https://rudraanshpatel.in/projects" />
+
+  <!-- ─── CRITICAL CSS ─── -->
+  <style>
+    :root{
+      --paper:#eae8df;--paper-sunk:#dedcd2;--ink:#1a1a1a;--ink-muted:#555;--ink-dim:#777;
+      --rule:#d0cfc8;--rule-dotted:#d8d6cc;
+      --link:#0000ee;--link-visited:#551a8b;--link-hover-bg:#ffeb3b;
+      --serif:Georgia,'Times New Roman',Times,serif;
+      --mono:'Courier New',Courier,monospace;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-size:15px;-webkit-text-size-adjust:100%}
+    body{font-family:var(--serif);font-size:1rem;line-height:1.5;color:var(--ink);background:var(--paper);max-width:900px;margin:0 auto;padding:2rem 1.5rem 3rem}
+    a{color:var(--link);text-decoration:underline;text-underline-offset:2px}
+    a:visited{color:var(--link-visited)}
+    a:hover{background:var(--link-hover-bg);color:var(--link)}
+    h1{font-size:2rem;font-weight:bold;line-height:1.1;letter-spacing:-0.5px;margin-bottom:0.5rem}
+    h2{font-size:0.95rem;font-weight:bold;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1rem}
+    p{margin-bottom:0.6rem}
+    .mono,.meta{font-family:var(--mono)}
+    .dim{color:var(--ink-dim)}
+    hr{border:none;border-top:1px solid var(--rule);margin:1.5rem 0}
+    hr.thick{border-top:2px solid var(--ink);margin:2rem 0}
+    .breadcrumb{font-family:var(--mono);font-size:0.8rem;color:var(--ink-dim);margin-bottom:1.5rem}
+  </style>
+
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+  <p class="breadcrumb"><a href="../index.html">← rudraansh</a> / projects</p>
+
+  <h1>Projects</h1>
+  <p style="color:var(--ink-muted); font-size:0.95rem;">
+    Things I've built. Click any card for the full writeup — context, architecture
+    decisions, and what I learned.
+  </p>
+
+  <hr class="thick" />
+
+  <!-- ═══════════════════════════════════════════════════
+       FEATURED
+       ═══════════════════════════════════════════════════ -->
+  <div class="section-divider">
+    <span class="section-label">Featured</span>
+    <hr />
+  </div>
+
+  <div class="project-grid">
+
+    <a class="project-card" href="projects/bulls-cows-multi/">
+      <div class="project-card-thumb">
+        <div class="thumb-diagram">
+          <div class="thumb-row">
+            <span class="thumb-box">P1</span>
+            <span class="thumb-box">P2</span>
+          </div>
+          <div class="thumb-row">
+            <span class="thumb-box wide">WebSocket</span>
+          </div>
+          <div class="thumb-row">
+            <span class="thumb-box wide">FastAPI</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card-body">
+        <span class="project-card-title">Bulls &amp; Cows Multiplayer <span class="tag tag-active">active</span></span>
+        <span class="project-card-desc">Real-time two-player guessing game over WebSockets.</span>
+        <span class="project-card-year">2026</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="projects/portfolio/">
+      <div class="project-card-thumb">
+        <div class="thumb-diagram">
+          <div class="thumb-row">
+            <span class="thumb-box wide">HTML+CSS</span>
+          </div>
+          <div class="thumb-row">
+            <span class="thumb-box">GH</span>
+            <span class="thumb-box">CDN</span>
+          </div>
+          <div class="thumb-row">
+            <span class="thumb-box wide">→ .in</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card-body">
+        <span class="project-card-title">rudraanshpatel.in <span class="tag tag-live">live</span></span>
+        <span class="project-card-desc">This site. Hand-written HTML/CSS, no framework, GitHub Pages.</span>
+        <span class="project-card-year">2026</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="projects/leetcode-redirect/">
+      <div class="project-card-thumb">
+        <div class="thumb-diagram">
+          <div class="thumb-row">
+            <span class="thumb-box wide">cron</span>
+          </div>
+          <div class="thumb-row">
+            <span class="thumb-box">LC</span>
+            <span class="thumb-box">→</span>
+            <span class="thumb-box">HTML</span>
+          </div>
+          <div class="thumb-row">
+            <span class="thumb-box wide">/problems</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card-body">
+        <span class="project-card-title">LeetCode redirect <span class="tag tag-live">live</span></span>
+        <span class="project-card-desc">Scheduled GitHub Action regenerates a static stats page.</span>
+        <span class="project-card-year">2026</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       EARLIER WORK
+       ═══════════════════════════════════════════════════ -->
+  <div class="section-divider">
+    <span class="section-label">Earlier work</span>
+    <hr />
+  </div>
+
+  <div class="project-grid">
+
+    <a class="project-card" href="projects/bulls-cows-cli/">
+      <div class="project-card-thumb">
+        <div class="thumb-diagram">
+          <div class="thumb-row">
+            <span class="thumb-box wide">$ ./game</span>
+          </div>
+          <div class="thumb-row">
+            <span class="thumb-box">3B</span>
+            <span class="thumb-box">2C</span>
+          </div>
+          <div class="thumb-row">
+            <span class="thumb-box wide">C++17</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card-body">
+        <span class="project-card-title">Bulls &amp; Cows CLI <span class="tag tag-archived">archived</span></span>
+        <span class="project-card-desc">Overnight terminal build. First serious C++ project.</span>
+        <span class="project-card-year">2023</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="projects/chemelement/">
+      <div class="project-card-thumb">
+        <div class="thumb-diagram">
+          <div class="thumb-row">
+            <span class="thumb-box">H</span>
+            <span class="thumb-box">He</span>
+          </div>
+          <div class="thumb-row">
+            <span class="thumb-box wide">118 elements</span>
+          </div>
+          <div class="thumb-row">
+            <span class="thumb-box wide">Tkinter</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card-body">
+        <span class="project-card-title">ChemElement Finder <span class="tag tag-archived">archived</span></span>
+        <span class="project-card-desc">Desktop lookup tool for chemical elements. First real project.</span>
+        <span class="project-card-year">2020</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       UPCOMING
+       ═══════════════════════════════════════════════════ -->
+  <div class="section-divider">
+    <span class="section-label">Upcoming</span>
+    <hr />
+  </div>
+
+  <div class="project-grid">
+
+    <a class="project-card planned" href="#">
+      <div class="project-card-thumb">
+        <div class="thumb-diagram">
+          <div class="thumb-row">
+            <span class="thumb-box wide">Manim</span>
+          </div>
+          <div class="thumb-row">
+            <span class="thumb-box">▶</span>
+            <span class="thumb-box wide">video</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card-body">
+        <span class="project-card-title">Algorithm explainers in Manim <span class="tag tag-planned">planned</span></span>
+        <span class="project-card-desc">Short videos visualising DSA concepts.</span>
+        <span class="project-card-year">2026</span>
+      </div>
+    </a>
+
+    <a class="project-card planned" href="#">
+      <div class="project-card-thumb">
+        <div class="thumb-diagram">
+          <div class="thumb-row">
+            <span class="thumb-box wide">posts</span>
+          </div>
+          <div class="thumb-row">
+            <span class="thumb-box">in</span>
+            <span class="thumb-box">→</span>
+            <span class="thumb-box">md</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card-body">
+        <span class="project-card-title">"Not So Obvious" archive <span class="tag tag-planned">planned</span></span>
+        <span class="project-card-desc">Canonical home for my LinkedIn series.</span>
+        <span class="project-card-year">2026</span>
+      </div>
+    </a>
+
+  </div>
+
+  <hr class="thick" />
+
+  <!-- ─── FOOTER NAV ─── -->
+  <p style="margin-top: 1rem; font-family: var(--mono); font-size: 0.85rem; color: var(--ink-dim);">
+    elsewhere: <a href="index.html">home</a> · <a href="now.html">now</a> · <a href="blog.html">blog</a>
+  </p>
+
+</body>
+</html>
