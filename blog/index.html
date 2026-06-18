@@ -28,92 +28,62 @@
 
   <hr />
 
-  <!-- ── RECENT ── -->
-  <section class="post-section">
-    <h2>Recent</h2>
-    <ul class="post-list">
+  <!--
+    Post index — newest first.
+    To add a new post: copy a <tr>, edit the date / slug / title.
+    Three things per row, in this order:
+      1. Date (YYYY-MM-DD for sortability + display format)
+      2. Linked title (href to /blog/<slug>/)
+      3. Nothing else
+  -->
+  <h2 style="margin-top:1.5rem;">Recent posts</h2>
+      <div class="mac8 blog-index-table">
+    <table class="post-table">
+      <tbody>
+        <tr>
+          <td class="post-date mono">2026-08-02</td>
+          <td><a href="/blog/remolding-humans/">Remolding Humans</a></td>
+        </tr>
+        
+        
+        <!-- <tr>
+          <td class="post-date mono">2026-07-20</td>
+          <td><a href="/blog/placeholder-two/">Why I rebuilt my portfolio from scratch <span class="post-flag mono">[draft]</span></a></td>
+        </tr> -->
 
-      <li class="post-item">
-        <div class="post-line">
-          <a class="post-title" href="/blog/why-i-rebuilt-my-portfolio/">Why I rebuilt my portfolio from scratch</a>
-          <span class="post-date mono">Aug 02, 2026</span>
-        </div>
-        <p class="post-desc">On choosing a document-first aesthetic over a React template, and why hand-written HTML still wins.</p>
-      </li>
+        <!-- <tr>
+          <td class="post-date mono">2026-07-12</td>
+          <td><a href="/blog/placeholder-one/">My 42-day DSA prep, honestly <span class="post-flag mono">[draft]</span></a></td>
+        </tr> -->
 
-      <li class="post-item">
-        <div class="post-line">
-          <a class="post-title" href="#">Reading DDIA slowly</a>
-          <span class="post-date mono">Jul 20, 2026</span>
-        </div>
-        <p class="post-desc">Three chapters in, what's clicking, what isn't, and why this is the only way to read this book.</p>
-      </li>
+      </tbody>
+    </table>
+  </div>
+  <h2 style="margin-top:1.5rem;">Upcoming</h2>
+      <div class="mac8 blog-index-table">
+    <table class="post-table">
+      <tbody>
+        <tr>
+          <td class="post-date mono">2026-08-02</td>
+          <td><a href="/blog/remolding-humans/">Remolding Humans</a></td>
+        </tr>
+        
+        
+        <!-- <tr>
+          <td class="post-date mono">2026-07-20</td>
+          <td><a href="/blog/placeholder-two/">Why I rebuilt my portfolio from scratch <span class="post-flag mono">[draft]</span></a></td>
+        </tr> -->
 
-      <li class="post-item">
-        <div class="post-line">
-          <a class="post-title" href="#">My 42-day DSA prep, honestly</a>
-          <span class="post-date mono">Jul 12, 2026</span>
-        </div>
-        <p class="post-desc">What worked, what didn't, and the spreadsheet I wish I'd built on day one.</p>
-      </li>
+        <!-- <tr>
+          <td class="post-date mono">2026-07-12</td>
+          <td><a href="/blog/placeholder-one/">My 42-day DSA prep, honestly <span class="post-flag mono">[draft]</span></a></td>
+        </tr> -->
 
-      <li class="post-item">
-        <div class="post-line">
-          <a class="post-title" href="#">Civil engineering to SWE: the honest version</a>
-          <span class="post-date mono">Jul 01, 2026</span>
-        </div>
-        <p class="post-desc">No "follow your passion" platitudes. Just what I actually did, what it cost, and what I'd skip.</p>
-      </li>
+      </tbody>
+    </table>
+  </div>
 
-      <li class="post-item">
-        <div class="post-line">
-          <a class="post-title" href="#">What GSIH 2026 taught me</a>
-          <span class="post-date mono">Jun 15, 2026</span>
-        </div>
-        <p class="post-desc">Top 10% rank, two perfect scores, one painful mistake — and what I'm taking into the next contest.</p>
-      </li>
-
-    </ul>
-  </section>
-
-  <!-- ── BY YEAR ── -->
-  <section class="post-section">
-    <h2>2026</h2>
-    <ul class="post-list">
-
-      <li class="post-item">
-        <div class="post-line">
-          <a class="post-title" href="#">Building Bulls &amp; Cows Multiplayer</a>
-          <span class="post-date mono">Jun 01, 2026</span>
-        </div>
-        <p class="post-desc">Rebuilding an overnight C++ terminal game as a real-time web app — WebSocket lifecycle, room state, the disconnect problem.</p>
-      </li>
-
-      <li class="post-item">
-        <div class="post-line">
-          <a class="post-title" href="#">Two months back on Linux</a>
-          <span class="post-date mono">May 18, 2026</span>
-        </div>
-        <p class="post-desc">After three years on Windows, what I gained, what I lost, and what I didn't expect to miss.</p>
-      </li>
-
-    </ul>
-  </section>
-
-  <section class="post-section">
-    <h2>2025</h2>
-    <ul class="post-list">
-
-      <li class="post-item">
-        <div class="post-line">
-          <a class="post-title" href="#">Organising SIH for the second year</a>
-          <span class="post-date mono">Nov 22, 2025</span>
-        </div>
-        <p class="post-desc">98% participation growth — what scaling a hackathon teaches you about running anything.</p>
-      </li>
-
-    </ul>
-  </section>
+  <p class="mono dim post-count">1 post &middot; newest first</p>
 
   <hr />
 
