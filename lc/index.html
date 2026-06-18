@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Type a LeetCode problem number, press Enter, land on the problem." />
+  <meta name="robots" content="noindex" />
+  <title>Go to LeetCode problem — rudraanshpatel.in</title>
+  <link rel="canonical" href="https://rudraanshpatel.in/lc" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="lc-launcher">
+
+  <main class="lc-wrap">
+    <p class="lc-prompt mono">Go to LeetCode problem</p>
+
+    <form id="lcForm" autocomplete="off">
+      <input
+        type="text"
+        id="lcInput"
+        class="lc-input mono"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        autofocus
+        aria-label="LeetCode problem number"
+        placeholder="1"
+      />
+    </form>
+
+    <p class="lc-hint mono">type a number &middot; press <kbd>enter</kbd></p>
+  </main>
+
+  <script>
+    (function () {
+      var input = document.getElementById('lcInput');
+      var form  = document.getElementById('lcForm');
+
+      // Keep focus on the input no matter what the user clicks
+      input.focus();
+      document.addEventListener('click', function () { input.focus(); });
+
+      // Strip non-digits on every keystroke
+      input.addEventListener('input', function () {
+        input.value = input.value.replace(/\D/g, '');
+      });
+
+      // Enter → go to /<number>, which triggers 404.html redirect logic
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var n = input.value.trim();
+        if (!n) return;
+        window.location.href = '/' + n;
+      });
+    })();
+  </script>
+
+</body>
+</html>
