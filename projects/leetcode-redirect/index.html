@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LeetCode Redirect — a 404-as-router pattern that turns rudraanshpatel.in/<n> into a direct link to LeetCode problem #n." />
+
+  <meta property="og:title" content="LeetCode Redirect — Rudraansh Patel" />
+  <meta property="og:description" content="A 404-as-router pattern. Visit /1 and land on LeetCode problem #1. Built with GitHub Actions and a static JSON index." />
+  <meta property="og:url" content="https://rudraanshpatel.in/projects/leetcode-redirect" />
+  <meta property="og:type" content="article" />
+
+  <title>LeetCode Redirect — Rudraansh Patel</title>
+  <link rel="canonical" href="https://rudraanshpatel.in/projects/leetcode-redirect" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="deep-page">
+
+  <p class="breadcrumb mono">
+    <a href="/">← rudraansh</a> / <a href="/projects/">projects</a> / leetcode-redirect
+  </p>
+
+  <article>
+
+    <header class="project-detail-header">
+      <h1>LeetCode Redirect <span class="tag tag-live">live</span></h1>
+      <span class="meta dim">2026</span>
+    </header>
+    <p class="project-detail-meta">GitHub Actions &middot; vanilla JS &middot; JSON index</p>
+
+    <p>
+      A small utility that turns <code>rudraanshpatel.in/&lt;number&gt;</code>
+      into a direct link to the matching LeetCode problem. Type
+      <a href="/1">/1</a> and you land on Two Sum. Type
+      <a href="/2962">/2962</a> and you land on Count Subarrays Where Max
+      Element Appears at Least K Times. Premium problems get a small chooser
+      page instead of a broken link.
+    </p>
+
+    <p>
+      No server, no database, no runtime cost. The whole thing is a static
+      site &mdash; GitHub Pages serves it for free, and a scheduled GitHub
+      Action keeps the problem index fresh.
+    </p>
+
+    <!-- ── Architecture diagram ── -->
+    <figure class="post-diagram">
+      <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="Flow: user visits /N, GitHub Pages serves 404.html, JS fetches problems.json, then either redirects to LeetCode or shows a premium chooser.">
+        <style>
+          .box   { fill: #eae8df; stroke: #1a1a1a; stroke-width: 1.5; }
+          .box-d { fill: #dedcd2; stroke: #1a1a1a; stroke-width: 1.5; stroke-dasharray: 4 3; }
+          .arr   { stroke: #1a1a1a; stroke-width: 1.5; fill: none; }
+          .lbl   { font-family: Georgia, serif; font-size: 14px; fill: #1a1a1a; }
+          .meta  { font-family: 'Courier New', monospace; font-size: 10px; fill: #555; }
+          .note  { font-family: 'Courier New', monospace; font-size: 10px; fill: #777; }
+        </style>
+
+        <!-- Step 1: User -->
+        <rect class="box" x="20" y="110" width="120" height="60" />
+        <text class="lbl"  x="80" y="138" text-anchor="middle">user visits</text>
+        <text class="meta" x="80" y="156" text-anchor="middle">/1234</text>
+
+        <line class="arr" x1="140" y1="140" x2="180" y2="140" />
+        <polygon points="180,140 172,136 172,144" fill="#1a1a1a" />
+
+        <!-- Step 2: 404.html -->
+        <rect class="box" x="185" y="110" width="130" height="60" />
+        <text class="lbl"  x="250" y="138" text-anchor="middle">404.html served</text>
+        <text class="meta" x="250" y="156" text-anchor="middle">by github pages</text>
+
+        <line class="arr" x1="315" y1="140" x2="355" y2="140" />
+        <polygon points="355,140 347,136 347,144" fill="#1a1a1a" />
+
+        <!-- Step 3: JS parses + fetches -->
+        <rect class="box" x="360" y="110" width="140" height="60" />
+        <text class="lbl"  x="430" y="138" text-anchor="middle">parse path</text>
+        <text class="meta" x="430" y="156" text-anchor="middle">fetch problems.json</text>
+
+        <line class="arr" x1="500" y1="140" x2="540" y2="140" />
+        <polygon points="540,140 532,136 532,144" fill="#1a1a1a" />
+
+        <!-- Decision -->
+        <polygon points="615,110 690,140 615,170 540,140" fill="#eae8df" stroke="#1a1a1a" stroke-width="1.5" />
+        <text class="lbl" x="615" y="138" text-anchor="middle">premium?</text>
+        <text class="meta" x="615" y="156" text-anchor="middle">flag check</text>
+
+        <!-- Branch: free → redirect -->
+        <line class="arr" x1="615" y1="170" x2="615" y2="215" />
+        <polygon points="615,215 611,207 619,207" fill="#1a1a1a" />
+        <text class="meta" x="635" y="195" text-anchor="start">no</text>
+
+        <rect class="box" x="540" y="215" width="150" height="50" />
+        <text class="lbl"  x="615" y="240" text-anchor="middle">redirect &rarr; leetcode</text>
+        <text class="meta" x="615" y="255" text-anchor="middle">/problems/&lt;slug&gt;/</text>
+
+        <!-- Branch: premium → chooser -->
+        <line class="arr" x1="690" y1="140" x2="710" y2="140" />
+        <text class="meta" x="700" y="135" text-anchor="middle">yes</text>
+        <line class="arr" x1="710" y1="140" x2="710" y2="40" />
+        <line class="arr" x1="710" y1="40" x2="430" y2="40" />
+        <polygon points="430,40 438,36 438,44" fill="#1a1a1a" />
+
+        <rect class="box-d" x="360" y="20" width="140" height="50" />
+        <text class="lbl"  x="430" y="44" text-anchor="middle">show chooser</text>
+        <text class="meta" x="430" y="60" text-anchor="middle">[leetcode] / [google]</text>
+
+        <text class="note" x="360" y="270" text-anchor="start">non-number path &rarr; normal 404</text>
+      </svg>
+      <figcaption>The whole flow runs on the client. Nothing dynamic on the server.</figcaption>
+    </figure>
+
+    <!-- ── Structured spec ── -->
+    <div class="spec-row">
+      <div class="spec-label">What I built</div>
+      <div class="spec-body">
+        <p>
+          A vanity-URL pattern for LeetCode problems. Instead of bookmarking
+          long slugs, I can share <code>rudraanshpatel.in/15</code> in a chat
+          or paste it into notes &mdash; and it always resolves to the right
+          problem page. Premium problems show a chooser between
+          <em>Open on LeetCode</em> and <em>Search on Google</em> so the link
+          is never a dead end.
+        </p>
+      </div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-label">How it works</div>
+      <div class="spec-body">
+        <p>
+          GitHub Pages serves <code>404.html</code> for any path that doesn't
+          match an existing file. I treat that 404 page as a router: a small
+          script reads the URL, and if the path is a number, fetches
+          <code>/problems.json</code> &mdash; a static index of every LeetCode
+          problem with its id, slug, title, and a premium flag.
+        </p>
+        <p>
+          If the problem is free, the page does
+          <code>window.location.replace(&hellip;)</code> to the real LeetCode
+          URL. If it's premium, the page swaps in a chooser UI. If the path
+          isn't a number, it falls through to a normal 404 message.
+        </p>
+        <p>
+          The <code>problems.json</code> file is rebuilt periodically by a
+          scheduled GitHub Action, so new problems get added without me
+          touching the repo.
+        </p>
+      </div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-label">Tradeoffs</div>
+      <div class="spec-body">
+        <p>
+          Doing the redirect in JS means the URL flashes through the 404 page
+          for a beat before landing on LeetCode. A server-side redirect would
+          be instant, but it would also require a server &mdash; and the whole
+          point was to keep this free, static, and zero-maintenance. The flash
+          is a fair price.
+        </p>
+        <p>
+          The <code>problems.json</code> file is small enough today (a few
+          hundred KB) that fetching it on every visit is fine. If it grows
+          past a megabyte I'll switch to per-problem JSON files or a
+          binary-searchable index.
+        </p>
+      </div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-label">What I learned</div>
+      <div class="spec-body">
+        <p>
+          Static + scheduled regeneration is an underrated pattern. You get
+          near-real-time data with zero hosting cost, zero runtime concerns,
+          and your "infrastructure" is one YAML file. The mental shift from
+          <em>"I need a server for this"</em> to <em>"I need a build step for
+          this"</em> opens up a lot of small useful projects.
+        </p>
+        <p>
+          Also: 404 pages are a more general primitive than they look. Any
+          path-based dispatcher you'd write on a server can be moved to the
+          client this way &mdash; vanity URLs, short links, dynamic redirects,
+          even simple lookups.
+        </p>
+      </div>
+    </div>
+
+    <p class="project-links">
+      <a href="/1">[try /1]</a>
+      <a href="/2962">[try /2962]</a>
+      <a href="https://github.com/rudraanshpatel/rudraanshpatel.github.io">[source]</a>
+    </p>
+
+  </article>
+
+  <hr class="post-end" />
+
+  <p class="mono dim" style="font-size:0.78rem;">
+    <a href="/projects/">← back to projects</a>
+  </p>
+
+</body>
+</html>
