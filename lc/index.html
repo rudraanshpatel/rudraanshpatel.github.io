@@ -9,12 +9,13 @@
   <link rel="canonical" href="https://rudraanshpatel.in/lc" />
   <link rel="stylesheet" href="/style.css" />
 </head>
-<body class="lc-launcher">
+<body class="lc-stage">
 
-  <main class="lc-wrap">
-    <p class="lc-prompt mono">Go to LeetCode problem</p>
+  <main class="lc-frame">
+    <p class="lc-caption mono lc-caption--top">Go to LeetCode problem</p>
 
-    <form id="lcForm" autocomplete="off">
+    <form id="lcForm" autocomplete="off" class="lc-number-row">
+      <span class="lc-hash mono">#</span>
       <input
         type="text"
         id="lcInput"
@@ -23,11 +24,12 @@
         pattern="[0-9]*"
         autofocus
         aria-label="LeetCode problem number"
-        placeholder="1"
       />
     </form>
 
-    <p class="lc-hint mono">type a number &middot; press <kbd>enter</kbd></p>
+    <p class="lc-caption mono lc-caption--bottom">
+      type a number &middot; press <kbd>enter</kbd>
+    </p>
   </main>
 
   <script>
@@ -35,16 +37,13 @@
       var input = document.getElementById('lcInput');
       var form  = document.getElementById('lcForm');
 
-      // Keep focus on the input no matter what the user clicks
       input.focus();
       document.addEventListener('click', function () { input.focus(); });
 
-      // Strip non-digits on every keystroke
       input.addEventListener('input', function () {
         input.value = input.value.replace(/\D/g, '');
       });
 
-      // Enter → go to /<number>, which triggers 404.html redirect logic
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var n = input.value.trim();
