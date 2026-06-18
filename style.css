@@ -1025,40 +1025,63 @@ body.blog-post {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   MATCH-CUT GEOMETRY — used by /lc and 404.html
-   Both pages share .lc-stage, .lc-frame, .lc-number-row, .lc-input.
-   Identical positioning means the number stays anchored between
-   screens — only the surrounding text changes.
+   LC LAUNCHER — append to style.css
+   For /lc/index.html — single-input redirect page
    ═══════════════════════════════════════════════════════════ */
 
-body.lc-stage {
+body.lc-launcher {
   max-width: none;
   min-height: 100vh;
   display: grid;
   place-items: center;
   padding: 2rem 1rem;
-  margin: 0;
 }
 
-.lc-frame {
+.lc-wrap {
   text-align: center;
+  max-width: 480px;
   width: 100%;
-  max-width: 540px;
 }
 
-/* ─── Captions above & below the number ─── */
-.lc-caption {
+.lc-prompt {
   font-size: 0.85rem;
   color: var(--ink-dim);
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin: 0;
+  margin-bottom: 1.2rem;
 }
 
-.lc-caption--top    { margin-bottom: 1.2rem; }
-.lc-caption--bottom { margin-top: 1.2rem; text-transform: none; letter-spacing: 0; }
+.lc-input {
+  font-family: var(--mono);
+  width: 100%;
+  font-size: 3.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--ink);
+  padding: 0.4rem 0;
+  outline: none;
+  caret-color: var(--link);
+  letter-spacing: 0.1em;
+}
 
-.lc-caption kbd {
+.lc-input::placeholder {
+  color: var(--ink-faint);
+  opacity: 0.4;
+}
+
+/* No focus state — the blinking caret is enough. */
+.lc-input:focus { outline: none; }
+
+.lc-hint {
+  font-size: 0.78rem;
+  color: var(--ink-dim);
+  margin-top: 1.2rem;
+}
+
+.lc-hint kbd {
   font-family: var(--mono);
   background: var(--paper-sunk);
   border: 1px solid var(--rule);
@@ -1066,55 +1089,7 @@ body.lc-stage {
   font-size: 0.75rem;
 }
 
-/* ─── The number row (anchor of the match cut) ─── */
-.lc-number-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 0.05em;
-  border-bottom: 2px solid var(--ink);
-  padding: 0.4rem 0;
-}
-
-.lc-hash {
-  font-size: 3.5rem;
-  font-weight: bold;
-  color: var(--ink);
-  line-height: 1;
-  letter-spacing: 0.05em;
-}
-
-.lc-input,
-.lc-static {
-  font-family: var(--mono);
-  font-size: 3.5rem;
-  font-weight: bold;
-  text-align: center;
-  color: var(--ink);
-  letter-spacing: 0.1em;
-  line-height: 1;
-  min-width: 4ch;          /* keeps width stable while typing or empty */
-}
-
-/* Input-specific resets */
-input.lc-input {
-  background: transparent;
-  border: none;
-  padding: 0;
-  outline: none;
-  caret-color: var(--link);
-  width: auto;             /* override earlier 100% */
-}
-
-input.lc-input:focus { outline: none; }
-
-input.lc-input::placeholder {
-  color: var(--ink-faint);
-  opacity: 0.4;
-}
-
 @media (max-width: 600px) {
-  .lc-hash,
-  .lc-input,
-  .lc-static { font-size: 2.5rem; }
+  .lc-input { font-size: 2.5rem; }
 }
+
