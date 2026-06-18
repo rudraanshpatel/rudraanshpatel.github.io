@@ -4,38 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Not found — rudraanshpatel.in</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/style.css" />
   <style>
-    /* Override body to keep 404's centred single-column layout */
-    body {
-      max-width: none;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 24px;
-    }
-    .wrap { max-width: 480px; }
-    h1 {
-  font-family: var(--mono);
-  font-size: 64px;
-  margin: 0 0 8px;
-  font-weight: bold;       /* mono fonts look weak at weight 300 */
-  letter-spacing: -0.02em;
-}
-    p { color: var(--ink-muted); margin: 0 0 24px; line-height: 1.6; }
-    /* Let style.css handle <a> colours; just strip the border-bottom override */
-    a { text-decoration: underline; border-bottom: none; }
-    a:hover { border-bottom: none; }
-    .status {
-      font-family: var(--mono);
-      font-size: 13px;
-      color: var(--ink-dim);
-      margin-top: 16px;
-    }
+    /* Override anything; we want the match-cut geometry here */
+    body.lc-stage { max-width: none; }
     .hidden { display: none; }
 
-    /* Premium choice page */
+    /* Premium chooser specifics (only used on the premium screen) */
     .title {
       font-size: 18px;
       color: var(--ink);
@@ -62,72 +37,86 @@
       transition: background 0.12s, color 0.12s;
     }
     .btn:visited { color: var(--paper); }
-    .btn:hover {
-      background: var(--link-hover-bg);
-      color: var(--ink);
-      border-color: var(--ink);
-      text-decoration: none;
-    }
+    .btn:hover { background: var(--paper); color: var(--ink); }
     .btn--secondary {
       background: transparent;
       color: var(--ink);
-      border: 1.5px solid var(--ink);
     }
     .btn--secondary:visited { color: var(--ink); }
-    .btn--secondary:hover {
-      background: var(--link-hover-bg);
-      color: var(--ink);
-    }
+    .btn--secondary:hover { background: var(--ink); color: var(--paper); }
+
     .footnote {
       font-family: var(--mono);
-      font-size: 13px;
+      font-size: 0.78rem;
       color: var(--ink-dim);
       margin-top: 24px;
     }
+
+    /* Default-404 specifics */
+    .nf-h1 {
+      font-family: var(--mono);
+      font-size: 5rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      margin: 0 0 0.5rem;
+    }
+    .nf-text { color: var(--ink-muted); margin: 0; }
   </style>
 </head>
-<body>
-  <div class="wrap">
-    <!-- Default 404 view -->
-    <div id="notFound" class="hidden">
-      <h1>404</h1>
-      <p>This page doesn't exist. Head <a href="/">home</a>, or try a problem number like <a href="/1">/1</a>.</p>
+<body class="lc-stage">
+
+  <!-- ─── LOOKUP (match-cut target) ─── -->
+  <main id="redirecting" class="lc-frame">
+    <p class="lc-caption mono lc-caption--top">Looking up LeetCode problem</p>
+
+    <div class="lc-number-row">
+      <span class="lc-hash mono">#</span>
+      <span id="numLabel" class="lc-input lc-static mono"></span>
     </div>
 
-    <!-- Shown while looking up the problem -->
-    <div id="redirecting">
-      <h1 id="numLabel">…</h1>
-      <p>Looking up LeetCode problem…</p>
-      <div class="status" id="status"></div>
+    <p class="lc-caption mono lc-caption--bottom" id="status">loading index&hellip;</p>
+  </main>
+
+  <!-- ─── PREMIUM CHOOSER ─── -->
+  <main id="premium" class="lc-frame hidden">
+    <p class="lc-caption mono lc-caption--top">Premium problem</p>
+
+    <div class="lc-number-row">
+      <span class="lc-hash mono">#</span>
+      <span id="premiumNum" class="lc-input lc-static mono"></span>
     </div>
 
-    <!-- Shown when the problem is premium -->
-    <div id="premium" class="hidden">
-      <h1 id="premiumNum">…</h1>
-      <p id="premiumTitle" class="title"></p>
-      <p>This is a LeetCode <strong>premium</strong> problem. Where would you like to go?</p>
-      <div class="choices">
-        <a id="goLeetcode" href="#" class="btn">Open on LeetCode</a>
-        <a id="goGoogle" href="#" class="btn btn--secondary">Search on Google</a>
-      </div>
-      <p class="footnote"><a href="/lc/">← find another problem</a></p>
+    <p id="premiumTitle" class="title"></p>
+    <div class="choices">
+      <a id="goLeetcode" href="#" class="btn">Open on LeetCode</a>
+      <a id="goGoogle" href="#" class="btn btn--secondary">Search on Google</a>
     </div>
-  </div>
+    <p class="footnote"><a href="/">&larr; back home</a></p>
+  </main>
+
+  <!-- ─── DEFAULT 404 ─── -->
+  <main id="notFound" class="lc-frame hidden">
+    <h1 class="nf-h1">404</h1>
+    <p class="nf-text">
+      This page doesn't exist. Head <a href="/">home</a>,
+      or try a problem number like <a href="/1">/1</a>.
+    </p>
+  </main>
 
   <script>
     (function () {
-      var path = window.location.pathname.replace(/^\/+|\/+$/g, '');
+      var path  = window.location.pathname.replace(/^\/+|\/+$/g, '');
       var match = /^(\d+)$/.exec(path);
 
-      var notFoundEl = document.getElementById('notFound');
       var redirectingEl = document.getElementById('redirecting');
-      var premiumEl = document.getElementById('premium');
-      var numLabel = document.getElementById('numLabel');
-      var statusEl = document.getElementById('status');
-      var premiumNum = document.getElementById('premiumNum');
-      var premiumTitle = document.getElementById('premiumTitle');
-      var goLeetcode = document.getElementById('goLeetcode');
-      var goGoogle = document.getElementById('goGoogle');
+      var premiumEl     = document.getElementById('premium');
+      var notFoundEl    = document.getElementById('notFound');
+      var numLabel      = document.getElementById('numLabel');
+      var statusEl      = document.getElementById('status');
+      var premiumNum    = document.getElementById('premiumNum');
+      var premiumTitle  = document.getElementById('premiumTitle');
+      var goLeetcode    = document.getElementById('goLeetcode');
+      var goGoogle      = document.getElementById('goGoogle');
 
       function showNotFound() {
         redirectingEl.classList.add('hidden');
@@ -135,7 +124,7 @@
       }
 
       function showPremium(entry) {
-        premiumNum.textContent = '#' + entry.id;
+        premiumNum.textContent = entry.id;
         premiumTitle.textContent = entry.title;
         goLeetcode.href = 'https://leetcode.com/problems/' + entry.slug + '/description/';
         var q = encodeURIComponent('"' + entry.title + '" leetcode solution');
@@ -154,7 +143,7 @@
       }
 
       var n = parseInt(match[1], 10);
-      numLabel.textContent = '#' + n;
+      numLabel.textContent = n;
       statusEl.textContent = 'loading index…';
 
       fetch('/problems.json')
@@ -174,7 +163,7 @@
             setTimeout(showNotFound, 1200);
             return;
           }
-          
+
           if (entry.premium) {
             showPremium(entry);
           } else {
@@ -189,3 +178,4 @@
     })();
   </script>
 </body>
+</html>
