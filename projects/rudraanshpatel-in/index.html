@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="rudraanshpatel.in — a hand-written, framework-less, build-step-less personal website hosted on GitHub Pages." />
+
+  <meta property="og:title" content="rudraanshpatel.in — Rudraansh Patel" />
+  <meta property="og:description" content="The site you're reading. Hand-written HTML and CSS, no framework, no build step." />
+  <meta property="og:url" content="https://rudraanshpatel.in/projects/rudraanshpatel-in" />
+  <meta property="og:type" content="article" />
+
+  <title>rudraanshpatel.in — Rudraansh Patel</title>
+  <link rel="canonical" href="https://rudraanshpatel.in/projects/rudraanshpatel-in" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="deep-page">
+
+  <p class="breadcrumb mono">
+    <a href="/">← rudraansh</a> / <a href="/projects/">projects</a> / rudraanshpatel-in
+  </p>
+
+  <article>
+
+    <header class="project-detail-header">
+      <h1>rudraanshpatel.in <span class="tag tag-planned">work-in-progress</span></h1>
+      <span class="meta dim">May 2026 &mdash; ongoing</span>
+    </header>
+    <p class="project-detail-meta">
+      HTML &middot; CSS &middot; vanilla JS &middot; GitHub Pages
+    </p>
+
+    <p>
+      The site you're reading right now. Hand-written HTML and CSS, no
+      framework, no build step. Hosted on GitHub Pages with a custom domain.
+      The whole thing is small enough to fit on a floppy disk &mdash; assuming
+      anyone still owned one.
+    </p>
+
+    <p>
+      I started this site three times. The first two attempts were
+      framework-heavy and I lost interest in writing anything on them within
+      a week. This is the third attempt, and the one I've actually been
+      adding to.
+    </p>
+
+    <!-- ── The build pipeline diagram ── -->
+    <figure class="post-diagram">
+      <svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="Build pipeline: write HTML/CSS, push to GitHub, GitHub Pages serves it. No build step.">
+        <style>
+          .box   { fill: #eae8df; stroke: #1a1a1a; stroke-width: 1.5; }
+          .arr   { stroke: #1a1a1a; stroke-width: 1.5; fill: none; }
+          .lbl   { font-family: Georgia, serif; font-size: 14px; fill: #1a1a1a; font-weight: bold; }
+          .meta  { font-family: 'Courier New', monospace; font-size: 10px; fill: #555; }
+          .note  { font-family: Georgia, serif; font-size: 11px; fill: #777; font-style: italic; }
+        </style>
+
+        <rect class="box" x="30" y="70" width="160" height="70" />
+        <text class="lbl"  x="110" y="100" text-anchor="middle">write</text>
+        <text class="meta" x="110" y="122" text-anchor="middle">.html / .css</text>
+
+        <line class="arr" x1="190" y1="105" x2="270" y2="105" />
+        <polygon points="270,105 262,101 262,109" fill="#1a1a1a" />
+
+        <rect class="box" x="275" y="70" width="160" height="70" />
+        <text class="lbl"  x="355" y="100" text-anchor="middle">push</text>
+        <text class="meta" x="355" y="122" text-anchor="middle">git commit + git push</text>
+
+        <line class="arr" x1="435" y1="105" x2="515" y2="105" />
+        <polygon points="515,105 507,101 507,109" fill="#1a1a1a" />
+
+        <rect class="box" x="520" y="70" width="170" height="70" />
+        <text class="lbl"  x="605" y="100" text-anchor="middle">serve</text>
+        <text class="meta" x="605" y="122" text-anchor="middle">github pages + custom domain</text>
+
+        <text class="note" x="360" y="175" text-anchor="middle">no build step. no node_modules. ~30 seconds end-to-end.</text>
+      </svg>
+      <figcaption>The whole pipeline.</figcaption>
+    </figure>
+
+    <!-- ── Structured spec ── -->
+    <div class="spec-row">
+      <div class="spec-label">Built</div>
+      <div class="spec-body">
+        <p>
+          A document-first personal website. The homepage is a dense
+          GCC-style directory &mdash; intro paragraph, two content columns
+          (projects, achievements, now, skills), and a narrow right sidebar
+          with blue heading bars. Deeper pages (projects, blog, now) live in
+          their own folders so the URLs stay clean: no <code>.html</code>
+          extensions anywhere.
+        </p>
+        <p>
+          The aesthetic is borrowed from <a href="https://gcc.gnu.org">gcc.gnu.org</a>
+          and pre-2010 personal sites: warm grey paper, Georgia serif body,
+          classic blue underlined links with a yellow highlighter on hover.
+          The signature visual touch is a chunky Mac OS 8 scrollbar on
+          bounded scroll widgets &mdash; like the post list on the blog index.
+        </p>
+      </div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-label">Constraints</div>
+      <div class="spec-body">
+        <p>
+          I gave myself a few rules going in. Most of them held.
+        </p>
+        <ul>
+          <li>System fonts only (Georgia &amp; Courier New). No web font loads.</li>
+          <li>No JavaScript on the homepage. The site works fully without it.</li>
+          <li>One stylesheet for the whole site. No CSS-in-JS, no preprocessors, no Tailwind.</li>
+          <li>Every page printable. <code>@media print</code> rules from day one.</li>
+          <li>No <code>.html</code> in any URL.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-label">How it works</div>
+      <div class="spec-body">
+        <p>
+          Every page is a static <code>index.html</code> in its own folder,
+          which gives clean URLs without any server-side routing. The
+          stylesheet lives at the root and is shared across every page, so
+          a visitor downloads it once and the browser caches it for every
+          subsequent page they visit.
+        </p>
+        <p>
+          The only piece of JavaScript on the whole site is the LeetCode
+          redirect at <a href="/projects/leetcode-redirect/">/&lt;number&gt;</a>
+          &mdash; documented as its own project. Everything else is plain HTML.
+        </p>
+      </div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-label">Tradeoffs</div>
+      <div class="spec-body">
+        <p>
+          Hand-writing every page means I can't reuse the header or sidebar
+          via a component &mdash; if I change one, I change all of them. For
+          a small site this is fine; for a larger one I'd reach for a
+          static-site generator like Eleventy. The break-even point, I'd
+          guess, is somewhere around twenty pages.
+        </p>
+        <p>
+          The choice of system fonts gives me zero font-loading flash but
+          means visitors on Linux without Georgia installed see a different
+          serif. I think that's a fair price for the speed.
+        </p>
+      </div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-label">What I learned</div>
+      <div class="spec-body">
+        <p>
+          You can do a lot with very little. The hardest part wasn't writing
+          the code &mdash; it was committing to one aesthetic and resisting
+          the urge to add a fifth font, a sixth colour, a seventh widget.
+          Every framework I tried earlier had given me too many primitives,
+          and the result felt like everyone else's site.
+        </p>
+        <p>
+          The deeper lesson: the medium of a personal site is the act of
+          maintaining it. A site I can edit in any text editor and push
+          with one command is a site I'll actually keep updating. A site
+          that needs <code>npm install</code> to render is one I'll
+          eventually abandon.
+        </p>
+      </div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-label">What's next</div>
+      <div class="spec-body">
+        <p>
+          A proper <code>/now</code> page. RSS feed for the blog. A few
+          easter eggs that aren't visible from the homepage. And eventually,
+          a writeup of every visual decision in a single page that links to
+          the relevant CSS lines &mdash; partly as a design doc for me,
+          partly as a guide for anyone who wants to fork the repo.
+        </p>
+      </div>
+    </div>
+
+    <p class="project-links">
+      <a href="https://rudraanshpatel.in">[you're on it]</a>
+      <a href="https://github.com/rudraanshpatel/rudraanshpatel.github.io">[source]</a>
+    </p>
+
+    <hr class="post-end" />
+
+  </article>
+
+  <p class="mono dim" style="font-size:0.78rem;">
+    <a href="/projects/">← back to projects</a>
+  </p>
+
+</body>
+</html>
