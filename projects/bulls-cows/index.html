@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bulls & Cows — from an overnight C++ terminal build to a real-time multiplayer web app. The arc of one project across three years." />
+
+  <meta property="og:title" content="Bulls &amp; Cows — Rudraansh Patel" />
+  <meta property="og:description" content="From an overnight C++ terminal game to a real-time multiplayer web app. Three years, three versions, one game." />
+  <meta property="og:url" content="https://rudraanshpatel.in/projects/bulls-and-cows" />
+  <meta property="og:type" content="article" />
+
+  <title>Bulls &amp; Cows — Rudraansh Patel</title>
+  <link rel="canonical" href="https://rudraanshpatel.in/projects/bulls-and-cows" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="deep-page">
+
+  <p class="breadcrumb mono">
+    <a href="/">← rudraansh</a> / <a href="/projects/">projects</a> / bulls-and-cows
+  </p>
+
+  <article>
+
+    <header class="project-detail-header">
+      <h1>Bulls &amp; Cows <span class="tag tag-active">active</span></h1>
+      <span class="meta dim">2023 &mdash; ongoing</span>
+    </header>
+    <p class="project-detail-meta">
+      C++ &middot; Python &middot; FastAPI &middot; WebSockets &middot; SQLite &middot; Vanilla JS
+    </p>
+
+    <p>
+      A simple guessing game that became a three-year arc of learning. Started
+      as an overnight C++ terminal build &mdash; just to see if I could.
+      Rebuilt as a single-player web app to learn the basics of a real backend.
+      Now being rebuilt again as a real-time two-player multiplayer game over
+      WebSockets.
+    </p>
+
+    <p>
+      Same rules every time. Same scoring algorithm. Each version forced me
+      to learn something the previous one let me ignore.
+    </p>
+
+    <!-- ── ARC TIMELINE ── -->
+    <figure class="post-diagram">
+      <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="Three-version timeline: v1 CLI in 2023, v2 web solo in 2024, v3 multiplayer in 2026.">
+        <style>
+          .box   { fill: #eae8df; stroke: #1a1a1a; stroke-width: 1.5; }
+          .arr   { stroke: #1a1a1a; stroke-width: 1.5; fill: none; }
+          .lbl   { font-family: Georgia, serif; font-size: 14px; fill: #1a1a1a; font-weight: bold; }
+          .meta  { font-family: 'Courier New', monospace; font-size: 10px; fill: #555; }
+          .year  { font-family: 'Courier New', monospace; font-size: 11px; fill: #777; font-weight: bold; }
+          .note  { font-family: Georgia, serif; font-size: 11px; fill: #777; font-style: italic; }
+        </style>
+
+        <!-- v1 -->
+        <rect class="box" x="20" y="60" width="180" height="100" />
+        <text class="year"  x="110" y="80"  text-anchor="middle">2023</text>
+        <text class="lbl"   x="110" y="105" text-anchor="middle">v1 &middot; CLI</text>
+        <text class="meta"  x="110" y="125" text-anchor="middle">C++ &middot; one terminal</text>
+        <text class="meta"  x="110" y="142" text-anchor="middle">you vs computer</text>
+
+        <line class="arr" x1="200" y1="110" x2="250" y2="110" />
+        <polygon points="250,110 242,106 242,114" fill="#1a1a1a" />
+        <text class="note" x="225" y="98" text-anchor="middle">"make it visible"</text>
+
+        <!-- v2 -->
+        <rect class="box" x="255" y="60" width="180" height="100" />
+        <text class="year"  x="345" y="80"  text-anchor="middle">2024</text>
+        <text class="lbl"   x="345" y="105" text-anchor="middle">v2 &middot; web (solo)</text>
+        <text class="meta"  x="345" y="125" text-anchor="middle">FastAPI &middot; SQLite</text>
+        <text class="meta"  x="345" y="142" text-anchor="middle">you vs computer, in a browser</text>
+
+        <line class="arr" x1="435" y1="110" x2="485" y2="110" />
+        <polygon points="485,110 477,106 477,114" fill="#1a1a1a" />
+        <text class="note" x="460" y="98" text-anchor="middle">"make it social"</text>
+
+        <!-- v3 -->
+        <rect class="box" x="490" y="60" width="200" height="100" />
+        <text class="year"  x="590" y="80"  text-anchor="middle">2026</text>
+        <text class="lbl"   x="590" y="105" text-anchor="middle">v3 &middot; multiplayer</text>
+        <text class="meta"  x="590" y="125" text-anchor="middle">WebSockets &middot; rooms</text>
+        <text class="meta"  x="590" y="142" text-anchor="middle">you vs human, real-time</text>
+
+        <text class="note" x="360" y="195" text-anchor="middle">same game. each rewrite taught what the last one let me skip.</text>
+      </svg>
+      <figcaption>Three versions, one game.</figcaption>
+    </figure>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         v1 — CLI
+         ═══════════════════════════════════════════════════════════ -->
+    <h2 class="arc-h2">v1 &middot; The overnight CLI <span class="arc-year mono">2023</span></h2>
+
+    <p>
+      One evening I read about the Bulls and Cows guessing game and decided
+      to build it before going to sleep. I didn't. I built it before going
+      to sleep the next day. C++17, just <code>&lt;iostream&gt;</code> and
+      <code>&lt;string&gt;</code>, no external libraries.
+    </p>
+
+    <div class="spec-row">
+      <div class="spec-label">Built</div>
+      <div class="spec-body">
+        <p>
+          A terminal version of Bulls &amp; Cows. The computer picks a secret
+          4-digit number, you guess, the game reports Bulls (right digit, right
+          spot) and Cows (right digit, wrong spot) until you crack it.
+        </p>
+      </div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-label">Taught me</div>
+      <div class="spec-body">
+        <p>
+          The game loop. State that lives across iterations of a
+          <code>while</code> loop without anything like classes or objects to
+          hold it. Input validation that doesn't crash on garbage. The Bulls
+          and Cows scoring rule itself, which is trickier than it sounds when
+          the secret has repeated digits.
+        </p>
+      </div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-label">Why I rebuilt</div>
+      <div class="spec-body">
+        <p>
+          A terminal game can't be shared. I wanted to send a link to a
+          friend, and "clone my repo and compile this" is not a link.
+        </p>
+      </div>
+    </div>
+
+    <p class="project-links">
+      <a href="https://github.com/rudraanshpatel/bulls-and-cows-cli">[source]</a>
+    </p>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         v2 — web solo
+         ═══════════════════════════════════════════════════════════ -->
+    <h2 class="arc-h2">v2 &middot; The solo web app <span class="arc-year mono">2024</span></h2>
+
+    <p>
+      Same game, same scoring, now in a browser. The computer still picks the
+      secret; you still guess. But the entire stack underneath had to change
+      to support the rendering of a single web page.
+    </p>
+
+    <div class="spec-row">
+      <div class="spec-label">Built</div>
+      <div class="spec-body">
+        <p>
+          FastAPI backend with one endpoint that creates a new game and one
+          that accepts a guess. Game state stored in SQLite by session id.
+          Frontend was plain HTML and one JS file &mdash; the same minimal
+          philosophy I now use for this site.
+        </p>
+      </div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-label">Taught me</div>
+      <div class="spec-body">
+        <p>
+          What "stateless API + persistent store" actually means. Why you
+          shouldn't trust the client to tell you the secret number (yes, I
+          made that mistake in the first draft). How a request/response
+          cycle is fundamentally different from a function call &mdash; the
+          server has no memory of you unless you give it a token.
+        </p>
+      </div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-label">Why I rebuilt</div>
+      <div class="spec-body">
+        <p>
+          Playing alone against a computer is fine. Playing against another
+          human is a different game entirely. And to do that, the
+          request/response model wasn't going to work &mdash; I needed both
+          players to see updates in near-real-time. Polling would have worked,
+          but it would have been ugly. Time to learn WebSockets.
+        </p>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         v3 — multiplayer
+         ═══════════════════════════════════════════════════════════ -->
+    <h2 class="arc-h2">v3 &middot; The multiplayer rewrite <span class="arc-year mono">2026</span></h2>
+
+    <p>
+      Two players. One room. Each player picks their own secret number, then
+      they take turns guessing each other's. The first to crack the other's
+      number wins. Real-time, no refresh.
+    </p>
+
+    <div class="spec-row">
+      <div class="spec-label">Built</div>
+      <div class="spec-body">
+        <p>
+          Same FastAPI backend, but with WebSocket endpoints instead of REST.
+          Players join a room via a 6-character code; game state lives in an
+          in-memory Python dict keyed by room code. SQLite is only touched
+          at game end to write a leaderboard row.
+        </p>
+        <p>
+          The frontend uses one WebSocket connection per player and a small
+          JS dispatcher that handles incoming messages by type:
+          <code>guess</code>, <code>opponent_guessed</code>, <code>turn</code>,
+          <code>win</code>, <code>opponent_left</code>.
+        </p>
+      </div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-label">Taught me</div>
+      <div class="spec-body">
+        <p>
+          Real-time state is the hard part. When two clients are simultaneously
+          connected, the server is the source of truth &mdash; clients can
+          only ask, never assert. Turn synchronization without polling means
+          the server has to explicitly push <em>"it's your turn"</em> messages
+          rather than letting clients infer it.
+        </p>
+        <p>
+          And disconnect handling is the deep end. When a player's socket
+          drops mid-game, the room can't die immediately (they might just
+          have flaky wifi) but it also can't hang forever. The current rule:
+          the room stays alive while at least one player is connected, and is
+          garbage-collected when both leave.
+        </p>
+      </div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-label">What's next</div>
+      <div class="spec-body">
+        <p>
+          Adding a spectator mode &mdash; same WebSocket, but read-only. A
+          rejoin flow so a player who drops can come back to the same room
+          within a grace window. Eventually a Redis-backed room store so I
+          can run more than one server instance.
+        </p>
+      </div>
+    </div>
+
+    <p class="project-links">
+      <a href="#">[live demo]</a>
+      <a href="https://github.com/rudraanshpatel/bulls-and-cows-multiplayer">[source]</a>
+    </p>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         Closing reflection
+         ═══════════════════════════════════════════════════════════ -->
+    <h2 class="arc-h2">Looking back</h2>
+
+    <p>
+      I didn't plan this as a three-year arc. v1 was an overnight challenge.
+      v2 was an excuse to learn FastAPI. v3 is the one I'm still building.
+      But looking at them in sequence, the thing I notice is that each
+      rewrite forced me to learn what the previous version had let me skip
+      &mdash; state, persistence, concurrency &mdash; and each one was small
+      enough that I actually finished it.
+    </p>
+
+    <p>
+      The lesson, I think, is that the same toy project, rebuilt at a higher
+      level of abstraction, can teach more than three different toy projects
+      built at the same level.
+    </p>
+
+    <hr class="post-end" />
+
+  </article>
+
+  <p class="mono dim" style="font-size:0.78rem;">
+    <a href="/projects/">← back to projects</a>
+  </p>
+
+</body>
+</html>
