@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Why I rebuilt my portfolio from scratch — on choosing a document-first aesthetic over a React template." />
+  <meta name="description" content="Post description — replace this." />
 
-  <meta property="og:title" content="Why I rebuilt my portfolio from scratch — Rudraansh Patel" />
-  <meta property="og:description" content="On choosing a document-first aesthetic over a React template, and why hand-written HTML still wins." />
-  <meta property="og:url" content="https://rudraanshpatel.in/blog/why-i-rebuilt-my-portfolio" />
+  <meta property="og:title" content="Post with image &amp; diagram — Rudraansh Patel" />
+  <meta property="og:description" content="A template showing how to embed images and inline SVG diagrams in a post." />
+  <meta property="og:url" content="https://rudraanshpatel.in/blog/placeholder-two" />
   <meta property="og:type" content="article" />
-  <meta property="article:published_time" content="2026-08-02" />
+  <meta property="article:published_time" content="2026-07-20" />
   <meta property="article:author" content="Rudraansh Patel" />
 
-  <title>Why I rebuilt my portfolio from scratch — Rudraansh Patel</title>
-  <link rel="canonical" href="https://rudraanshpatel.in/blog/why-i-rebuilt-my-portfolio" />
+  <title>Post with image &amp; diagram — Rudraansh Patel</title>
+  <link rel="canonical" href="https://rudraanshpatel.in/blog/placeholder-two" />
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body class="blog-post">
@@ -23,80 +23,37 @@
   <article class="post">
 
     <header class="post-header">
-      <h1>Why I rebuilt my portfolio from scratch</h1>
+      <h1>Post with image &amp; diagram</h1>
       <p class="post-meta mono">
-        <time datetime="2026-08-02">Aug 02, 2026</time>
-        &middot; 4 min read
+        <time datetime="2026-07-20">Jul 20, 2026</time>
       </p>
     </header>
 
     <p class="post-lede">
-      A short note on why I tossed the React template I started with and
-      hand-wrote everything in HTML and CSS instead.
-    </p>
-
-    <!-- BODY — prose paragraphs -->
-    <p>
-      I started this site three times. The first attempt was Next.js with
-      Tailwind — modern, fast to set up, and within a week I'd lost interest
-      in writing anything on it. The second was a Notion-style template I
-      bought. It looked fine. It also looked like everyone else's site.
+      Template showing how to embed images and inline SVG diagrams.
     </p>
 
     <p>
-      The third attempt was this one. Plain HTML, plain CSS, no framework,
-      no build step. I can edit any page in any text editor and push. The
-      whole site weighs less than one Tailwind icon library.
+      For an image, use a &lt;figure&gt; with an &lt;img&gt; and a
+      &lt;figcaption&gt;. Drop the file at
+      <code>/img/blog/&lt;post-slug&gt;/&lt;filename&gt;</code>.
     </p>
 
-    <!-- HEADING within the post -->
-    <h2>What changed</h2>
-
-    <p>
-      The thing that flipped for me was reading old personal sites on the
-      web — sites that have been around since 2005, still readable, still
-      themselves. The common thread wasn't aesthetic. It was that the
-      people who maintain those sites can <em>actually maintain them</em>.
-      No `npm install`, no broken dependencies, no migration from one
-      framework to the next every two years.
-    </p>
-
-    <!-- IMAGE — wrapped in a figure for caption support -->
+    <!-- ── IMAGE EXAMPLE ── -->
     <figure class="post-image">
-      <img src="/img/blog/why-i-rebuilt/old-vs-new.png" alt="Side-by-side comparison of the old React template and the new hand-written site" />
-      <figcaption>Old (left): generic dark-mode template. New (right): document-first cream paper.</figcaption>
+      <img src="/img/blog/placeholder-two/example.png" alt="Replace with a real alt description" />
+      <figcaption>Caption text in monospace. Keep it short.</figcaption>
     </figure>
 
     <p>
-      I wanted something that would still feel right when I came back to it
-      in a year. Something I'd want to add to, not migrate.
+      For a diagram, use inline SVG. It scales perfectly, prints cleanly, and
+      doesn't require an external file. The pattern below uses three boxes and
+      arrows &mdash; copy and edit the &lt;rect&gt; and &lt;text&gt; elements.
     </p>
 
-    <!-- BLOCKQUOTE -->
-    <blockquote>
-      <p>
-        The medium is the message, and the medium of a personal site is
-        the act of maintaining it.
-      </p>
-    </blockquote>
-
-    <h2>The constraints</h2>
-
-    <p>
-      I gave myself a few rules going in. Some of them I broke. Most of
-      them held.
-    </p>
-
-    <ul>
-      <li>System fonts only (Georgia and Courier New). No web font loads.</li>
-      <li>No JavaScript on the homepage. The site works fully without it.</li>
-      <li>Every page printable. <code>@media print</code> styles from day one.</li>
-      <li>One stylesheet. No CSS-in-JS, no preprocessors, no Tailwind.</li>
-    </ul>
-
-    <!-- DIAGRAM — inline SVG, no external image needed -->
+    <!-- ── DIAGRAM EXAMPLE (inline SVG) ── -->
     <figure class="post-diagram">
-      <svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram showing the build pipeline: write HTML, push to GitHub, GitHub Pages serves it. No build step.">
+      <svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three-step diagram: input, process, output.">
         <style>
           .box  { fill: #eae8df; stroke: #1a1a1a; stroke-width: 1.5; }
           .arr  { stroke: #1a1a1a; stroke-width: 1.5; fill: none; }
@@ -105,40 +62,29 @@
         </style>
 
         <rect class="box" x="20"  y="70" width="110" height="60" />
-        <text class="lbl"  x="75"  y="100" text-anchor="middle">write</text>
-        <text class="meta" x="75"  y="118" text-anchor="middle">.html / .css</text>
+        <text class="lbl"  x="75"  y="100" text-anchor="middle">input</text>
+        <text class="meta" x="75"  y="118" text-anchor="middle">step one</text>
 
         <line class="arr" x1="130" y1="100" x2="180" y2="100" />
         <polygon points="180,100 172,96 172,104" fill="#1a1a1a" />
 
         <rect class="box" x="185" y="70" width="110" height="60" />
-        <text class="lbl"  x="240" y="100" text-anchor="middle">push</text>
-        <text class="meta" x="240" y="118" text-anchor="middle">git</text>
+        <text class="lbl"  x="240" y="100" text-anchor="middle">process</text>
+        <text class="meta" x="240" y="118" text-anchor="middle">step two</text>
 
         <line class="arr" x1="295" y1="100" x2="345" y2="100" />
         <polygon points="345,100 337,96 337,104" fill="#1a1a1a" />
 
         <rect class="box" x="350" y="70" width="110" height="60" />
-        <text class="lbl"  x="405" y="100" text-anchor="middle">serve</text>
-        <text class="meta" x="405" y="118" text-anchor="middle">github pages</text>
-
-        <text class="meta" x="240" y="170" text-anchor="middle">no build step. no node_modules. ~10s total.</text>
+        <text class="lbl"  x="405" y="100" text-anchor="middle">output</text>
+        <text class="meta" x="405" y="118" text-anchor="middle">step three</text>
       </svg>
-      <figcaption>The whole build pipeline.</figcaption>
+      <figcaption>Inline SVG diagram. Edit the boxes and labels directly in the HTML.</figcaption>
     </figure>
 
-    <h2>What I'd do differently</h2>
-
     <p>
-      The Mac OS 8 scrollbar took three evenings I didn't budget for. Worth
-      it — but I should have done it last, not somewhere in the middle.
-      Lesson noted.
-    </p>
-
-    <p>
-      If you're thinking about doing the same thing: don't overthink the
-      first version. Mine looked terrible for the first week. The point
-      isn't to ship a beautiful site. It's to ship a site you can keep.
+      Both elements work in print mode, scale on mobile, and don't require any
+      JavaScript.
     </p>
 
     <hr class="post-end" />

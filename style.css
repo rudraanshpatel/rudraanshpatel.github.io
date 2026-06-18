@@ -739,64 +739,94 @@ body.blog-post {
   margin-bottom: 0;
 }
 
-/* ─── BLOG INDEX — post list ─── */
-.post-section {
-  margin-top: 1.5rem;
+/* ═══════════════════════════════════════════════════════════
+   BLOG STYLES — replace the previous blog section in style.css
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Shared blog page setup ─── */
+body.blog-index,
+body.blog-post {
+  max-width: 720px;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.breadcrumb {
+  font-size: 0.78rem;
+  color: var(--ink-dim);
   margin-bottom: 1.5rem;
 }
 
-.post-section h2 {
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--ink-dim);
-  margin-bottom: 0.8rem;
-  padding-bottom: 0.3rem;
-  border-bottom: 1px solid var(--rule);
+.page-intro h1 {
+  font-size: 2rem;
+  margin-bottom: 0.4rem;
 }
 
-.post-list {
-  list-style: none;
-  padding: 0;
+.page-intro .role {
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+  max-width: 60ch;
+  margin-bottom: 0;
 }
 
-.post-item {
-  padding: 0.6rem 0;
+/* ─── BLOG INDEX — scrollable table ─── */
+
+/* The .mac8 class gives us the chunky retro scrollbar from the
+   homepage. We just constrain max-height so it actually scrolls
+   once the list grows. */
+.blog-index-table {
+  max-height: 60vh;
+  padding: 0;             /* table provides its own padding */
+  margin-top: 1.2rem;
+}
+
+.post-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.post-table td {
+  padding: 0.4rem 0.9rem;
   border-bottom: 1px dotted var(--rule-dotted);
+  vertical-align: baseline;
 }
 
-.post-item:last-child { border-bottom: none; }
+.post-table tr:last-child td { border-bottom: none; }
 
-.post-line {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-  flex-wrap: wrap;
+.post-table tr:hover td {
+  background: var(--paper-soft);
 }
-
-.post-title {
-  font-size: 1.02rem;
-  font-weight: bold;
-  color: var(--ink);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.post-title:visited { color: var(--link-visited); }
 
 .post-date {
+  width: 110px;
+  white-space: nowrap;
   font-size: 0.78rem;
   color: var(--ink-dim);
-  white-space: nowrap;
 }
 
-.post-desc {
-  font-size: 0.9rem;
-  color: var(--ink-muted);
-  margin-top: 0.2rem;
-  margin-bottom: 0;
-  line-height: 1.45;
+.post-table a {
+  font-weight: bold;
+  text-decoration: none;          /* table-row hover handles the visual feedback */
+  color: var(--link);
+}
+
+.post-table a:hover {
+  background: transparent;        /* let the row hover do the work */
+  text-decoration: underline;
+}
+
+.post-flag {
+  display: inline-block;
+  margin-left: 0.4rem;
+  font-size: 0.7rem;
+  color: var(--ink-dim);
+  font-weight: normal;
+}
+
+.post-count {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  text-align: right;
 }
 
 /* ─── INDIVIDUAL POST PAGE ─── */
@@ -830,15 +860,15 @@ body.blog-post {
   border-bottom: 1px solid var(--rule);
 }
 
-/* Post body — comfortable reading */
+/* Reading paragraphs — tighter line-height (1.65) than the original 1.7
+   to match the rhythm of essay prose without feeling sparse. */
 .post p {
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.65;
   margin-bottom: 1rem;
 }
 
 .post h2 {
-  /* Override the small-caps h2 from the homepage for in-post headings */
   font-size: 1.3rem;
   font-weight: bold;
   text-transform: none;
@@ -874,19 +904,27 @@ body.blog-post {
 
 .post blockquote {
   margin: 1.5rem 0;
-  padding: 0.6rem 1.2rem;
+  padding: 0.8rem 1.4rem;
   border-left: 3px solid var(--ink-muted);
   background: var(--paper-sunk);
   font-style: italic;
   color: var(--ink-muted);
+  font-size: 1.02rem;
+  line-height: 1.55;
 }
 
 .post blockquote p { margin-bottom: 0; }
 
+.post hr {
+  margin: 1.5rem auto;
+  width: 60%;
+  border-top: 1px solid var(--rule);
+}
+
 /* Images & diagrams */
 .post-image,
 .post-diagram {
-  margin: 1.5rem 0;
+  margin: 1.8rem 0;
   text-align: center;
 }
 
@@ -915,7 +953,9 @@ body.blog-post {
 }
 
 .post-end {
-  margin: 2.5rem 0 1rem;
+  margin: 2.5rem auto 1rem;
+  width: 30%;
+  border-top: 1px solid var(--rule);
 }
 
 /* Responsive */
@@ -924,23 +964,62 @@ body.blog-post {
   body.blog-post {
     padding: 1rem 0.9rem 2rem;
   }
-  .post-line { flex-direction: column; gap: 0.1rem; }
   .post-header h1 { font-size: 1.5rem; }
   .post h2 { font-size: 1.15rem; }
+  .post-date { width: 90px; font-size: 0.72rem; }
+  .post-table td { padding: 0.35rem 0.6rem; }
+  .blog-index-table { max-height: none; }   /* let it flow on mobile */
 }
 
-/* Print — clean essay format */
+/* Print */
 @media print {
   body.blog-post {
     max-width: none;
     padding: 1rem;
   }
   .breadcrumb,
-  .post-end + p { display: none; }
+  .post-end ~ p { display: none; }
   .post-image img,
   .post-diagram svg {
     border: none;
     background: none;
     padding: 0;
   }
+  .blog-index-table {
+    max-height: none;
+    overflow: visible;
+    border: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Append to style.css — for the Bulls & Cows arc page
+   (and any other multi-version project page)
+   ═══════════════════════════════════════════════════════════ */
+
+/* Section heading for a version of the project ("v1 · The CLI") */
+.arc-h2 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: none;
+  letter-spacing: -0.2px;
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  margin-top: 2.8rem;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.arc-year {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: var(--ink-dim);
+  margin-left: auto;          /* pushes the year to the far right */
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .arc-h2 { font-size: 1.15rem; }
 }
