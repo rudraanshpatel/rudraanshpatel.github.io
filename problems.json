@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-20T16:23:00Z",
-  "count": 3966,
+  "updated": "2026-06-20T18:16:06Z",
+  "count": 3967,
   "problems": [
     {
       "id": 1,
@@ -27763,6 +27763,13 @@
       "slug": "count-good-integers-in-a-range",
       "difficulty": "Hard",
       "premium": false
+    },
+    {
+      "id": 3967,
+      "title": "Finish Time of Tasks II",
+      "slug": "finish-time-of-tasks-ii",
+      "difficulty": "Hard",
+      "premium": true
     }
   ]
 }
