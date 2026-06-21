@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-21T00:12:23Z",
-  "count": 3967,
+  "updated": "2026-06-21T06:07:04Z",
+  "count": 3972,
   "problems": [
     {
       "id": 1,
@@ -27768,6 +27768,41 @@
       "id": 3967,
       "title": "Finish Time of Tasks II",
       "slug": "finish-time-of-tasks-ii",
+      "difficulty": "Hard",
+      "premium": true
+    },
+    {
+      "id": 3968,
+      "title": "Maximum Manhattan Distance After All Moves",
+      "slug": "maximum-manhattan-distance-after-all-moves",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3969,
+      "title": "Valid Subarrays With Matching Sum Digits I",
+      "slug": "valid-subarrays-with-matching-sum-digits-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3970,
+      "title": "Shortest Path With At Most K Consecutive Identical Characters",
+      "slug": "shortest-path-with-at-most-k-consecutive-identical-characters",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3971,
+      "title": "Maximum Total Value",
+      "slug": "maximum-total-value",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 3972,
+      "title": "Valid Subarrays With Matching Sum Digits II",
+      "slug": "valid-subarrays-with-matching-sum-digits-ii",
       "difficulty": "Hard",
       "premium": true
     }
