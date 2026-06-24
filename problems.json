@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-24T18:53:34Z",
-  "count": 3972,
+  "updated": "2026-06-24T20:50:05Z",
+  "count": 3973,
   "problems": [
     {
       "id": 1,
@@ -27803,6 +27803,13 @@
       "id": 3972,
       "title": "Valid Subarrays With Matching Sum Digits II",
       "slug": "valid-subarrays-with-matching-sum-digits-ii",
+      "difficulty": "Hard",
+      "premium": true
+    },
+    {
+      "id": 3973,
+      "title": "Distinct Gate Paths to LCA",
+      "slug": "distinct-gate-paths-to-lca",
       "difficulty": "Hard",
       "premium": true
     }
