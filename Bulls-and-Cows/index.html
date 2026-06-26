@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bulls & Cows — guess the 4-digit number. A small playable demo embedded in rudraanshpatel.in." />
+  <meta name="robots" content="noindex" />
+  <title>Bulls &amp; Cows — play — rudraanshpatel.in</title>
+  <link rel="canonical" href="https://rudraanshpatel.in/play/bulls-and-cows" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="deep-page">
+
+  <p class="breadcrumb mono">
+    <a href="/">← rudraansh</a> /
+    <a href="/projects/">projects</a> /
+    <a href="/projects/bulls-and-cows/">bulls-and-cows</a> /
+    play
+  </p>
+
+  <article>
+
+    <header class="project-detail-header">
+      <h1>Bulls &amp; Cows</h1>
+      <span class="meta dim">play</span>
+    </header>
+    <p class="project-detail-meta">
+      Guess the 4-digit secret. No repeats.
+      <span class="bc-rules-inline mono">
+        <strong>Bull</strong> = right digit, right spot &middot;
+        <strong>Cow</strong> = right digit, wrong spot
+      </span>
+    </p>
+
+    <!-- ── The game ── -->
+    <section class="bc-game" aria-live="polite">
+
+      <div class="bc-board mac8" id="bcBoard">
+        <!-- Guess rows injected here -->
+        <div class="bc-empty mono dim" id="bcEmpty">no guesses yet &mdash; type 4 digits below.</div>
+      </div>
+
+      <form id="bcForm" class="bc-input-row" autocomplete="off">
+        <span class="bc-prompt mono">&gt;</span>
+        <input
+          type="text"
+          id="bcInput"
+          class="bc-input mono"
+          inputmode="numeric"
+          pattern="[0-9]{4}"
+          maxlength="4"
+          autofocus
+          aria-label="Your 4-digit guess"
+          placeholder="____"
+        />
+        <span id="bcStatus" class="bc-status mono"></span>
+      </form>
+
+      <p class="bc-foot mono dim">
+        <kbd>enter</kbd> to guess &middot;
+        <kbd>esc</kbd> to restart &middot;
+        <span id="bcCount">0 guesses</span>
+      </p>
+
+    </section>
+
+    <hr class="post-end" />
+
+    <p class="mono dim" style="font-size:0.78rem;">
+      this is the in-browser solo version &middot;
+      <a href="/projects/bulls-and-cows/">read the project story →</a>
+    </p>
+
+  </article>
+
+  <script>
+  (function () {
+    /* ── elements ── */
+    var board   = document.getElementById('bcBoard');
+    var empty   = document.getElementById('bcEmpty');
+    var input   = document.getElementById('bcInput');
+    var form    = document.getElementById('bcForm');
+    var status  = document.getElementById('bcStatus');
+    var counter = document.getElementById('bcCount');
+
+    var secret   = '';
+    var guesses  = 0;
+    var won      = false;
+
+    /* ── core ── */
+    function makeSecret () {
+      var digits = ['0','1','2','3','4','5','6','7','8','9'];
+      // Fisher–Yates shuffle, take first 4
+      for (var i = digits.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = digits[i]; digits[i] = digits[j]; digits[j] = t;
+      }
+      return digits.slice(0, 4).join('');
+    }
+
+    function score (guess) {
+      var bulls = 0, cows = 0;
+      for (var i = 0; i < 4; i++) {
+        if (guess[i] === secret[i]) bulls++;
+        else if (secret.indexOf(guess[i]) !== -1) cows++;
+      }
+      return { bulls: bulls, cows: cows };
+    }
+
+    function isValid (g) {
+      if (!/^\d{4}$/.test(g)) return 'need exactly 4 digits';
+      var seen = {};
+      for (var i = 0; i < 4; i++) {
+        if (seen[g[i]]) return 'no repeated digits';
+        seen[g[i]] = true;
+      }
+      return null;
+    }
+
+    function addRow (guess, result) {
+      if (empty) { empty.remove(); }
+      var row = document.createElement('div');
+      row.className = 'bc-row mono';
+
+      var num = document.createElement('span');
+      num.className = 'bc-num';
+      num.textContent = String(guesses).padStart(2, '0');
+
+      var g = document.createElement('span');
+      g.className = 'bc-guess';
+      g.textContent = guess;
+
+      var r = document.createElement('span');
+      r.className = 'bc-result';
+      r.textContent = result.bulls + 'B ' + result.cows + 'C';
+
+      row.appendChild(num);
+      row.appendChild(g);
+      row.appendChild(r);
+      board.appendChild(row);
+
+      // auto-scroll to newest
+      board.scrollTop = board.scrollHeight;
+    }
+
+    function setStatus (msg, kind) {
+      status.textContent = msg;
+      status.className = 'bc-status mono' + (kind ? ' bc-status--' + kind : '');
+    }
+
+    function updateCount () {
+      counter.textContent = guesses + (guesses === 1 ? ' guess' : ' guesses');
+    }
+
+    function restart () {
+      secret = makeSecret();
+      guesses = 0;
+      won = false;
+      board.innerHTML = '';
+      var e = document.createElement('div');
+      e.id = 'bcEmpty';
+      e.className = 'bc-empty mono dim';
+      e.textContent = 'no guesses yet — type 4 digits below.';
+      board.appendChild(e);
+      empty = e;
+      setStatus('');
+      input.disabled = false;
+      input.value = '';
+      updateCount();
+      input.focus();
+    }
+
+    /* ── events ── */
+    input.addEventListener('input', function () {
+      input.value = input.value.replace(/\D/g, '').slice(0, 4);
+      setStatus('');
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (won) return;
+      var g = input.value.trim();
+      var err = isValid(g);
+      if (err) { setStatus(err, 'err'); return; }
+
+      var r = score(g);
+      guesses++;
+      addRow(g, r);
+      updateCount();
+      input.value = '';
+
+      if (r.bulls === 4) {
+        won = true;
+        setStatus('solved in ' + guesses + (guesses === 1 ? ' guess' : ' guesses') + ' — press esc to play again', 'ok');
+        input.disabled = true;
+      }
+    });
+
+    // Esc to restart, anywhere
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        restart();
+      }
+    });
+
+    // Keep focus on the input no matter what
+    document.addEventListener('click', function () {
+      if (!input.disabled) input.focus();
+    });
+
+    /* ── boot ── */
+    restart();
+  })();
+  </script>
+
+</body>
+</html>
