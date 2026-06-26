@@ -1093,3 +1093,145 @@ body.lc-launcher {
   .lc-input { font-size: 2.5rem; }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   BULLS & COWS PLAY PAGE — append to style.css
+   ═══════════════════════════════════════════════════════════ */
+
+.bc-rules-inline {
+  display: inline-block;
+  margin-left: 0.6rem;
+  font-size: 0.78rem;
+  color: var(--ink-dim);
+}
+
+.bc-game {
+  margin-top: 1.5rem;
+  max-width: 520px;
+}
+
+/* ─── Board (guess history) ──────────────────────────────────
+   Reuses .mac8 for the chunky scrollbar. Padding is 0 here so
+   rows can span the full width and look like a log.
+   ─────────────────────────────────────────────────────────── */
+.bc-board {
+  height: 280px;
+  max-height: 280px;
+  padding: 0;
+  background: var(--paper-sunk);
+}
+
+.bc-empty {
+  padding: 1rem 0.9rem;
+  font-size: 0.85rem;
+}
+
+/* Individual guess row */
+.bc-row {
+  display: grid;
+  grid-template-columns: 50px 1fr auto;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.45rem 0.9rem;
+  border-bottom: 1px dotted var(--rule-dotted);
+  font-size: 0.95rem;
+}
+
+.bc-row:last-child { border-bottom: none; }
+
+.bc-num {
+  font-size: 0.75rem;
+  color: var(--ink-dim);
+}
+
+.bc-guess {
+  font-size: 1.15rem;
+  font-weight: bold;
+  letter-spacing: 0.25em;
+  color: var(--ink);
+}
+
+.bc-result {
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+/* ─── Input row ─────────────────────────────────────────── */
+.bc-input-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+  padding: 0.5rem 0.2rem 0.5rem 0;
+  border-bottom: 2px solid var(--ink);
+}
+
+.bc-prompt {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--ink);
+}
+
+.bc-input {
+  flex: 0 0 auto;
+  width: 7ch;
+  font-size: 1.4rem;
+  font-weight: bold;
+  letter-spacing: 0.25em;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  caret-color: var(--link);
+}
+
+.bc-input:focus { outline: none; }
+
+.bc-input::placeholder {
+  color: var(--ink-faint);
+  opacity: 0.35;
+  letter-spacing: 0.25em;
+}
+
+.bc-input:disabled {
+  color: var(--ink-dim);
+}
+
+.bc-status {
+  font-size: 0.82rem;
+  color: var(--ink-dim);
+  margin-left: auto;
+}
+
+.bc-status--err { color: #aa3322; }
+.bc-status--ok  { color: #006622; }
+
+/* ─── Footer key hints ───────────────────────────────────── */
+.bc-foot {
+  font-size: 0.78rem;
+  margin-top: 0.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.bc-foot kbd {
+  font-family: var(--mono);
+  background: var(--paper-sunk);
+  border: 1px solid var(--rule);
+  padding: 1px 6px;
+  font-size: 0.72rem;
+}
+
+#bcCount { margin-left: auto; }
+
+@media (max-width: 600px) {
+  .bc-board { height: 230px; max-height: 230px; }
+  .bc-row { grid-template-columns: 36px 1fr auto; gap: 0.6rem; font-size: 0.85rem; }
+  .bc-guess { font-size: 1.05rem; }
+  .bc-input { font-size: 1.2rem; }
+  #bcCount { margin-left: 0; width: 100%; }
+}
+

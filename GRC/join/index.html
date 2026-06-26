@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join — Gen Run Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="../" class="brand">
+      <span class="grc">GRC</span>
+      <span class="city">BHOPAL · INDORE</span>
+    </a>
+    <div class="nav-links">
+      <a href="../events/">Events</a>
+      <a href="../cities/">Cities</a>
+      <a href="../about/">About</a>
+    </div>
+    <a href="../join/" class="nav-cta active">Join the run</a>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <span class="eyebrow">Welcome to the run</span>
+    <h1 class="h1" style="margin-top: 16px;">Two minutes.<br><span class="accent-y">One Sunday away.</span></h1>
+    <p class="lead">Pick your city. Tap the WhatsApp link. Show up next Sunday. That's the whole thing.</p>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <span class="eyebrow">Step 01 · Pick your city</span>
+    <h2 class="h2" style="margin: 12px 0 40px;">Where do you <span class="accent-y">run?</span></h2>
+
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+      <a href="#" class="poster red" style="min-height: 280px; padding: 32px; text-decoration: none;">
+        <div class="ptag">● FLAGSHIP CHAPTER</div>
+        <h3 class="ptitle" style="font-size: 64px;">BHOPAL</h3>
+        <p class="pdesc">Sundays · 6:00 AM · Bhojpur Club + rotating venues</p>
+        <div class="pfoot">
+          <span>JOIN WHATSAPP</span>
+          <span>→</span>
+        </div>
+      </a>
+      <a href="#" class="poster pink" style="min-height: 280px; padding: 32px; text-decoration: none;">
+        <div class="ptag">● SISTER CHAPTER</div>
+        <h3 class="ptitle" style="font-size: 64px;">INDORE</h3>
+        <p class="pdesc">Sundays · 6:30 AM · Pool + Zumba focus</p>
+        <div class="pfoot">
+          <span>JOIN WHATSAPP</span>
+          <span>→</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="tape red">● NO FEE ● NO COMMITMENT ● NO TRAINING REQUIRED ● JUST SHOW UP ●</div>
+
+<section>
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;">
+      <div>
+        <span class="eyebrow">Step 02 (optional)</span>
+        <h2 class="h2" style="margin: 12px 0 24px;">Want to <span class="accent-y">say hi</span> first?</h2>
+        <p style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">Not required — but useful if you want someone to look out for you on your first Sunday, or if you have a question before you turn up at 6 AM.</p>
+        <p style="font-size: 14px; color: var(--muted);">We reply on WhatsApp within a day. No spam. No newsletters. No selling your number to anyone.</p>
+
+        <div style="margin-top: 40px; padding: 24px; border: 1px solid var(--line); background: rgba(255,255,255,0.02);">
+          <div class="label" style="margin-bottom: 8px;">What to expect on day 01</div>
+          <ul style="display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+            <li>● 3 km easy run, walk breaks fine</li>
+            <li>● Someone will run with you</li>
+            <li>● Bring water, wear any shoes</li>
+            <li>● Stay for coffee, leave when you want</li>
+          </ul>
+        </div>
+      </div>
+
+      <form class="form-card">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" placeholder="First name is fine">
+        </div>
+        <div class="field">
+          <label for="city">Your city</label>
+          <select id="city">
+            <option>Bhopal</option>
+            <option>Indore</option>
+            <option>Other (asking about a new chapter)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="phone">WhatsApp number</label>
+          <input type="tel" id="phone" placeholder="+91">
+        </div>
+        <div class="field">
+          <label for="exp">Running experience</label>
+          <select id="exp">
+            <option>Brand new — never run before</option>
+            <option>I can do a slow 3 km</option>
+            <option>I run regularly, looking for community</option>
+            <option>I'm here mostly for the Zumba / vibes tbh</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="msg">Anything we should know? (optional)</label>
+          <textarea id="msg" rows="3" placeholder="Injuries, what you're hoping for, questions"></textarea>
+        </div>
+        <button class="btn btn-y" style="width: 100%; justify-content: center;">Send →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 0;">
+  <div class="cta-mega" style="background: var(--yellow); color: var(--black);">
+    <h2 class="h1" style="color: var(--black); margin-bottom: 24px;">SEE YOU<br>SUNDAY.</h2>
+    <p style="color: rgba(0,0,0,0.7); font-size: 18px; max-width: 50ch; margin: 0 auto 32px;">6 AM. Bhojpur Club. Bring water. Skip breakfast. We'll handle the rest.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="../" class="brand" style="margin-bottom: 16px;">
+          <span class="grc">GRC</span>
+          <span class="city">EST 2024</span>
+        </a>
+        <p style="font-size: 13px; max-width: 30ch; margin-top: 12px; color: var(--muted);">Generation that runs together. Bhopal · Indore.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="../events/">Events</a></li>
+          <li><a href="../cities/">Cities</a></li>
+          <li><a href="../about/">About</a></li>
+          <li><a href="../join/">Join</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Find us</h4>
+        <ul>
+          <li><a href="https://instagram.com/genrunclub">Instagram</a></li>
+          <li><a href="#">Strava</a></li>
+          <li><a href="#">WhatsApp</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Reach us</h4>
+        <ul>
+          <li>hello@genrunclub.in</li>
+          <li>Partnerships welcome</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 GEN RUN CLUB</span>
+      <span>BUILT IN BHOPAL</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
