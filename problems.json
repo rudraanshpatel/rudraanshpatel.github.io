@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-18T09:18:29Z",
-  "count": 3962,
+  "updated": "2026-06-26T08:32:06Z",
+  "count": 3973,
   "problems": [
     {
       "id": 1,
@@ -27735,6 +27735,83 @@
       "slug": "maximum-subarray-sum-after-at-most-k-swaps",
       "difficulty": "Hard",
       "premium": false
+    },
+    {
+      "id": 3963,
+      "title": "Create Grid With Exactly One Path",
+      "slug": "create-grid-with-exactly-one-path",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 3964,
+      "title": "Minimum Lights to Illuminate a Road",
+      "slug": "minimum-lights-to-illuminate-a-road",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3965,
+      "title": "Finish Time of Tasks I",
+      "slug": "finish-time-of-tasks-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3966,
+      "title": "Count Good Integers in a Range",
+      "slug": "count-good-integers-in-a-range",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 3967,
+      "title": "Finish Time of Tasks II",
+      "slug": "finish-time-of-tasks-ii",
+      "difficulty": "Hard",
+      "premium": true
+    },
+    {
+      "id": 3968,
+      "title": "Maximum Manhattan Distance After All Moves",
+      "slug": "maximum-manhattan-distance-after-all-moves",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3969,
+      "title": "Valid Subarrays With Matching Sum Digits I",
+      "slug": "valid-subarrays-with-matching-sum-digits-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3970,
+      "title": "Shortest Path With At Most K Consecutive Identical Characters",
+      "slug": "shortest-path-with-at-most-k-consecutive-identical-characters",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3971,
+      "title": "Maximum Total Value",
+      "slug": "maximum-total-value",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 3972,
+      "title": "Valid Subarrays With Matching Sum Digits II",
+      "slug": "valid-subarrays-with-matching-sum-digits-ii",
+      "difficulty": "Hard",
+      "premium": true
+    },
+    {
+      "id": 3973,
+      "title": "Distinct Gate Paths to LCA",
+      "slug": "distinct-gate-paths-to-lca",
+      "difficulty": "Hard",
+      "premium": true
     }
   ]
 }
