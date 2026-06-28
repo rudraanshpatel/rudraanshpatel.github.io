@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-27T23:06:58Z",
-  "count": 3973,
+  "updated": "2026-06-28T04:13:36Z",
+  "count": 3977,
   "problems": [
     {
       "id": 1,
@@ -27812,6 +27812,34 @@
       "slug": "distinct-gate-paths-to-lca",
       "difficulty": "Hard",
       "premium": true
+    },
+    {
+      "id": 3974,
+      "title": "Maximum Total Sum of K Selected Elements",
+      "slug": "maximum-total-sum-of-k-selected-elements",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3975,
+      "title": "Filter Occupied Intervals",
+      "slug": "filter-occupied-intervals",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3976,
+      "title": "Maximum Subarray Sum After Multiplier",
+      "slug": "maximum-subarray-sum-after-multiplier",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3977,
+      "title": "Minimum Time to Reach Target With Limited Power",
+      "slug": "minimum-time-to-reach-target-with-limited-power",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
