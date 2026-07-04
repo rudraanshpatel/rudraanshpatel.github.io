@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-04T15:08:46Z",
-  "count": 3977,
+  "updated": "2026-07-04T17:10:34Z",
+  "count": 3981,
   "problems": [
     {
       "id": 1,
@@ -27838,6 +27838,34 @@
       "id": 3977,
       "title": "Minimum Time to Reach Target With Limited Power",
       "slug": "minimum-time-to-reach-target-with-limited-power",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 3978,
+      "title": "Unique Middle Element",
+      "slug": "unique-middle-element",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 3979,
+      "title": "Maximum Valid Pair Sum",
+      "slug": "maximum-valid-pair-sum",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3980,
+      "title": "Minimum Operations to Transform Binary String",
+      "slug": "minimum-operations-to-transform-binary-string",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3981,
+      "title": "Count Distinct Ways to Form Target from Two Strings",
+      "slug": "count-distinct-ways-to-form-target-from-two-strings",
       "difficulty": "Hard",
       "premium": false
     }
