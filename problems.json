@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-05T03:50:35Z",
-  "count": 3981,
+  "updated": "2026-07-05T07:31:02Z",
+  "count": 3985,
   "problems": [
     {
       "id": 1,
@@ -27866,6 +27866,34 @@
       "id": 3981,
       "title": "Count Distinct Ways to Form Target from Two Strings",
       "slug": "count-distinct-ways-to-form-target-from-two-strings",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 3982,
+      "title": "Sum of Integers with Maximum Digit Range",
+      "slug": "sum-of-integers-with-maximum-digit-range",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 3983,
+      "title": "Subsequence After One Replacement",
+      "slug": "subsequence-after-one-replacement",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3984,
+      "title": "Divisible Game",
+      "slug": "divisible-game",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3985,
+      "title": "Palindromic Subarray Sum",
+      "slug": "palindromic-subarray-sum",
       "difficulty": "Hard",
       "premium": false
     }
