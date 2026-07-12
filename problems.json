@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-12T09:05:33Z",
-  "count": 3989,
+  "updated": "2026-07-12T11:13:36Z",
+  "count": 3991,
   "problems": [
     {
       "id": 1,
@@ -27924,6 +27924,20 @@
       "slug": "maximum-consistent-columns-in-a-grid",
       "difficulty": "Hard",
       "premium": false
+    },
+    {
+      "id": 3990,
+      "title": "Create Grid With Exactly K Paths II",
+      "slug": "create-grid-with-exactly-k-paths-ii",
+      "difficulty": "Hard",
+      "premium": true
+    },
+    {
+      "id": 3991,
+      "title": "Sort Array Using Prefix Reversals",
+      "slug": "sort-array-using-prefix-reversals",
+      "difficulty": "Medium",
+      "premium": true
     }
   ]
 }
