@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-18T16:03:12Z",
-  "count": 3991,
+  "updated": "2026-07-18T17:57:32Z",
+  "count": 3995,
   "problems": [
     {
       "id": 1,
@@ -27938,6 +27938,34 @@
       "slug": "sort-array-using-prefix-reversals",
       "difficulty": "Medium",
       "premium": true
+    },
+    {
+      "id": 3992,
+      "title": "Rearrange String to Avoid Character Pair",
+      "slug": "rearrange-string-to-avoid-character-pair",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 3993,
+      "title": "Maximum Value of an Alternating Sequence",
+      "slug": "maximum-value-of-an-alternating-sequence",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3994,
+      "title": "Minimum Adjacent Swaps to Partition Array",
+      "slug": "minimum-adjacent-swaps-to-partition-array",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3995,
+      "title": "Minimum Cost to Convert String III",
+      "slug": "minimum-cost-to-convert-string-iii",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
