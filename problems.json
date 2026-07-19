@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-19T03:39:40Z",
-  "count": 3995,
+  "updated": "2026-07-19T06:33:35Z",
+  "count": 3999,
   "problems": [
     {
       "id": 1,
@@ -27964,6 +27964,34 @@
       "id": 3995,
       "title": "Minimum Cost to Convert String III",
       "slug": "minimum-cost-to-convert-string-iii",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 3996,
+      "title": "Even Number of Knight Moves",
+      "slug": "even-number-of-knight-moves",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 3997,
+      "title": "Count Dominant Nodes in a Binary Tree",
+      "slug": "count-dominant-nodes-in-a-binary-tree",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3998,
+      "title": "Transform Binary String Using Subsequence Sort",
+      "slug": "transform-binary-string-using-subsequence-sort",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 3999,
+      "title": "Minimum Number of String Groups Through Transformations",
+      "slug": "minimum-number-of-string-groups-through-transformations",
       "difficulty": "Hard",
       "premium": false
     }
