@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-22T06:32:13Z",
+  "updated": "2026-07-22T09:28:52Z",
   "count": 3999,
   "problems": [
     {
@@ -1553,7 +1553,7 @@
       "id": 222,
       "title": "Count Complete Tree Nodes",
       "slug": "count-complete-tree-nodes",
-      "difficulty": "Easy",
+      "difficulty": "Medium",
       "premium": false
     },
     {
