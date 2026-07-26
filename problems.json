@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-26T00:02:20Z",
-  "count": 3999,
+  "updated": "2026-07-26T04:28:35Z",
+  "count": 4003,
   "problems": [
     {
       "id": 1,
@@ -27992,6 +27992,34 @@
       "id": 3999,
       "title": "Minimum Number of String Groups Through Transformations",
       "slug": "minimum-number-of-string-groups-through-transformations",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 4000,
+      "title": "Largest Integer With Given Digit Sum",
+      "slug": "largest-integer-with-given-digit-sum",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4001,
+      "title": "Aggregate Two Time Series",
+      "slug": "aggregate-two-time-series",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4002,
+      "title": "Count Valid Sequences",
+      "slug": "count-valid-sequences",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4003,
+      "title": "Minimum Cost Path with Alternating Directions III",
+      "slug": "minimum-cost-path-with-alternating-directions-iii",
       "difficulty": "Hard",
       "premium": false
     }
