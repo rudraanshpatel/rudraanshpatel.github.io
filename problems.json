@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-28T16:43:06Z",
-  "count": 4003,
+  "updated": "2026-07-28T18:17:24Z",
+  "count": 4005,
   "problems": [
     {
       "id": 1,
@@ -28022,6 +28022,20 @@
       "slug": "minimum-cost-path-with-alternating-directions-iii",
       "difficulty": "Hard",
       "premium": false
+    },
+    {
+      "id": 4004,
+      "title": "Minimum Moves to Balance Circular Array II",
+      "slug": "minimum-moves-to-balance-circular-array-ii",
+      "difficulty": "Hard",
+      "premium": true
+    },
+    {
+      "id": 4005,
+      "title": "Minimum Operations to Make Array Equal III",
+      "slug": "minimum-operations-to-make-array-equal-iii",
+      "difficulty": "Medium",
+      "premium": true
     }
   ]
 }
