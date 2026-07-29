@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-29T04:14:06Z",
+  "updated": "2026-07-29T07:45:28Z",
   "count": 4005,
   "problems": [
     {
@@ -28034,7 +28034,7 @@
       "id": 4005,
       "title": "Minimum Operations to Make Array Equal III",
       "slug": "minimum-operations-to-make-array-equal-iii",
-      "difficulty": "Medium",
+      "difficulty": "Hard",
       "premium": true
     }
   ]
