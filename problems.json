@@ -1,6 +1,6 @@
 {
-  "updated": "2026-08-02T03:44:49Z",
-  "count": 4009,
+  "updated": "2026-08-02T06:36:18Z",
+  "count": 4013,
   "problems": [
     {
       "id": 1,
@@ -28062,6 +28062,34 @@
       "id": 4009,
       "title": "Minimum Possible Maximum Waiting Time",
       "slug": "minimum-possible-maximum-waiting-time",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 4010,
+      "title": "Maximize Pair Strength Using GCD",
+      "slug": "maximize-pair-strength-using-gcd",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4011,
+      "title": "Count Subarrays With Even Odd Ratio I",
+      "slug": "count-subarrays-with-even-odd-ratio-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4012,
+      "title": "Count of Unfinished Tasks After Each Shift",
+      "slug": "count-of-unfinished-tasks-after-each-shift",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4013,
+      "title": "Count Subarrays With Even Odd Ratio II",
+      "slug": "count-subarrays-with-even-odd-ratio-ii",
       "difficulty": "Hard",
       "premium": false
     }
