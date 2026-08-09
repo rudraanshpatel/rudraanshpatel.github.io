@@ -1,6 +1,6 @@
 {
-  "updated": "2026-08-09T02:00:27Z",
-  "count": 4013,
+  "updated": "2026-08-09T04:19:54Z",
+  "count": 4017,
   "problems": [
     {
       "id": 1,
@@ -28090,6 +28090,34 @@
       "id": 4013,
       "title": "Count Subarrays With Even Odd Ratio II",
       "slug": "count-subarrays-with-even-odd-ratio-ii",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 4014,
+      "title": "Minimum Total Price After Applying Discounts",
+      "slug": "minimum-total-price-after-applying-discounts",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4015,
+      "title": "Weighted Sum of a Tree",
+      "slug": "weighted-sum-of-a-tree",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4016,
+      "title": "Maximum Area of Two Non-Overlapping Square Submatrices",
+      "slug": "maximum-area-of-two-non-overlapping-square-submatrices",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4017,
+      "title": "Peaks in Array II",
+      "slug": "peaks-in-array-ii",
       "difficulty": "Hard",
       "premium": false
     }
