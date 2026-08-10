@@ -1,6 +1,6 @@
 {
-  "updated": "2026-08-10T19:01:55Z",
-  "count": 4017,
+  "updated": "2026-08-10T20:47:17Z",
+  "count": 4018,
   "problems": [
     {
       "id": 1,
@@ -28120,6 +28120,13 @@
       "slug": "peaks-in-array-ii",
       "difficulty": "Hard",
       "premium": false
+    },
+    {
+      "id": 4018,
+      "title": "Total Sum of Interaction Cost in Tree Groups II",
+      "slug": "total-sum-of-interaction-cost-in-tree-groups-ii",
+      "difficulty": "Hard",
+      "premium": true
     }
   ]
 }
