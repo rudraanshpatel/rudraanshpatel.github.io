@@ -1,6 +1,6 @@
 {
-  "updated": "2026-08-13T16:58:46Z",
-  "count": 4018,
+  "updated": "2026-08-13T18:01:03Z",
+  "count": 4019,
   "problems": [
     {
       "id": 1,
@@ -28126,6 +28126,13 @@
       "title": "Total Sum of Interaction Cost in Tree Groups II",
       "slug": "total-sum-of-interaction-cost-in-tree-groups-ii",
       "difficulty": "Hard",
+      "premium": true
+    },
+    {
+      "id": 4019,
+      "title": "Merge Close Characters II",
+      "slug": "merge-close-characters-ii",
+      "difficulty": "Medium",
       "premium": true
     }
   ]
