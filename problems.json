@@ -1,6 +1,6 @@
 {
-  "updated": "2026-08-15T15:24:41Z",
-  "count": 4019,
+  "updated": "2026-08-15T16:28:39Z",
+  "count": 4023,
   "problems": [
     {
       "id": 1,
@@ -28134,6 +28134,34 @@
       "slug": "merge-close-characters-ii",
       "difficulty": "Medium",
       "premium": true
+    },
+    {
+      "id": 4020,
+      "title": "Elevator Requests I",
+      "slug": "elevator-requests-i",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4021,
+      "title": "Minimum Operations to Make a Rotated Palindrome I",
+      "slug": "minimum-operations-to-make-a-rotated-palindrome-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4022,
+      "title": "K-th Digit in Infinite String",
+      "slug": "k-th-digit-in-infinite-string",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4023,
+      "title": "Elevator Requests II",
+      "slug": "elevator-requests-ii",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
