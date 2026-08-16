@@ -1,6 +1,6 @@
 {
-  "updated": "2026-08-16T03:03:30Z",
-  "count": 4023,
+  "updated": "2026-08-16T04:38:53Z",
+  "count": 4027,
   "problems": [
     {
       "id": 1,
@@ -28160,6 +28160,34 @@
       "id": 4023,
       "title": "Elevator Requests II",
       "slug": "elevator-requests-ii",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 4024,
+      "title": "Nearest Available Drone",
+      "slug": "nearest-available-drone",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4025,
+      "title": "Minimize the Maximum Waiting Time at Synchronized Traffic Lights",
+      "slug": "minimize-the-maximum-waiting-time-at-synchronized-traffic-lights",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4026,
+      "title": "Maximum Gap Between Stations",
+      "slug": "maximum-gap-between-stations",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4027,
+      "title": "Elevator Requests III",
+      "slug": "elevator-requests-iii",
       "difficulty": "Hard",
       "premium": false
     }
