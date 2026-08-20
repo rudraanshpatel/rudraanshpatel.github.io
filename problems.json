@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-20T05:34:11Z",
+  "updated": "2026-08-20T06:52:02Z",
   "count": 4029,
   "problems": [
     {
@@ -28192,14 +28192,14 @@
       "premium": false
     },
     {
-      "id": 4029,
+      "id": 4028,
       "title": "Minimum Operations to Make a Rotated Palindrome II",
       "slug": "minimum-operations-to-make-a-rotated-palindrome-ii",
       "difficulty": "Hard",
       "premium": true
     },
     {
-      "id": 4030,
+      "id": 4029,
       "title": "Elevator Requests IV",
       "slug": "elevator-requests-iv",
       "difficulty": "Hard",
