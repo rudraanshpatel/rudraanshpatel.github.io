@@ -1,6 +1,6 @@
 {
-  "updated": "2026-08-23T03:05:53Z",
-  "count": 4029,
+  "updated": "2026-08-23T04:41:02Z",
+  "count": 4033,
   "problems": [
     {
       "id": 1,
@@ -28204,6 +28204,34 @@
       "slug": "elevator-requests-iv",
       "difficulty": "Hard",
       "premium": true
+    },
+    {
+      "id": 4030,
+      "title": "Check ASCII Palindromic",
+      "slug": "check-ascii-palindromic",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4031,
+      "title": "Find All Numbers Disappeared in an Array II",
+      "slug": "find-all-numbers-disappeared-in-an-array-ii",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4032,
+      "title": "Longest Subarray With at Most K Distinct Prime Factors",
+      "slug": "longest-subarray-with-at-most-k-distinct-prime-factors",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4033,
+      "title": "Valid K-Unique Subarrays I",
+      "slug": "valid-k-unique-subarrays-i",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
