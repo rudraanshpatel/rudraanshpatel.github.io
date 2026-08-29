@@ -1,6 +1,6 @@
 {
-  "updated": "2026-08-29T13:03:47Z",
-  "count": 4033,
+  "updated": "2026-08-29T17:35:17Z",
+  "count": 4037,
   "problems": [
     {
       "id": 1,
@@ -28048,7 +28048,7 @@
       "id": 4007,
       "title": "Widest Possible Fence",
       "slug": "widest-possible-fence",
-      "difficulty": "Medium",
+      "difficulty": "Hard",
       "premium": false
     },
     {
@@ -28230,6 +28230,34 @@
       "id": 4033,
       "title": "Valid K-Unique Subarrays I",
       "slug": "valid-k-unique-subarrays-i",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 4034,
+      "title": "Minimum Bishop Moves to Reach Target",
+      "slug": "minimum-bishop-moves-to-reach-target",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4035,
+      "title": "Maximum Valid Split Positions I",
+      "slug": "maximum-valid-split-positions-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4036,
+      "title": "Lexicographically Largest String After Pair Transformations",
+      "slug": "lexicographically-largest-string-after-pair-transformations",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4037,
+      "title": "Maximum Valid Split Positions II",
+      "slug": "maximum-valid-split-positions-ii",
       "difficulty": "Hard",
       "premium": false
     }
