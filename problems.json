@@ -1,6 +1,6 @@
 {
-  "updated": "2026-08-29T23:07:04Z",
-  "count": 4037,
+  "updated": "2026-08-30T04:36:23Z",
+  "count": 4041,
   "problems": [
     {
       "id": 1,
@@ -28258,6 +28258,34 @@
       "id": 4037,
       "title": "Maximum Valid Split Positions II",
       "slug": "maximum-valid-split-positions-ii",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 4038,
+      "title": "Count Integers Appearing in a Single Block",
+      "slug": "count-integers-appearing-in-a-single-block",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4039,
+      "title": "Sum of Decoded Numbers",
+      "slug": "sum-of-decoded-numbers",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4040,
+      "title": "Minimum Operations to Form Subset Sum I",
+      "slug": "minimum-operations-to-form-subset-sum-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4041,
+      "title": "Minimum Operations to Form Subset Sum II",
+      "slug": "minimum-operations-to-form-subset-sum-ii",
       "difficulty": "Hard",
       "premium": false
     }
