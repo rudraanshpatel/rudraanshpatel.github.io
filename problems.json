@@ -1,6 +1,6 @@
 {
-  "updated": "2026-09-01T13:17:15Z",
-  "count": 4041,
+  "updated": "2026-09-01T17:42:41Z",
+  "count": 4042,
   "problems": [
     {
       "id": 1,
@@ -28288,6 +28288,13 @@
       "slug": "minimum-operations-to-form-subset-sum-ii",
       "difficulty": "Hard",
       "premium": false
+    },
+    {
+      "id": 4042,
+      "title": "Valid K-Unique Subarrays II",
+      "slug": "valid-k-unique-subarrays-ii",
+      "difficulty": "Hard",
+      "premium": true
     }
   ]
 }
