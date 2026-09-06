@@ -1,6 +1,6 @@
 {
-  "updated": "2026-09-06T03:46:42Z",
-  "count": 4042,
+  "updated": "2026-09-06T08:29:57Z",
+  "count": 4046,
   "problems": [
     {
       "id": 1,
@@ -28295,6 +28295,34 @@
       "slug": "valid-k-unique-subarrays-ii",
       "difficulty": "Hard",
       "premium": true
+    },
+    {
+      "id": 4043,
+      "title": "Count Rotations With Exactly K Equal Adjacent Pairs",
+      "slug": "count-rotations-with-exactly-k-equal-adjacent-pairs",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4044,
+      "title": "Count Good Cyclic Rotations",
+      "slug": "count-good-cyclic-rotations",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4045,
+      "title": "Count Robot Groups",
+      "slug": "count-robot-groups",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4046,
+      "title": "Minimum Cost Path With At Most K Turns",
+      "slug": "minimum-cost-path-with-at-most-k-turns",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
