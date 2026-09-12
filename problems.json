@@ -1,6 +1,6 @@
 {
-  "updated": "2026-09-12T13:26:59Z",
-  "count": 4047,
+  "updated": "2026-09-12T16:51:26Z",
+  "count": 4051,
   "problems": [
     {
       "id": 1,
@@ -28330,6 +28330,34 @@
       "slug": "minimum-operations-to-make-xor-of-all-elements-zero",
       "difficulty": "Hard",
       "premium": true
+    },
+    {
+      "id": 4048,
+      "title": "Count Values With Equally Spaced Occurrences I",
+      "slug": "count-values-with-equally-spaced-occurrences-i",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4049,
+      "title": "Count Values With Equally Spaced Occurrences II",
+      "slug": "count-values-with-equally-spaced-occurrences-ii",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4050,
+      "title": "Minimum Days to Score Exactly N Points",
+      "slug": "minimum-days-to-score-exactly-n-points",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4051,
+      "title": "Count Subarrays with Distant Sums",
+      "slug": "count-subarrays-with-distant-sums",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
