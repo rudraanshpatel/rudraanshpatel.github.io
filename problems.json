@@ -1,6 +1,6 @@
 {
-  "updated": "2026-09-13T00:42:00Z",
-  "count": 4051,
+  "updated": "2026-09-13T05:46:31Z",
+  "count": 4055,
   "problems": [
     {
       "id": 1,
@@ -28356,6 +28356,34 @@
       "id": 4051,
       "title": "Count Subarrays with Distant Sums",
       "slug": "count-subarrays-with-distant-sums",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 4052,
+      "title": "Cyclically Shift Rows and Columns",
+      "slug": "cyclically-shift-rows-and-columns",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4053,
+      "title": "Minimum Operations to Make Every Element Palindromic",
+      "slug": "minimum-operations-to-make-every-element-palindromic",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4054,
+      "title": "Count Shadow Pairs I",
+      "slug": "count-shadow-pairs-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4055,
+      "title": "Count Shadow Pairs II",
+      "slug": "count-shadow-pairs-ii",
       "difficulty": "Hard",
       "premium": false
     }
