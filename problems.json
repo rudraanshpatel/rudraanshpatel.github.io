@@ -1,6 +1,6 @@
 {
-  "updated": "2026-09-20T05:53:17Z",
-  "count": 4055,
+  "updated": "2026-09-20T10:57:39Z",
+  "count": 4059,
   "problems": [
     {
       "id": 1,
@@ -28384,6 +28384,34 @@
       "id": 4055,
       "title": "Count Shadow Pairs II",
       "slug": "count-shadow-pairs-ii",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 4056,
+      "title": "Number of Intersecting Interval Pairs I",
+      "slug": "number-of-intersecting-interval-pairs-i",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4057,
+      "title": "Number of Intersecting Interval Pairs II",
+      "slug": "number-of-intersecting-interval-pairs-ii",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4058,
+      "title": "Maximum Pulse Value After One Subarray Rotation",
+      "slug": "maximum-pulse-value-after-one-subarray-rotation",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4059,
+      "title": "Lexicographically Largest Power Array",
+      "slug": "lexicographically-largest-power-array",
       "difficulty": "Hard",
       "premium": false
     }
