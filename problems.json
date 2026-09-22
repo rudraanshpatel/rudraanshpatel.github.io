@@ -1,6 +1,6 @@
 {
-  "updated": "2026-09-22T14:30:08Z",
-  "count": 4059,
+  "updated": "2026-09-22T18:37:57Z",
+  "count": 4060,
   "problems": [
     {
       "id": 1,
@@ -28414,6 +28414,13 @@
       "slug": "lexicographically-largest-power-array",
       "difficulty": "Hard",
       "premium": false
+    },
+    {
+      "id": 4060,
+      "title": "Count Evenly Good Integers",
+      "slug": "count-evenly-good-integers",
+      "difficulty": "Hard",
+      "premium": true
     }
   ]
 }
