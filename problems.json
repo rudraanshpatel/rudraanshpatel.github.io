@@ -1,6 +1,6 @@
 {
-  "updated": "2026-09-26T12:48:51Z",
-  "count": 4060,
+  "updated": "2026-09-26T16:57:13Z",
+  "count": 4064,
   "problems": [
     {
       "id": 1,
@@ -28421,6 +28421,34 @@
       "slug": "count-evenly-good-integers",
       "difficulty": "Hard",
       "premium": true
+    },
+    {
+      "id": 4061,
+      "title": "Minimum Queen Moves to Reach Target",
+      "slug": "minimum-queen-moves-to-reach-target",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4062,
+      "title": "Transform Array Using Pair Operations",
+      "slug": "transform-array-using-pair-operations",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4063,
+      "title": "Longest Subarray Divisible by K with At Most One Negation I",
+      "slug": "longest-subarray-divisible-by-k-with-at-most-one-negation-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4064,
+      "title": "Longest Subarray Divisible by K with At Most One Negation II",
+      "slug": "longest-subarray-divisible-by-k-with-at-most-one-negation-ii",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
