@@ -1,6 +1,6 @@
 {
-  "updated": "2026-09-27T01:12:13Z",
-  "count": 4064,
+  "updated": "2026-09-27T07:50:14Z",
+  "count": 4068,
   "problems": [
     {
       "id": 1,
@@ -28447,6 +28447,34 @@
       "id": 4064,
       "title": "Longest Subarray Divisible by K with At Most One Negation II",
       "slug": "longest-subarray-divisible-by-k-with-at-most-one-negation-ii",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 4065,
+      "title": "Rearrange Array by Removing Distinct Values",
+      "slug": "rearrange-array-by-removing-distinct-values",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4066,
+      "title": "Maximum Equal Adjacent Pairs After at Most One Replacement",
+      "slug": "maximum-equal-adjacent-pairs-after-at-most-one-replacement",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4067,
+      "title": "Longest Subarray With Restricted Pair Sums",
+      "slug": "longest-subarray-with-restricted-pair-sums",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4068,
+      "title": "Maximize Meeting Earnings with Idle Gaps",
+      "slug": "maximize-meeting-earnings-with-idle-gaps",
       "difficulty": "Hard",
       "premium": false
     }
