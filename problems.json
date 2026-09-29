@@ -1,6 +1,6 @@
 {
-  "updated": "2026-09-29T08:07:10Z",
-  "count": 4068,
+  "updated": "2026-09-29T15:31:36Z",
+  "count": 4069,
   "problems": [
     {
       "id": 1,
@@ -28477,6 +28477,13 @@
       "slug": "maximize-meeting-earnings-with-idle-gaps",
       "difficulty": "Hard",
       "premium": false
+    },
+    {
+      "id": 4069,
+      "title": "Best Time to Buy and Sell Stock with Cooldown II",
+      "slug": "best-time-to-buy-and-sell-stock-with-cooldown-ii",
+      "difficulty": "Medium",
+      "premium": true
     }
   ]
 }
