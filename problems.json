@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-03T23:36:56Z",
-  "count": 4069,
+  "updated": "2026-10-04T05:05:22Z",
+  "count": 4073,
   "problems": [
     {
       "id": 1,
@@ -28484,6 +28484,34 @@
       "slug": "best-time-to-buy-and-sell-stock-with-cooldown-ii",
       "difficulty": "Medium",
       "premium": true
+    },
+    {
+      "id": 4070,
+      "title": "Minimum Rotations to Dial a Number I",
+      "slug": "minimum-rotations-to-dial-a-number-i",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4071,
+      "title": "Minimum Rotations to Dial a Number II",
+      "slug": "minimum-rotations-to-dial-a-number-ii",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4072,
+      "title": "Maximum Alternating Subarray Sum With One Deletion",
+      "slug": "maximum-alternating-subarray-sum-with-one-deletion",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4073,
+      "title": "Count Good Strings",
+      "slug": "count-good-strings",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
