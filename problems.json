@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-12T00:19:29Z",
-  "count": 4073,
+  "updated": "2026-10-12T07:05:35Z",
+  "count": 4081,
   "problems": [
     {
       "id": 1,
@@ -28510,6 +28510,62 @@
       "id": 4073,
       "title": "Count Good Strings",
       "slug": "count-good-strings",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 4074,
+      "title": "Maximum Product Pair With Target Sum",
+      "slug": "maximum-product-pair-with-target-sum",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4075,
+      "title": "Longest Resilient Subarray I",
+      "slug": "longest-resilient-subarray-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4076,
+      "title": "Longest Resilient Subarray II",
+      "slug": "longest-resilient-subarray-ii",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4077,
+      "title": "Minimize Inversions in a Prefix Tree",
+      "slug": "minimize-inversions-in-a-prefix-tree",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 4078,
+      "title": "Three Fibonacci Sum",
+      "slug": "three-fibonacci-sum",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4079,
+      "title": "Prime Subset Selection I",
+      "slug": "prime-subset-selection-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4080,
+      "title": "Design Bus Seat Booking System",
+      "slug": "design-bus-seat-booking-system",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4081,
+      "title": "Prime Subset Selection II",
+      "slug": "prime-subset-selection-ii",
       "difficulty": "Hard",
       "premium": false
     }
