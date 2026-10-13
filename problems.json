@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-13T07:29:57Z",
-  "count": 4081,
+  "updated": "2026-10-13T15:43:22Z",
+  "count": 4082,
   "problems": [
     {
       "id": 1,
@@ -28568,6 +28568,13 @@
       "slug": "prime-subset-selection-ii",
       "difficulty": "Hard",
       "premium": false
+    },
+    {
+      "id": 4082,
+      "title": "Minimum Operations to Stabilize a Binary Tree",
+      "slug": "minimum-operations-to-stabilize-a-binary-tree",
+      "difficulty": "Hard",
+      "premium": true
     }
   ]
 }
