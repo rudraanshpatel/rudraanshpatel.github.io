@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-18T00:43:57Z",
-  "count": 4082,
+  "updated": "2026-10-18T05:33:46Z",
+  "count": 4086,
   "problems": [
     {
       "id": 1,
@@ -28575,6 +28575,34 @@
       "slug": "minimum-operations-to-stabilize-a-binary-tree",
       "difficulty": "Hard",
       "premium": true
+    },
+    {
+      "id": 4083,
+      "title": "Minimum Deletions to Make Array Sharp",
+      "slug": "minimum-deletions-to-make-array-sharp",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4084,
+      "title": "Last Visited Cell in a Directional Grid",
+      "slug": "last-visited-cell-in-a-directional-grid",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4085,
+      "title": "Find Root of a Colored Tree",
+      "slug": "find-root-of-a-colored-tree",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4086,
+      "title": "Minimum Interval Selection to Cover Target Intervals",
+      "slug": "minimum-interval-selection-to-cover-target-intervals",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
