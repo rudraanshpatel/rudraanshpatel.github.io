@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-20T09:52:24Z",
-  "count": 4086,
+  "updated": "2026-10-20T14:49:50Z",
+  "count": 4087,
   "problems": [
     {
       "id": 1,
@@ -28603,6 +28603,13 @@
       "slug": "minimum-interval-selection-to-cover-target-intervals",
       "difficulty": "Hard",
       "premium": false
+    },
+    {
+      "id": 4087,
+      "title": "Maximum Subarray Sum of Fixed Length After at Most K Swaps",
+      "slug": "maximum-subarray-sum-of-fixed-length-after-at-most-k-swaps",
+      "difficulty": "Medium",
+      "premium": true
     }
   ]
 }
