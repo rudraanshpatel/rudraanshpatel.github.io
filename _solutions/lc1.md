@@ -3,7 +3,7 @@ date: 2026-10-21
 platform: LeetCode
 id: "1"
 title: Two Sum
-link: rudraanshpatel.in/1
+link: /1
 difficulty: Easy
 tags:
   - array
