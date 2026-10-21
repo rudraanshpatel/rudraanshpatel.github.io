@@ -13,7 +13,7 @@ space: O(n)
 ---
 ## Problem
 
-Given an array of integers and a target, return the indices of the two numbers that add up to the target. Exactly one valid pair exists, and the same element can't be used twice.
+Given an array of integers and  target, return the indices of the two numbers that add up to the target. Exactly one valid pair exists, and the same element can't be used twice.
 
 ## Approach
 
