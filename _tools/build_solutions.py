@@ -2,9 +2,9 @@
 """
 Build the /solutions/ section of rudraanshpatel.in.
 
-Reads:   _solutions/YYYY-MM-DD-<slug>.md   (files starting with "_" are skipped)
+Reads:   _solutions/*.md   any filename; files/folders starting with "_" are skipped
 Writes:  solutions/index.html                        all entries, newest first
-         solutions/<file-stem>/index.html            one page per solution
+         solutions/<date>-<platform>-<id>/index.html one page per solution
          solutions/platform/<platform>/index.html    filtered lists
          solutions/tag/<tag>/index.html
 
@@ -28,7 +28,7 @@ SRC = ROOT / "_solutions"
 OUT = ROOT / "solutions"
 SITE = "https://rudraanshpatel.in"
 
-FILENAME_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-([a-z0-9][a-z0-9-]*)\.md$")
+FILENAME_DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})")
 
 # Short labels shown in lists. Anything not here is shown as written.
 PLATFORM_SHORT = {
@@ -68,18 +68,6 @@ def esc(text):
 
 def parse_file(path):
     """Return an entry dict, or raise ValueError with a readable message."""
-    m = FILENAME_RE.match(path.name)
-    if not m:
-        raise ValueError(
-            f"{path.name}: filename must look like 2026-10-21-lc-2962.md "
-            "(date, then lowercase letters/numbers/dashes)"
-        )
-    date_str, _ = m.groups()
-    try:
-        date = dt.date.fromisoformat(date_str)
-    except ValueError:
-        raise ValueError(f"{path.name}: {date_str} is not a real date")
-
     raw = path.read_text(encoding="utf-8").replace("\r\n", "\n")
     if not raw.startswith("---\n"):
         raise ValueError(f"{path.name}: must start with a --- front matter block")
@@ -91,9 +79,29 @@ def parse_file(path):
     try:
         fm = yaml.safe_load(fm_text) or {}
     except yaml.YAMLError as e:
-        raise ValueError(f"{path.name}: front matter is not valid YAML\n{e}")
+        hint = ""
+        if "{{" in fm_text:
+            hint = " (a {{...}} template placeholder wasn't filled in: use Insert template, not copy-paste)"
+        raise ValueError(f"{path.name}: front matter is not valid YAML{hint}\n{e}")
     if not isinstance(fm, dict):
         raise ValueError(f"{path.name}: front matter must be key: value pairs")
+
+    # Date: front matter `date:` wins; otherwise a YYYY-MM-DD at the start of the filename.
+    raw_date = fm.get("date")
+    if not raw_date:
+        m = FILENAME_DATE_RE.match(path.name)
+        raw_date = m.group(1) if m else None
+    if not raw_date:
+        raise ValueError(f"{path.name}: add a date, e.g.  date: 2026-10-21")
+    if isinstance(raw_date, dt.datetime):
+        date = raw_date.date()
+    elif isinstance(raw_date, dt.date):
+        date = raw_date
+    else:
+        try:
+            date = dt.date.fromisoformat(str(raw_date).strip())
+        except ValueError:
+            raise ValueError(f"{path.name}: date '{raw_date}' should look like 2026-10-21")
 
     missing = [k for k in REQUIRED if not fm.get(k)]
     if missing:
@@ -106,14 +114,18 @@ def parse_file(path):
 
     difficulty = str(fm.get("difficulty") or "").strip()
     platform = str(fm["platform"]).strip()
+    short = PLATFORM_SHORT.get(slugify(platform).replace("-", ""), platform)
+    ident = str(fm.get("id") or "").strip()
+    url_slug = f"{date.isoformat()}-{slugify(short)}-{slugify(ident or fm['title'])}"
 
     return {
-        "stem": path.stem,
+        "file": path.name,
+        "stem": url_slug,
         "date": date,
         "platform": platform,
         "platform_slug": slugify(platform),
-        "platform_short": PLATFORM_SHORT.get(slugify(platform).replace("-", ""), platform),
-        "id": str(fm.get("id") or "").strip(),
+        "platform_short": short,
+        "id": ident,
         "title": str(fm["title"]).strip(),
         "link": str(fm.get("link") or "").strip(),
         "difficulty": difficulty,
@@ -366,7 +378,14 @@ def main():
             print(f"  ✗ {err}\n", file=sys.stderr)
         sys.exit(1)
 
-    # Newest first; within a day, reverse filename order (later-added on top).
+    # Same problem logged twice on one day -> suffix -2, -3 ...
+    seen = Counter()
+    for e in sorted(entries, key=lambda e: e["file"]):
+        seen[e["stem"]] += 1
+        if seen[e["stem"]] > 1:
+            e["stem"] = f'{e["stem"]}-{seen[e["stem"]]}'
+
+    # Newest first.
     entries.sort(key=lambda e: (e["date"], e["stem"]), reverse=True)
 
     # Rebuild output from scratch so deleted entries disappear.
