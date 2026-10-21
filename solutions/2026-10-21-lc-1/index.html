@@ -29,7 +29,7 @@
     </header>
 
 <h2>Problem</h2>
-<p>Given an array of integers and a target, return the indices of the two numbers that add up to the target. Exactly one valid pair exists, and the same element can't be used twice.</p>
+<p>Given an array of integers and  target, return the indices of the two numbers that add up to the target. Exactly one valid pair exists, and the same element can't be used twice.</p>
 <h2>Approach</h2>
 <p>The brute force checks every pair in O(n²). The faster way: for each number <code>x</code>, the partner it needs is <code>target - x</code>. Keep a hash map from value to index for the numbers already seen. If the partner is already in the map, that's the answer. Otherwise store <code>x</code> and move on. Checking before inserting means an element can never pair with itself, and one pass is enough because the second number of the pair always finds the first.</p>
 <h2>Solution</h2>
