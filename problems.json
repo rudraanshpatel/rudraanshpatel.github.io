@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-24T14:21:28Z",
-  "count": 4087,
+  "updated": "2026-10-24T17:57:55Z",
+  "count": 4091,
   "problems": [
     {
       "id": 1,
@@ -28610,6 +28610,34 @@
       "slug": "maximum-subarray-sum-of-fixed-length-after-at-most-k-swaps",
       "difficulty": "Medium",
       "premium": true
+    },
+    {
+      "id": 4088,
+      "title": "Difference Between Peaks and Valleys",
+      "slug": "difference-between-peaks-and-valleys",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4089,
+      "title": "Count Subarrays With Loose Bounds",
+      "slug": "count-subarrays-with-loose-bounds",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4090,
+      "title": "Count Magical Substring Pairs I",
+      "slug": "count-magical-substring-pairs-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4091,
+      "title": "Count Magical Substring Pairs II",
+      "slug": "count-magical-substring-pairs-ii",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
