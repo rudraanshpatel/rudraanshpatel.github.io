@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-25T01:01:34Z",
-  "count": 4091,
+  "updated": "2026-10-25T07:25:33Z",
+  "count": 4095,
   "problems": [
     {
       "id": 1,
@@ -28636,6 +28636,34 @@
       "id": 4091,
       "title": "Count Magical Substring Pairs II",
       "slug": "count-magical-substring-pairs-ii",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 4092,
+      "title": "Binary Digit Score",
+      "slug": "binary-digit-score",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4093,
+      "title": "Maximize Sum After At Most K Digit Rearrangements",
+      "slug": "maximize-sum-after-at-most-k-digit-rearrangements",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4094,
+      "title": "Count Frequency Staircase Subarrays I",
+      "slug": "count-frequency-staircase-subarrays-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4095,
+      "title": "Count Frequency Staircase Subarrays II",
+      "slug": "count-frequency-staircase-subarrays-ii",
       "difficulty": "Hard",
       "premium": false
     }
