@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-27T07:31:44Z",
-  "count": 4095,
+  "updated": "2026-10-27T14:11:22Z",
+  "count": 4096,
   "problems": [
     {
       "id": 1,
@@ -28666,6 +28666,13 @@
       "slug": "count-frequency-staircase-subarrays-ii",
       "difficulty": "Hard",
       "premium": false
+    },
+    {
+      "id": 4096,
+      "title": "Simulate Bomb Explosions and Falling Boxes",
+      "slug": "simulate-bomb-explosions-and-falling-boxes",
+      "difficulty": "Medium",
+      "premium": true
     }
   ]
 }
