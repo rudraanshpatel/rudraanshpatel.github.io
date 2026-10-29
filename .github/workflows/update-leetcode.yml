@@ -3,7 +3,8 @@
 # Runs every 6 hours + on-demand. Server-side fetch, no CORS issues.
 #
 # Behaviour:
-#   - Tries the REST endpoint first, then the GraphQL endpoint as a fallback.
+#   - Uses LeetCode's GraphQL endpoint (paged, 100 per request), with the old
+#     REST endpoint as a fallback.
 #   - If LeetCode blocks both, the existing problems.json is kept and the run
 #     only warns. It fails (red) only once the committed file is >3 days old,
 #     so a real long-term breakage still gets noticed.
@@ -34,15 +35,65 @@ jobs:
       - name: Fetch problems from LeetCode
         id: fetch
         run: |
-          rm -f raw.json
+          rm -f raw.json page.json pages.jsonl list.json
           UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
 
-          # 1) REST endpoint
-          code=$(curl -sSL --retry 3 --retry-delay 5 --max-time 60 \
+          # 1) GraphQL (what leetcode.com itself uses). Since 2026-10-29 the
+          #    REST endpoint below gets a Cloudflare challenge from Actions
+          #    runners, while GraphQL POSTs still go through.
+          #    LeetCode caps `limit` at 100, so page through with `skip`.
+          gql() {  # $1 = skip
+            jq -nc --argjson skip "$1" '{
+              operationName: "problemsetQuestionList",
+              query: "query problemsetQuestionList($categorySlug: String, $limit: Int, $skip: Int, $filters: QuestionListFilterInput) { questionList(categorySlug: $categorySlug, limit: $limit, skip: $skip, filters: $filters) { totalNum data { questionFrontendId title titleSlug difficulty isPaidOnly } } }",
+              variables: { categorySlug: "all-code-essentials", limit: 100, skip: $skip, filters: {} }
+            }' | curl -sS --retry 2 --retry-delay 5 --max-time 30 \
+                   -o page.json -w '%{http_code}' \
+                   -H "User-Agent: $UA" \
+                   -H "Content-Type: application/json" \
+                   -H "Referer: https://leetcode.com/problemset/" \
+                   --data @- "https://leetcode.com/graphql/" || true
+          }
+
+          skip=0; total=1; ok=1
+          while [ "$skip" -lt "$total" ]; do
+            code=$(gql "$skip")
+            if [ "$code" != "200" ] || ! jq -e '.data.questionList.data | length > 0' page.json >/dev/null 2>&1; then
+              echo "GraphQL page skip=$skip failed: HTTP $code, first 300 bytes:"
+              head -c 300 page.json 2>/dev/null || true; echo
+              ok=0; break
+            fi
+            total=$(jq '.data.questionList.totalNum' page.json)
+            jq -c '.data.questionList.data[]' page.json >> pages.jsonl
+            skip=$((skip + 100))
+            sleep 1
+          done
+
+          if [ "$ok" = "1" ]; then
+            jq -s '[ .[]
+                    | select(.questionFrontendId | test("^[0-9]+$"))
+                    | {
+                        id:      (.questionFrontendId | tonumber),
+                        title:   .title,
+                        slug:    .titleSlug,
+                        difficulty: (if .difficulty == "Easy" or .difficulty == "Medium" or .difficulty == "Hard"
+                                     then .difficulty else "Unknown" end),
+                        premium: .isPaidOnly
+                      } ] | unique_by(.id)' pages.jsonl > list.json
+            n=$(jq length list.json)
+            echo "GraphQL: $n problems (LeetCode reports $total)"
+            if [ "$n" -gt 1000 ]; then
+              echo "source=graphql" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "GraphQL list too short, ignoring it"
+          fi
+
+          # 2) Old REST endpoint as a fallback, single attempt
+          code=$(curl -sSL --max-time 60 \
             -o raw.json -w '%{http_code}' \
             -H "User-Agent: $UA" \
             -H "Accept: application/json" \
-            -H "Referer: https://leetcode.com/problemset/" \
             "https://leetcode.com/api/problems/all/" || true)
           echo "REST: HTTP $code, $(cat raw.json 2>/dev/null | wc -c) bytes"
 
@@ -62,36 +113,6 @@ jobs:
             exit 0
           fi
           echo "REST response unusable, first 300 bytes:"
-          head -c 300 raw.json 2>/dev/null || true; echo
-
-          # 2) GraphQL fallback
-          cat > query.json <<'EOF'
-          {"query":"query q($limit:Int,$skip:Int){questionList(categorySlug:\"\",limit:$limit,skip:$skip,filters:{}){totalNum data{questionFrontendId title titleSlug difficulty isPaidOnly}}}","variables":{"limit":10000,"skip":0}}
-          EOF
-          code=$(curl -sSL --retry 3 --retry-delay 5 --max-time 60 \
-            -o raw.json -w '%{http_code}' \
-            -H "User-Agent: $UA" \
-            -H "Content-Type: application/json" \
-            -H "Referer: https://leetcode.com/problemset/" \
-            --data @query.json \
-            "https://leetcode.com/graphql/" || true)
-          echo "GraphQL: HTTP $code, $(cat raw.json 2>/dev/null | wc -c) bytes"
-
-          if [ "$code" = "200" ] && jq -e '.data.questionList.data | length > 1000' raw.json >/dev/null 2>&1; then
-            jq '[ .data.questionList.data[]
-                  | select(.questionFrontendId | test("^[0-9]+$"))
-                  | {
-                      id:      (.questionFrontendId | tonumber),
-                      title:   .title,
-                      slug:    .titleSlug,
-                      difficulty: (if .difficulty == "Easy" or .difficulty == "Medium" or .difficulty == "Hard"
-                                   then .difficulty else "Unknown" end),
-                      premium: .isPaidOnly
-                    } ]' raw.json > list.json
-            echo "source=graphql" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          echo "GraphQL response unusable, first 300 bytes:"
           head -c 300 raw.json 2>/dev/null || true; echo
 
           # 3) Both blocked: keep the committed file, fail only if it is stale
@@ -118,7 +139,7 @@ jobs:
           else
             mv problems.new.json problems.json
           fi
-          rm -f raw.json list.json query.json
+          rm -f raw.json page.json pages.jsonl list.json
 
       - name: Commit if changed
         if: steps.fetch.outputs.source != 'none'
