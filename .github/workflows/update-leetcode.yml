@@ -1,15 +1,26 @@
 # .github/workflows/update-leetcode.yml
 # Fetches LeetCode's full problem list and commits it as problems.json.
-# Runs hourly + on-demand. Server-side fetch — no CORS issues.
+# Runs every 6 hours + on-demand. Server-side fetch, no CORS issues.
+#
+# Behaviour:
+#   - Uses LeetCode's GraphQL endpoint (paged, 100 per request), with the old
+#     REST endpoint as a fallback.
+#   - If LeetCode blocks both, the existing problems.json is kept and the run
+#     only warns. It fails (red) only once the committed file is >3 days old,
+#     so a real long-term breakage still gets noticed.
+#   - Commits only when the problem list itself changes, not on every run
+#     (the "updated" timestamp alone no longer triggers a commit).
 
 name: Update LeetCode problems
 
-on: 
-  # Run every hour
+on:
   schedule:
-    - cron: "0 * * * *"
-  # Allow manual runs from the Actions tab
+    - cron: "17 */6 * * *"
   workflow_dispatch:
+
+concurrency:
+  group: update-leetcode
+  cancel-in-progress: false
 
 jobs:
   update:
@@ -22,56 +33,124 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Fetch problems from LeetCode
+        id: fetch
         run: |
-          # LeetCode's own endpoint works fine server-to-server.
-          # We pretend to be a browser; otherwise it sometimes 403s.
-          curl -sSL \
-            -H "User-Agent: Mozilla/5.0 (compatible; rudraanshpatel.in updater)" \
-            -H "Accept: application/json" \
-            "https://leetcode.com/api/problems/all/" \
-            > raw.json
+          rm -f raw.json page.json pages.jsonl list.json
+          UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
 
-          # Sanity check: file should be substantial, not an error page.
-          size=$(wc -c < raw.json)
-          echo "Fetched $size bytes"
-          if [ "$size" -lt 100000 ]; then
-            echo "::error::Response too small, likely an error page"
-            head -c 500 raw.json
-            exit 1
+          # 1) GraphQL (what leetcode.com itself uses). Since 2026-10-29 the
+          #    REST endpoint below gets a Cloudflare challenge from Actions
+          #    runners, while GraphQL POSTs still go through.
+          #    LeetCode caps `limit` at 100, so page through with `skip`.
+          gql() {  # $1 = skip
+            jq -nc --argjson skip "$1" '{
+              operationName: "problemsetQuestionList",
+              query: "query problemsetQuestionList($categorySlug: String, $limit: Int, $skip: Int, $filters: QuestionListFilterInput) { questionList(categorySlug: $categorySlug, limit: $limit, skip: $skip, filters: $filters) { totalNum data { questionFrontendId title titleSlug difficulty isPaidOnly } } }",
+              variables: { categorySlug: "all-code-essentials", limit: 100, skip: $skip, filters: {} }
+            }' | curl -sS --retry 2 --retry-delay 5 --max-time 30 \
+                   -o page.json -w '%{http_code}' \
+                   -H "User-Agent: $UA" \
+                   -H "Content-Type: application/json" \
+                   -H "Referer: https://leetcode.com/problemset/" \
+                   --data @- "https://leetcode.com/graphql/" || true
+          }
+
+          skip=0; total=1; ok=1
+          while [ "$skip" -lt "$total" ]; do
+            code=$(gql "$skip")
+            if [ "$code" != "200" ] || ! jq -e '.data.questionList.data | length > 0' page.json >/dev/null 2>&1; then
+              echo "GraphQL page skip=$skip failed: HTTP $code, first 300 bytes:"
+              head -c 300 page.json 2>/dev/null || true; echo
+              ok=0; break
+            fi
+            total=$(jq '.data.questionList.totalNum' page.json)
+            jq -c '.data.questionList.data[]' page.json >> pages.jsonl
+            skip=$((skip + 100))
+            sleep 1
+          done
+
+          if [ "$ok" = "1" ]; then
+            jq -s '[ .[]
+                    | select(.questionFrontendId | test("^[0-9]+$"))
+                    | {
+                        id:      (.questionFrontendId | tonumber),
+                        title:   .title,
+                        slug:    .titleSlug,
+                        difficulty: (if .difficulty == "Easy" or .difficulty == "Medium" or .difficulty == "Hard"
+                                     then .difficulty else "Unknown" end),
+                        premium: .isPaidOnly
+                      } ] | unique_by(.id)' pages.jsonl > list.json
+            n=$(jq length list.json)
+            echo "GraphQL: $n problems (LeetCode reports $total)"
+            if [ "$n" -gt 1000 ]; then
+              echo "source=graphql" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "GraphQL list too short, ignoring it"
           fi
 
+          # 2) Old REST endpoint as a fallback, single attempt
+          code=$(curl -sSL --max-time 60 \
+            -o raw.json -w '%{http_code}' \
+            -H "User-Agent: $UA" \
+            -H "Accept: application/json" \
+            "https://leetcode.com/api/problems/all/" || true)
+          echo "REST: HTTP $code, $(cat raw.json 2>/dev/null | wc -c) bytes"
+
+          if [ "$code" = "200" ] && jq -e '.stat_status_pairs | length > 1000' raw.json >/dev/null 2>&1; then
+            jq '[ .stat_status_pairs[] | {
+                  id:      .stat.frontend_question_id,
+                  title:   .stat.question__title,
+                  slug:    .stat.question__title_slug,
+                  difficulty: (
+                    if   .difficulty.level == 1 then "Easy"
+                    elif .difficulty.level == 2 then "Medium"
+                    elif .difficulty.level == 3 then "Hard"
+                    else "Unknown" end),
+                  premium: .paid_only
+                } ]' raw.json > list.json
+            echo "source=rest" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "REST response unusable, first 300 bytes:"
+          head -c 300 raw.json 2>/dev/null || true; echo
+
+          # 3) Both blocked: keep the committed file, fail only if it is stale
+          echo "source=none" >> "$GITHUB_OUTPUT"
+          last=$(jq -r '.updated' problems.json)
+          age_h=$(( ( $(date -u +%s) - $(date -u -d "$last" +%s) ) / 3600 ))
+          if [ "$age_h" -gt 72 ]; then
+            echo "::error::LeetCode fetch failed and problems.json is ${age_h}h old"
+            exit 1
+          fi
+          echo "::warning::LeetCode fetch failed; keeping existing problems.json (${age_h}h old)"
+
       - name: Build slim problems.json
+        if: steps.fetch.outputs.source != 'none'
         run: |
-          jq '[
-            .stat_status_pairs[]
-            | {
-                id:      .stat.frontend_question_id,
-                title:   .stat.question__title,
-                slug:    .stat.question__title_slug,
-                difficulty: (
-                  if   .difficulty.level == 1 then "Easy"
-                  elif .difficulty.level == 2 then "Medium"
-                  elif .difficulty.level == 3 then "Hard"
-                  else "Unknown"
-                  end
-                ),
-                premium: .paid_only
-              }
-          ] | sort_by(.id)
-            | { updated: (now | todate), count: length, problems: . }' \
-            raw.json > problems.json
-            
-          rm raw.json
-          echo "Built problems.json with $(jq '.count' problems.json) problems"
+          jq 'sort_by(.id) | { updated: (now | todate), count: length, problems: . }' \
+            list.json > problems.new.json
+          echo "Built problems.json with $(jq '.count' problems.new.json) problems (source: ${{ steps.fetch.outputs.source }})"
+
+          # Only replace the file when the list itself changed.
+          if [ "$(jq -c '.problems' problems.new.json)" = "$(jq -c '.problems' problems.json)" ]; then
+            echo "Problem list unchanged"
+            rm problems.new.json
+          else
+            mv problems.new.json problems.json
+          fi
+          rm -f raw.json page.json pages.jsonl list.json
 
       - name: Commit if changed
+        if: steps.fetch.outputs.source != 'none'
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add problems.json
           if git diff --staged --quiet; then
-            echo "No changes — nothing to commit"
+            echo "No changes, nothing to commit"
           else
             git commit -m "chore: refresh LeetCode problems.json"
+            git pull --rebase origin main
             git push
           fi
