@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-28T23:00:18Z",
-  "count": 4096,
+  "updated": "2026-11-01T13:33:44Z",
+  "count": 4100,
   "problems": [
     {
       "id": 1,
@@ -28673,6 +28673,34 @@
       "slug": "simulate-bomb-explosions-and-falling-boxes",
       "difficulty": "Medium",
       "premium": true
+    },
+    {
+      "id": 4097,
+      "title": "Minimum Value of Merged Integers",
+      "slug": "minimum-value-of-merged-integers",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4098,
+      "title": "Minimize the Maximum Value of GCD-Connected Array",
+      "slug": "minimize-the-maximum-value-of-gcd-connected-array",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4099,
+      "title": "Minimum Operations to Sort With Locked Indices",
+      "slug": "minimum-operations-to-sort-with-locked-indices",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4100,
+      "title": "Minimum Cost Path With Even XOR Parity",
+      "slug": "minimum-cost-path-with-even-xor-parity",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
