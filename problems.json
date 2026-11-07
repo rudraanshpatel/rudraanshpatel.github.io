@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-04T06:35:34Z",
-  "count": 4101,
+  "updated": "2026-11-07T21:57:07Z",
+  "count": 4105,
   "problems": [
     {
       "id": 1,
@@ -28708,6 +28708,34 @@
       "slug": "find-all-numbers-disappeared-in-an-array-iii",
       "difficulty": "Medium",
       "premium": true
+    },
+    {
+      "id": 4102,
+      "title": "Count Valid Substrings I",
+      "slug": "count-valid-substrings-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4103,
+      "title": "Remove Elements by Type and Color",
+      "slug": "remove-elements-by-type-and-color",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4104,
+      "title": "Count Valid Substrings II",
+      "slug": "count-valid-substrings-ii",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4105,
+      "title": "Repeated String Match II",
+      "slug": "repeated-string-match-ii",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
