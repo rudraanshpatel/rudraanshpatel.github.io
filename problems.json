@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-07T21:57:07Z",
-  "count": 4105,
+  "updated": "2026-11-08T06:11:52Z",
+  "count": 4109,
   "problems": [
     {
       "id": 1,
@@ -28734,6 +28734,34 @@
       "id": 4105,
       "title": "Repeated String Match II",
       "slug": "repeated-string-match-ii",
+      "difficulty": "Hard",
+      "premium": false
+    },
+    {
+      "id": 4106,
+      "title": "Find Mismatched Segments Between Two Strings",
+      "slug": "find-mismatched-segments-between-two-strings",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4107,
+      "title": "Count Valid Suffix Sorts I",
+      "slug": "count-valid-suffix-sorts-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4108,
+      "title": "Minimum Cost to Make Red Nodes Connected",
+      "slug": "minimum-cost-to-make-red-nodes-connected",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4109,
+      "title": "Count Valid Suffix Sorts II",
+      "slug": "count-valid-suffix-sorts-ii",
       "difficulty": "Hard",
       "premium": false
     }
