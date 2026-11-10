@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-08T06:11:52Z",
-  "count": 4109,
+  "updated": "2026-11-10T19:49:20Z",
+  "count": 4110,
   "problems": [
     {
       "id": 1,
@@ -28764,6 +28764,13 @@
       "slug": "count-valid-suffix-sorts-ii",
       "difficulty": "Hard",
       "premium": false
+    },
+    {
+      "id": 4110,
+      "title": "Find the Maximum Length of Valid Subsequence III",
+      "slug": "find-the-maximum-length-of-valid-subsequence-iii",
+      "difficulty": "Medium",
+      "premium": true
     }
   ]
 }
