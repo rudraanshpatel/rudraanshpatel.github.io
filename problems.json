@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-10T19:49:20Z",
-  "count": 4110,
+  "updated": "2026-11-15T06:44:10Z",
+  "count": 4114,
   "problems": [
     {
       "id": 1,
@@ -28771,6 +28771,34 @@
       "slug": "find-the-maximum-length-of-valid-subsequence-iii",
       "difficulty": "Medium",
       "premium": true
+    },
+    {
+      "id": 4111,
+      "title": "Count Consistent Subarrays I",
+      "slug": "count-consistent-subarrays-i",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4112,
+      "title": "Maximize Score After Zeroing Subtrees",
+      "slug": "maximize-score-after-zeroing-subtrees",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4113,
+      "title": "Game of Divisible Sums",
+      "slug": "game-of-divisible-sums",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4114,
+      "title": "Count Consistent Subarrays II",
+      "slug": "count-consistent-subarrays-ii",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
