@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Groundwater recharge potential zones for the Bhopal region: an AHP-weighted overlay of seven thematic layers, with seasonal views, as an interactive web map." />
+
+  <meta property="og:title" content="Groundwater Recharge Zones, Bhopal — Rudraansh Patel" />
+  <meta property="og:description" content="Interactive map of groundwater recharge potential for Bhopal, Raisen and Narmadapuram districts." />
+  <meta property="og:url" content="https://rudraanshpatel.in/projects/groundwater-recharge/" />
+  <meta property="og:type" content="article" />
+
+  <title>Groundwater Recharge Zones — Rudraansh Patel</title>
+  <link rel="canonical" href="https://rudraanshpatel.in/projects/groundwater-recharge/" />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" type="image/x-icon" href="/avatar.ico">
+  <style>
+    .app-frame {
+      position: relative;
+      width: 100%;
+      height: 80vh;
+      min-height: 520px;
+      border: 1px solid var(--ink, #1a1a1a);
+      background: var(--paper-sunk, #dedcd2);
+      margin: 1rem 0 0.5rem;
+    }
+    .app-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .app-frame .app-loading {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; color: #555;
+      text-align: center; padding: 1rem; pointer-events: none;
+    }
+    .facts { font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; }
+    .facts td { padding: 0.15rem 1rem 0.15rem 0; vertical-align: top; }
+  </style>
+</head>
+<body class="deep-page">
+
+  <p class="breadcrumb mono">
+    <a href="/">← rudraansh</a> / <a href="/projects/">projects</a> / groundwater-recharge
+  </p>
+
+  <article>
+
+    <header class="project-detail-header">
+      <h1>Groundwater Recharge Zones, Bhopal <span class="tag tag-live">live</span></h1>
+      <span class="meta dim">Nov 2026</span>
+    </header>
+    <p class="project-detail-meta">
+      Python &middot; FastAPI &middot; rasterio &middot; GeoPandas &middot; AHP &middot; Leaflet
+    </p>
+
+    <p>
+      Semester team project at MANIT Bhopal (Civil Engineering). The map shows where
+      rain is most likely to soak in and recharge groundwater across Bhopal,
+      Raisen and Narmadapuram districts. Seven thematic layers &mdash; rainfall,
+      geology, slope, soil, land use, drainage density and lineament density
+      &mdash; are ranked and combined with weights from the Analytic Hierarchy
+      Process. You can pick a tehsil or watershed, switch between pre-monsoon,
+      monsoon and post-monsoon views, change the weights, and export the result
+      as a GeoTIFF or PDF.
+    </p>
+
+    <div class="app-frame">
+      <div class="app-loading" id="app-loading">
+        Loading the map&hellip; the server sleeps when nobody uses it,
+        so the first visit can take up to a minute.
+      </div>
+      <iframe id="app" title="Groundwater recharge zone map"
+              src="https://rudraanshpatel-groundwater-recharge-bhopal.hf.space/"
+              allow="fullscreen; clipboard-write" loading="lazy"></iframe>
+    </div>
+    <p class="project-links">
+      <a id="app-full" href="https://rudraanshpatel-groundwater-recharge-bhopal.hf.space/" target="_blank">[open full screen]</a>
+      <a href="https://github.com/rudraanshpatel/groundwater-recharge-bhopal" target="_blank">[source]</a>
+    </p>
+
+    <h2>Results</h2>
+    <table class="facts">
+      <tr><td>Study area</td><td>17,608 km&sup2;, 15 tehsils, 483 micro-watersheds</td></tr>
+      <tr><td>Resolution</td><td>30 m grid</td></tr>
+      <tr><td>Validation</td><td>60 CGWB wells, Spearman &rho; = 0.36 (p = 0.005) between recharge potential and observed recharge</td></tr>
+      <tr><td>Data</td><td>Copernicus DEM, ESA WorldCover, SoilGrids, IMD rainfall 2014&ndash;24, GSI geology and lineaments</td></tr>
+    </table>
+
+    <hr class="post-end" />
+
+  </article>
+
+  <p class="mono dim" style="font-size:0.78rem;">
+    <a href="/projects/">← back to projects</a>
+  </p>
+
+  <script>
+    document.getElementById('app').addEventListener('load', function () {
+      var l = document.getElementById('app-loading');
+      if (l) l.remove();
+    });
+  </script>
+</body>
+</html>
