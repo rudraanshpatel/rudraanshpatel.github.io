@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-15T06:44:10Z",
-  "count": 4114,
+  "updated": "2026-11-17T21:01:23Z",
+  "count": 4115,
   "problems": [
     {
       "id": 1,
@@ -28799,6 +28799,13 @@
       "slug": "count-consistent-subarrays-ii",
       "difficulty": "Hard",
       "premium": false
+    },
+    {
+      "id": 4115,
+      "title": "Sum of Compatible Numbers in Range II",
+      "slug": "sum-of-compatible-numbers-in-range-ii",
+      "difficulty": "Hard",
+      "premium": true
     }
   ]
 }
