@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-17T21:01:23Z",
-  "count": 4115,
+  "updated": "2026-11-21T19:23:24Z",
+  "count": 4119,
   "problems": [
     {
       "id": 1,
@@ -28806,6 +28806,34 @@
       "slug": "sum-of-compatible-numbers-in-range-ii",
       "difficulty": "Hard",
       "premium": true
+    },
+    {
+      "id": 4116,
+      "title": "Assign Umbrella on Rainy Days",
+      "slug": "assign-umbrella-on-rainy-days",
+      "difficulty": "Easy",
+      "premium": false
+    },
+    {
+      "id": 4117,
+      "title": "Minimum Range After Sum Operations",
+      "slug": "minimum-range-after-sum-operations",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4118,
+      "title": "Minimum Operations to Make Mountain Array I",
+      "slug": "minimum-operations-to-make-mountain-array-i",
+      "difficulty": "Medium",
+      "premium": false
+    },
+    {
+      "id": 4119,
+      "title": "Minimum Set Bits in a Valid Integer",
+      "slug": "minimum-set-bits-in-a-valid-integer",
+      "difficulty": "Hard",
+      "premium": false
     }
   ]
 }
