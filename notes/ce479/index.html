@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CE479 End-Term Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: a field engineer's notebook page, clear and exam-ready
+   IDEA: a soil profile / borehole log, each section a stratum
+   PICTURE: the 4.5 h plan drawn as a borehole column of layers, then the sketches to draw
+   COLOUR and TYPE: soil brown leads, water blue for anything that drains; Archivo + Source Sans 3
+   LAYOUT: sticky section strip, one band per topic: formulas, theory, sketch, worked numericals */
+:root{color-scheme:light dark;
+--bg:light-dark(#ffffff,#14100c);--ink:light-dark(#1d1711,#efe6dc);--mut:light-dark(#6b5f52,#b3a593);
+--soil:light-dark(#7a4a24,#d89b63);--soil2:light-dark(#f3e6d8,#2a1f16);--soil3:light-dark(#d9b48f,#5b3f28);
+--water:light-dark(#1663ad,#6eaef0);--water2:light-dark(#e3effa,#14273a);--line:light-dark(#e4d8cb,#3a2e23);--hi:light-dark(#fff3c4,#3b3214)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.55 "Source Sans 3",system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Archivo,system-ui,sans-serif;line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(32px,6vw,50px);font-weight:800}
+h2{font-size:clamp(26px,4vw,34px);font-weight:800;color:var(--soil)}
+h3{font-size:19px;font-weight:600;margin:26px 0 8px}
+.band{padding:clamp(28px,4vw,56px) max(5vw,16px)}
+.wrap{max-width:1120px;margin:0 auto}
+.top{background:var(--soil);color:#fff8f0}
+.top p{max-width:62ch;margin:10px 0 0;color:#f6e7d6}
+html{scroll-padding-top:64px}
+nav.scroll{display:flex;gap:6px;overflow-x:auto;padding:10px max(5vw,16px);border-bottom:1px solid var(--line);background:var(--bg)}
+@media(min-width:900px){nav.scroll{position:sticky;top:0;z-index:5}}
+nav a{flex:none;color:var(--ink);text-decoration:none;padding:10px 14px;border-radius:99px;background:var(--soil2);font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center}
+nav a:focus-visible,nav a:hover{outline:2px solid var(--water)}
+/* borehole plan */
+.plan{display:grid;grid-template-columns:minmax(0,1fr);gap:0;margin-top:22px;border-radius:10px;overflow:hidden;border:2px solid #fff8f0}
+.lyr{display:grid;grid-template-columns:72px minmax(0,1fr);align-items:center;color:var(--ink);text-decoration:none;border-top:1px solid rgba(0,0,0,.15)}
+.lyr:first-child{border-top:0}
+.lyr b{font-family:Archivo;font-size:15px;padding:0 10px;color:#fff8f0;white-space:nowrap}
+.lyr span{padding:10px 14px;background:var(--bg);height:100%;display:flex;flex-direction:column;justify-content:center}
+.lyr small{color:var(--mut);font-size:14px}
+.lyr:focus-visible{outline:3px solid var(--water);outline-offset:-3px}
+.band:nth-of-type(even){background:var(--soil2)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px 32px;align-items:start}
+.fx{border:1px solid var(--line);border-left:4px solid var(--soil);background:var(--bg);border-radius:8px;padding:6px 16px 12px}
+.fx.w{border-left-color:var(--water)}
+.f{display:grid;grid-template-columns:minmax(0,1fr);padding:10px 0;border-bottom:1px dashed var(--line)}
+.f:last-child{border-bottom:0}
+.f .lab{font-size:14px;color:var(--mut);font-weight:600}
+math{font-size:1.18em}
+math[display=block]{margin:4px 0;overflow-x:auto;overflow-y:hidden;padding:2px 0}
+ul{padding-left:20px;margin:6px 0}li{margin:3px 0}
+.ans{background:var(--hi);border-radius:8px;padding:10px 14px;margin:10px 0}
+.ans b{white-space:nowrap}
+figure{margin:14px 0;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px}
+figure svg{width:100%;height:auto;display:block;color:var(--ink);font-family:"Source Sans 3",sans-serif}
+figcaption{font-size:14.5px;color:var(--mut);margin-top:6px}
+.draw{display:inline-block;background:var(--water);color:#fff;font-weight:700;font-size:13px;padding:2px 9px;border-radius:99px;margin-right:6px;vertical-align:2px}
+table{border-collapse:collapse;width:100%;font-size:15px;background:var(--bg)}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{font-family:Archivo;font-weight:600;font-size:14px;background:var(--soil2)}
+.scroll{overflow-x:auto}
+.note{font-size:14.5px;color:var(--mut)}
+.why{background:var(--water2);border-radius:10px;padding:14px 18px;margin:16px 0 8px;border:1px solid light-dark(#c9def3,#24425f)}
+.why h3{margin:0 0 6px;color:var(--water)}
+.why p{margin:8px 0}.why ul,.why ol{margin:6px 0}
+.why math{font-size:1.15em;math-style:normal}
+.k{font-weight:700;color:var(--soil)}
+.qa details{border:1px solid var(--line);border-radius:8px;background:var(--bg);margin:8px 0}
+.qa summary{cursor:pointer;padding:12px 14px;font-weight:600;list-style:none;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;min-height:44px}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary .qn{font-family:Archivo;color:var(--soil);white-space:nowrap}
+.qa details[open] summary{border-bottom:1px dashed var(--line)}
+.qa .a{padding:8px 16px 12px}
+.qa .a p{margin:6px 0}
+.qa h3{margin-top:28px}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.btn{font:600 15px "Source Sans 3",sans-serif;padding:10px 16px;min-height:44px;border-radius:8px;border:1px solid var(--soil);background:var(--bg);color:var(--ink);cursor:pointer}
+.btn:focus-visible{outline:2px solid var(--water)}
+.home{color:#fff8f0;font-size:15px}
+/* svg helpers */
+.sf{fill:var(--soil3)}.sl{stroke:var(--soil);fill:none}.wl{stroke:var(--water);fill:none}.wf{fill:var(--water2)}.wt{fill:var(--water)}
+.t{font-size:12.5px;fill:currentColor}.tw{font-size:12.5px;fill:var(--water)}.ts{font-size:12.5px;fill:var(--soil);font-weight:700}
+@media(max-width:600px){table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;white-space:normal;font-weight:600}.stack td:empty{display:none}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+<marker id="aw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--water)"/></marker>
+</defs></svg>
+
+<header class="band top"><div class="wrap">
+<p style="margin:0 0 14px"><a class="home" href="/">← rudraanshpatel.in</a></p>
+<h1>Ground Improvement (CE479): end-term in 4.5 hours</h1>
+<p>Built from your 5 assignments and the lecture slides. Each section gives the formulas, the theory points examiners look for, the sketch to practise, and the assignment numericals worked to the answer. Start with the blue "Understand first" boxes in each section, then the formulas: every formula has a line on where it comes from. Tap a layer to jump.</p>
+<div class="plan" role="list">
+<a class="lyr" role="listitem" href="#basics" style="background:#a06c3d"><b>20 min</b><span>Soil basics (start here)<small>Phases, densities, permeability, consolidation: everything else builds on this</small></span></a>
+<a class="lyr" role="listitem" href="#compaction" style="background:#8a5a33"><b>55 min</b><span>Compaction: lab + field rollers<small>Assignments 1 and 2 · 3 numericals</small></span></a>
+<a class="lyr" role="listitem" href="#drains" style="background:#6e4524"><b>50 min</b><span>Vertical drains<small>Assignment 3 · 2 numericals, most likely in the paper</small></span></a>
+<a class="lyr" role="listitem" href="#grouting" style="background:#5a3a20"><b>45 min</b><span>Grouting + cement and lime stabilisation<small>Assignment 5 · Arora tables 31.4 and 31.5</small></span></a>
+<a class="lyr" role="listitem" href="#dewater" style="background:#1663ad"><b>40 min</b><span>Dewatering + mechanical stabilisation<small>Assignment 4 · 1 numerical</small></span></a>
+<a class="lyr" role="listitem" href="#qa" style="background:#3d2814"><b>20 min</b><span>Recall pass + Q&amp;A<small>Formulas from memory, then quiz yourself on the Q&amp;A section</small></span></a>
+</div>
+</div></header>
+
+<nav class="scroll" aria-label="Sections">
+<a href="#basics">Basics</a><a href="#compaction">Compaction</a><a href="#rollers">Rollers</a><a href="#drains">Drains</a><a href="#grouting">Grouting</a><a href="#stab">Cement/lime</a><a href="#mech">Mechanical stab.</a><a href="#dewater">Dewatering</a><a href="#qa">Q&amp;A</a><a href="#recall">Recall list</a>
+</nav>
+
+<section class="band" id="basics"><div class="wrap">
+<h2>0. Soil basics you need first</h2>
+<div class="why"><h3>The one-paragraph picture</h3>
+<p>Soil is a pile of grains with gaps between them. The gaps hold water and air. Almost every problem in this subject comes from those gaps: too many gaps means the soil is weak and squashy; water stuck in the gaps of clay means it settles slowly for years; water flowing through the gaps floods excavations. <b>Ground improvement</b> is the set of tricks to fix the gaps:</p>
+<ul><li><b>Squeeze out air</b> → compaction (sections 1, 2)</li><li><b>Squeeze out water faster</b> → vertical drains (section 3)</li><li><b>Fill or glue the gaps</b> → grouting, cement / lime, mechanical mixing (4, 5, 6)</li><li><b>Pump the water away</b> → dewatering (7)</li></ul></div>
+
+<div class="grid2">
+<div>
+<figure>
+<svg viewBox="0 0 440 260" role="img" aria-label="Phase diagram: total volume split into air, water and solids; with solids volume taken as 1, voids are e, water is wG, total is 1 plus e">
+<rect x="150" y="20" width="120" height="50" fill="var(--bg)" stroke="currentColor"/><text class="t" x="210" y="50" text-anchor="middle">Air</text>
+<rect x="150" y="70" width="120" height="60" class="wf" stroke="currentColor"/><text class="tw" x="210" y="105" text-anchor="middle">Water</text>
+<rect x="150" y="130" width="120" height="110" class="sf" stroke="currentColor"/><text class="ts" x="210" y="190" text-anchor="middle">Solids</text>
+<g class="t" text-anchor="end"><text x="140" y="105">Vw = wG</text><text x="140" y="190">Vs = 1</text></g>
+<line x1="290" y1="20" x2="290" y2="130" stroke="currentColor" marker-start="url(#ar)" marker-end="url(#ar)"/><text class="t" x="298" y="80">Vv = e</text>
+<line x1="350" y1="20" x2="350" y2="240" stroke="currentColor" marker-start="url(#ar)" marker-end="url(#ar)"/><text class="t" x="358" y="135">V = 1 + e</text>
+<g class="t"><text x="20" y="190">Mass Gγw</text><text x="20" y="105">Mass wGγw</text></g>
+</svg>
+<figcaption><span class="draw">Draw</span>Phase diagram with solids volume = 1. Every formula in compaction falls out of this picture.</figcaption>
+</figure>
+</div>
+<div>
+<div class="scroll"><table>
+<thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td>Void ratio e</td><td>Gap volume / solid volume. Loose sand ≈ 0.8, dense ≈ 0.4, soft clay can be 1.5+</td></tr>
+<tr><td>Water content w</td><td>Mass of water / mass of solids (not of total!)</td></tr>
+<tr><td>Degree of saturation S</td><td>Fraction of the gaps filled with water: 0 = dry, 1 = saturated</td></tr>
+<tr><td>Specific gravity G</td><td>How heavy the grains are vs water, ≈ 2.65-2.7</td></tr>
+<tr><td>Bulk unit weight γ</td><td>Total weight / total volume (grains + water)</td></tr>
+<tr><td>Dry unit weight γ<sub>d</sub></td><td>Weight of grains only / total volume. <b>This is the measure of how tightly packed the soil is</b>, so compaction is judged by it.</td></tr>
+</tbody></table></div>
+<div class="why"><h3>Deriving the two key formulas (2 lines)</h3>
+<p>Take V<sub>s</sub> = 1. Then voids = e, total V = 1 + e, solids weigh Gγ<sub>w</sub>, water weighs wGγ<sub>w</sub> so its volume is wG.</p>
+<p>Saturation = water volume / void volume: <math><mi>S</mi><mo>=</mo><mfrac><mrow><mi>w</mi><mi>G</mi></mrow><mi>e</mi></mfrac><mspace width="0.4em"/><mo>⇒</mo><mspace width="0.4em"/><mi>S</mi><mi>e</mi><mo>=</mo><mi>w</mi><mi>G</mi></math></p>
+<p>Dry unit weight = solids weight / total volume: <math><msub><mi>γ</mi><mi>d</mi></msub><mo>=</mo><mfrac><mrow><mi>G</mi><msub><mi>γ</mi><mi>w</mi></msub></mrow><mrow><mn>1</mn><mo>+</mo><mi>e</mi></mrow></mfrac></math></p>
+<p>Fewer gaps (smaller e) means higher γ<sub>d</sub>. That's all compaction is.</p></div>
+</div>
+</div>
+
+<div class="grid2">
+<div class="why"><h3>Grain sizes and D-values</h3>
+<ul><li>Gravel &gt; 4.75 mm · sand 0.075-4.75 mm · silt 0.002-0.075 mm · clay &lt; 0.002 mm (75 µ = 0.075 mm is the "fines" cut-off)</li>
+<li><b>D<sub>10</sub></b> = the size that 10% of the soil (by weight) is finer than. D<sub>50</sub> = median size. Small D<sub>10</sub> means lots of fines.</li>
+<li><b>Cohesionless</b> (sand, gravel): grains don't stick, strength from friction, drains fast. <b>Cohesive</b> (clay): tiny plate-shaped, electrically charged particles that stick together, hold water, drain very slowly.</li>
+<li><b>Plasticity index PI = LL − PL</b>: the range of water content over which a soil is mouldable like putty. High PI = very clayey, swells and shrinks a lot. PI = 0 means non-plastic (sand).</li></ul></div>
+<div class="why"><h3>Permeability and consolidation</h3>
+<ul><li><b>Permeability k</b> = how easily water flows through soil (Darcy: v = k·i). Gravel ≈ 10<sup>−2</sup> m/s, sand ≈ 10<sup>−4</sup>, silt ≈ 10<sup>−6</sup>, clay ≈ 10<sup>−9</sup> m/s. Every method choice in dewatering and grouting is really a choice based on k.</li>
+<li><b>Consolidation</b>: load a saturated clay and the grains can't move closer until the water between them leaves. Water is incompressible, so at first it carries the load (excess pore pressure). Since clay's k is tiny, the water leaks out over months or years, and the ground settles slowly.</li>
+<li><b>The key fact:</b> consolidation time grows with the <i>square</i> of the distance water must travel (t ∝ H²/c<sub>v</sub>). Halve the drainage path → 4× faster. Vertical drains exploit exactly this.</li>
+<li><b>Compaction ≠ consolidation.</b> Compaction removes <i>air</i> instantly with machines; consolidation removes <i>water</i> slowly under sustained load.</li></ul></div>
+</div>
+</div></section>
+
+<!-- ============ COMPACTION ============ -->
+<section class="band" id="compaction"><div class="wrap">
+<h2>1. Compaction (lab)</h2>
+<div class="why"><h3>Understand first</h3>
+<p>Compaction = pounding or rolling soil so grains pack closer and air is pushed out. Denser soil is stronger, settles less and lets less water through.</p>
+<p><b>Why does water content matter, and why is there a peak?</b> Take a dry clayey soil and compact it: grains grip each other through friction and suction, so they don't slide into the gaps. Add a little water and it acts like a lubricant, grains slide into denser packing, so γ<sub>d</sub> rises. Keep adding water and eventually the gaps are mostly water, which the rammer can't squeeze out, and water now takes space the grains could have used, so γ<sub>d</sub> falls. The peak is the <b>maximum dry density (MDD)</b> at the <b>optimum moisture content (OMC)</b>.</p>
+<p><b>ZAV line:</b> the best you could ever do at a given w is remove every bit of air (S = 1). Put S = 1 into Se = wG → e = wG, then into γ<sub>d</sub> = Gγ<sub>w</sub>/(1+e) and you get the ZAV formula. Real curves always sit below it because some air stays trapped.</p>
+<p><b>More energy</b> (Modified Proctor, heavier roller) pushes the curve up and to the left: denser, and the peak happens at a lower water content because less lubrication is needed when you hit harder.</p>
+<p><b>Dry vs wet side</b> is about particle arrangement in clay. Dry of OMC, there's too little water for plates to slide, so they lock edge-to-face like a house of cards (flocculated): big channels, so more permeable; stiff and strong but brittle; can suck in water later and swell. Wet of OMC, plates line up parallel (dispersed): tight, low permeability, soft and flexible, less swelling but more shrinkage. Every row in the table below follows from that one picture.</p></div>
+<div class="grid2">
+<div>
+<div class="fx">
+<div class="f"><span class="lab">Dry density: γ includes water weight; dividing by (1+w) strips the water out, leaving only the grains</span>
+<math display="block"><msub><mi>γ</mi><mi>d</mi></msub><mo>=</mo><mfrac><mi>γ</mi><mrow><mn>1</mn><mo>+</mo><mi>w</mi></mrow></mfrac></math></div>
+<div class="f"><span class="lab">Zero air voids line (S = 100%) and with air content n<sub>a</sub></span>
+<math display="block"><msub><mi>γ</mi><mi>d</mi></msub><mo>=</mo><mfrac><mrow><mi>G</mi><msub><mi>γ</mi><mi>w</mi></msub></mrow><mrow><mn>1</mn><mo>+</mo><mi>w</mi><mi>G</mi></mrow></mfrac><mspace width="1.2em"/><msub><mi>γ</mi><mi>d</mi></msub><mo>=</mo><mfrac><mrow><mo>(</mo><mn>1</mn><mo>−</mo><msub><mi>n</mi><mi>a</mi></msub><mo>)</mo><mi>G</mi><msub><mi>γ</mi><mi>w</mi></msub></mrow><mrow><mn>1</mn><mo>+</mo><mi>w</mi><mi>G</mi></mrow></mfrac></math></div>
+<div class="f"><span class="lab">Void ratio and saturation</span>
+<math display="block"><mi>e</mi><mo>=</mo><mfrac><mrow><mi>G</mi><msub><mi>γ</mi><mi>w</mi></msub></mrow><msub><mi>γ</mi><mi>d</mi></msub></mfrac><mo>−</mo><mn>1</mn><mspace width="1.2em"/><mi>S</mi><mi>e</mi><mo>=</mo><mi>w</mi><mi>G</mi></math></div>
+<div class="f"><span class="lab">Relative compaction: how close the field got to the lab maximum (spec usually ≥ 95%)</span>
+<math display="block"><mi>R</mi><mi>C</mi><mo>=</mo><mfrac><msub><mi>γ</mi><mrow><mi>d</mi><mo>,</mo><mtext>field</mtext></mrow></msub><msub><mi>γ</mi><mrow><mi>d</mi><mo>,</mo><mtext>max</mtext></mrow></msub></mfrac><mo>×</mo><mn>100</mn></math></div>
+<div class="f"><span class="lab">Borrow pit: digging and moving soil changes the gaps, never the amount of grain. Grain volume = V/(1+e) is the same in the pit and the embankment</span>
+<math display="block"><mfrac><msub><mi>V</mi><mtext>pit</mtext></msub><mrow><mn>1</mn><mo>+</mo><msub><mi>e</mi><mtext>pit</mtext></msub></mrow></mfrac><mo>=</mo><mfrac><msub><mi>V</mi><mtext>emb</mtext></msub><mrow><mn>1</mn><mo>+</mo><msub><mi>e</mi><mtext>emb</mtext></msub></mrow></mfrac></math></div>
+<div class="f"><span class="lab">Suitability number (Brown): rates sand used as backfill in vibroflotation (deep vibratory compaction), D in mm. Backfill must flow down and drain quickly, so fine particles are bad. Each term is 1/D², so a small D makes a huge term: lower S<sub>N</sub> = better backfill</span>
+<math display="block"><msub><mi>S</mi><mi>N</mi></msub><mo>=</mo><mn>1.7</mn><msqrt><mfrac><mn>3</mn><msubsup><mi>D</mi><mn>50</mn><mn>2</mn></msubsup></mfrac><mo>+</mo><mfrac><mn>1</mn><msubsup><mi>D</mi><mn>20</mn><mn>2</mn></msubsup></mfrac><mo>+</mo><mfrac><mn>1</mn><msubsup><mi>D</mi><mn>10</mn><mn>2</mn></msubsup></mfrac></msqrt></math>
+<span class="note">Rating: 0-10 excellent · 10-20 good · 20-30 fair · 30-50 poor · over 50 unsuitable</span></div>
+</div>
+</div>
+
+<div>
+<figure>
+<svg viewBox="0 0 460 300" role="img" aria-label="Compaction curve rising to a peak at OMC about 14 percent and MDD about 1.88, with the zero air voids line above it on the wet side">
+<line x1="60" y1="260" x2="430" y2="260" stroke="currentColor"/><line x1="60" y1="260" x2="60" y2="16" stroke="currentColor"/>
+<text class="t" x="245" y="292" text-anchor="middle">Water content w (%)</text>
+<text class="t" x="18" y="140" text-anchor="middle" transform="rotate(-90 18 140)">Dry density γd (g/cc)</text>
+<g class="t" text-anchor="middle"><text x="120" y="276">10</text><text x="180" y="276">12</text><text x="240" y="276">14</text><text x="300" y="276">16</text><text x="360" y="276">18</text><text x="420" y="276">20</text></g>
+<g class="t" text-anchor="end"><text x="54" y="264">1.70</text><text x="54" y="184">1.80</text><text x="54" y="104">1.90</text><text x="54" y="24">2.00</text></g>
+<path d="M210,21 L240,53 L300,112 L360,166 L420,218" class="wl" stroke-width="2.2" stroke-dasharray="7 4"/>
+<text class="tw" x="300" y="70">ZAV line (S = 100%)</text>
+<path d="M120,220 C150,160 170,122 225,113 S 280,122 303,156 S 350,205 366,219" class="sl" stroke-width="2.6"/>
+<g class="sf" stroke="var(--soil)"><circle cx="120" cy="220" r="4"/><circle cx="180" cy="123" r="4"/><circle cx="249" cy="115" r="4"/><circle cx="303" cy="156" r="4"/><circle cx="366" cy="219" r="4"/></g>
+<line x1="232" y1="113" x2="232" y2="260" stroke="currentColor" stroke-dasharray="3 3"/><line x1="60" y1="113" x2="232" y2="113" stroke="currentColor" stroke-dasharray="3 3"/>
+<text class="ts" x="66" y="106">MDD ≈ 1.88</text><text class="ts" x="236" y="252">OMC ≈ 14%</text>
+<text class="t" x="96" y="160">Dry side</text><text class="t" x="330" y="245">Wet side</text>
+<text class="t" x="66" y="40">Higher effort (Modified): curve moves up-left</text>
+</svg>
+<figcaption><span class="draw">Draw</span>Compaction curve with ZAV line. Plotted from your Assignment 1 Q9 data. The curve never crosses the ZAV line; a heavier compactive effort gives higher MDD at lower OMC.</figcaption>
+</figure>
+</div>
+</div>
+
+<h3>Theory points</h3>
+<div class="scroll"><table>
+<thead><tr><th>Property</th><th>Dry of optimum</th><th>Wet of optimum</th></tr></thead>
+<tbody>
+<tr><td>Structure</td><td>Flocculated (random)</td><td>Dispersed (parallel)</td></tr>
+<tr><td>Permeability</td><td>Higher</td><td>Lower</td></tr>
+<tr><td>Strength</td><td>Higher, brittle failure</td><td>Lower, ductile (plastic)</td></tr>
+<tr><td>Swelling</td><td>More</td><td>Less</td></tr>
+<tr><td>Shrinkage</td><td>Less</td><td>More</td></tr>
+<tr><td>Pore pressure</td><td>Lower</td><td>Higher</td></tr>
+<tr><td>Compressibility</td><td>Low at low stress, high at high stress</td><td>High at low stress</td></tr>
+<tr><td>Use it for</td><td>Pavement subgrade, bases, where strength matters</td><td>Dam cores, clay liners: low permeability, flexible, cracks less</td></tr>
+</tbody></table></div>
+
+<div class="grid2">
+<div>
+<h3>Standard vs Modified Proctor (IS 2720 Parts 7 and 8)</h3>
+<div class="scroll"><table>
+<thead><tr><th></th><th>Standard</th><th>Modified</th></tr></thead>
+<tbody>
+<tr><td>Rammer</td><td>2.6 kg, 310 mm drop</td><td>4.89 kg, 450 mm drop</td></tr>
+<tr><td>Layers × blows</td><td>3 × 25</td><td>5 × 25</td></tr>
+<tr><td>Mould</td><td>1000 ml</td><td>1000 ml</td></tr>
+<tr><td>Energy</td><td>≈ 600 kJ/m³</td><td>≈ 2700 kJ/m³ (4.5×)</td></tr>
+</tbody></table></div>
+<p class="note">Choose Modified when the field uses heavy compaction plant or loads are heavy (airfields, highways, heavy embankments); Standard for ordinary earthworks.</p>
+</div>
+<div>
+<h3>Lab factors and effect on properties</h3>
+<ul>
+<li><b>Factors (lab):</b> water content, compactive effort, soil type and gradation, method (impact, kneading, static, vibration), admixtures, recompaction of the same sample.</li>
+<li><b>Effect of compaction:</b> density, shear strength and bearing capacity up; permeability, compressibility and settlement down; swelling up if dry side.</li>
+<li><b>ZAV line:</b> theoretical max dry density at each w if all air were expelled (S = 100%). Unreachable in practice; the compaction curve always lies below it.</li>
+</ul>
+</div>
+</div>
+
+<h3>Worked numericals</h3>
+<div class="ans"><b>A1 Q1, suitability number.</b> 3/1² + 1/0.5² + 1/0.08² = 3 + 4 + 156.25 = 163.25. √163.25 = 12.78. S<sub>N</sub> = 1.7 × 12.78 = <b>21.7 → Fair</b> backfill. Note how D<sub>10</sub> dominates: fines spoil a backfill.</div>
+<div class="ans"><b>A1 Q8, borrow pits</b> (read volume as 10<sup>6</sup> m³). V<sub>s</sub> = 10<sup>6</sup>/1.80 = 5.556×10<sup>5</sup> m³.
+A: 1.90 V<sub>s</sub> = 10.56 lakh m³ × 0.25 = Rs 2.64 lakh. B: 2.50 V<sub>s</sub> = 13.89 lakh m³ × 0.23 = Rs 3.19 lakh. C: 2.80 V<sub>s</sub> = 15.56 lakh m³ × 0.18 = Rs 2.80 lakh. <b>Pit A is most economical.</b></div>
+<div class="ans"><b>A1 Q9, compaction test</b> (wet soil = total − 1000 g, V = 1000 cc, so γ in g/cc = mass/1000).
+γ: 1.925, 2.095, 2.150, 2.125, 2.070. γ<sub>d</sub> = γ/(1+w): 1.750, 1.871, 1.881, 1.830, 1.751.
+<b>OMC ≈ 14%, MDD ≈ 1.88 g/cc.</b> ZAV points γ<sub>d</sub> = 2.7/(1+2.7w): at 12% 2.04, 14% 1.96, 16% 1.89, 18% 1.82.
+At MDD: e = 2.70/1.881 − 1 = 0.435; S = wG/e = 0.143×2.7/0.435 = <b>88.7%</b>.</div>
+</div></section>
+
+<!-- ============ ROLLERS ============ -->
+<section class="band" id="rollers"><div class="wrap">
+<h2>2. Field compaction and rollers</h2>
+<div class="why"><h3>Understand first</h3>
+<p>In the field you can't use a rammer, so you use rollers. The rule: <b>match the mechanism to how the soil resists packing.</b></p>
+<ul><li><b>Clays</b> stick together in lumps. They need high pressure and kneading to break and remould lumps → sheepsfoot (spikes concentrate weight onto small areas) and pneumatic rollers.</li>
+<li><b>Sands and gravels</b> don't stick, they're held loose by friction. Shaking them lets grains drop into gaps → vibratory rollers and plates. Static pressure alone barely works on them.</li>
+<li><b>Lumpy or rocky fill</b> → grid roller crushes it. <b>Deep loose fill</b> → impact roller drops a heavy many-sided drum like a hammer.</li></ul>
+<p><b>Roller output formula, built up:</b> width × speed = area rolled per hour. × layer thickness = volume per hour. But each strip needs N passes, so ÷ N. × 1000 converts km/h into m/h, and × E allows for turning, overlaps and stops (efficiency, ~0.75).</p></div>
+<div class="grid2">
+<div>
+<div class="scroll"><table class="stack">
+<thead><tr><th>Equipment</th><th>Best for</th><th>How it works</th></tr></thead>
+<tbody>
+<tr><td>Smooth wheel (static)</td><td>Granular bases, crushed rock, finishing / sealing surfaces</td><td>Static pressure; shallow effect, can bridge over clods</td></tr>
+<tr><td>Pneumatic (rubber tyred)</td><td>Sands, silts, sandy clays (most versatile)</td><td>Static pressure + kneading; tyre pressure adjustable</td></tr>
+<tr><td>Sheepsfoot</td><td><b>Cohesive soils</b> (clays)</td><td>Feet penetrate, high contact pressure, kneading, bottom-up compaction</td></tr>
+<tr><td>Grid roller</td><td>Well-graded coarse soils, weathered rock, clods</td><td>Heavy mesh drum: crushes clods and oversize, high pressure</td></tr>
+<tr><td>Vibratory roller / plate</td><td><b>Cohesionless</b> sands and gravels</td><td>Vibration rearranges grains into denser packing</td></tr>
+<tr><td>Impact roller</td><td>Loose fills, collapsible / dry sands, deep layers (1-3 m)</td><td>Non-circular (pentagonal) drum lifts and drops: impact energy 10-25 kJ per blow</td></tr>
+<tr><td>Rammers / tampers</td><td>Confined spots, trenches, behind walls</td><td>Impact</td></tr>
+</tbody></table></div>
+<div class="fx" style="margin-top:14px">
+<div class="f"><span class="lab">Roller output (compacted m³/h); W = effective width (m), S = speed (km/h), L = compacted lift (m), E = efficiency, N = passes</span>
+<math display="block"><mi>Q</mi><mo>=</mo><mfrac><mrow><mi>W</mi><mo>×</mo><mi>S</mi><mo>×</mo><mi>L</mi><mo>×</mo><mn>1000</mn><mo>×</mo><mi>E</mi></mrow><mi>N</mi></mfrac></math></div>
+</div>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 420 220" role="img" aria-label="Sheepsfoot roller: drum with feet penetrating the loose layer and kneading it, walking out as density rises">
+<rect x="0" y="150" width="420" height="70" class="sf" opacity=".55"/>
+<line x1="0" y1="150" x2="420" y2="150" stroke="currentColor"/>
+<g transform="translate(170 100)">
+<circle r="52" fill="var(--bg)" stroke="currentColor" stroke-width="2"/>
+<circle r="5" fill="currentColor"/>
+<g fill="var(--soil)"><rect id="ft" x="-6" y="52" width="12" height="20"/>
+<use href="#ft" transform="rotate(30)"/><use href="#ft" transform="rotate(60)"/><use href="#ft" transform="rotate(90)"/><use href="#ft" transform="rotate(120)"/><use href="#ft" transform="rotate(150)"/><use href="#ft" transform="rotate(180)"/><use href="#ft" transform="rotate(210)"/><use href="#ft" transform="rotate(240)"/><use href="#ft" transform="rotate(270)"/><use href="#ft" transform="rotate(300)"/><use href="#ft" transform="rotate(330)"/></g>
+</g>
+<line x1="170" y1="100" x2="80" y2="40" stroke="currentColor" stroke-width="3"/>
+<line x1="240" y1="100" x2="320" y2="100" stroke="currentColor" marker-end="url(#ar)"/>
+<text class="t" x="250" y="92">direction of travel</text>
+<text class="t" x="232" y="40">drum ballasted with</text><text class="t" x="232" y="55">water / sand</text>
+<text class="ts" x="230" y="185">feet penetrate loose lift,</text><text class="ts" x="230" y="201">knead it from the bottom up</text>
+<text class="t" x="10" y="185">compacted layer</text>
+</svg>
+<figcaption><span class="draw">Draw</span>Sheepsfoot roller. Contact pressure under the feet is very high (roughly 1.4 to 7 MPa). As the layer densifies, the feet penetrate less and the roller "walks out".</figcaption>
+</figure>
+</div>
+</div>
+<div class="grid2">
+<div><h3>Factors for desired field compaction</h3>
+<ul><li>Moisture content near OMC (add water or dry out)</li><li>Lift thickness (typically 150-300 mm loose)</li><li>Number of passes and roller speed</li><li>Contact pressure / roller weight and type matched to soil</li><li>Soil type and gradation; removal of oversize and organics</li></ul></div>
+<div><h3>Field control methods</h3>
+<ul><li><b>Water content:</b> oven drying, calcium carbide (rapid moisture meter), sand bath / alcohol burning, Proctor needle, nuclear gauge</li><li><b>Density:</b> sand replacement, core cutter (soft fine soils), rubber balloon, water displacement, nuclear densometer</li><li>Compare with lab MDD → relative compaction; check w within OMC ± 2%</li></ul></div>
+</div>
+</div></section>
+
+<!-- ============ DRAINS ============ -->
+<section class="band" id="drains"><div class="wrap">
+<h2>3. Vertical drains</h2>
+<div class="why"><h3>Understand first</h3>
+<p><b>Problem:</b> you want to build on a 10 m thick soft clay. Load it and it will settle, but because water has to leak 10 m vertically through clay, that takes years. You can't wait that long.</p>
+<p><b>Fix:</b> push columns of sand (or plastic strip drains, PVDs) into the clay every ~2 m. Now water only travels about 1 m <i>sideways</i> into the nearest drain, then rises up the drain easily. Since time ∝ (distance)², going from 10 m to 1 m makes it roughly <b>100× faster</b>. Bonus: clay is usually layered, so it is more permeable horizontally (k<sub>h</sub> &gt; k<sub>v</sub>), which helps radial flow. Then you <b>preload</b> (pile extra fill on top) to force the settlement out before building.</p>
+<p><b>Reading the formulas, one by one:</b></p>
+<ul><li><b>d<sub>e</sub></b>: each drain "owns" a patch of soil around it (a square or a hexagon). Barron's math needs a circle, so we use a circle of the <i>same area</i>. Square: s² = πd<sub>e</sub>²/4 → d<sub>e</sub> = 1.128s. Hexagon: area 0.866s² → d<sub>e</sub> = 1.05s.</li>
+<li><b>d<sub>w</sub></b>: a PVD is a flat strip, not a circle. Treat it as a circle with the same perimeter: πd<sub>w</sub> = 2(a+b).</li>
+<li><b>n = d<sub>e</sub>/d<sub>w</sub></b>: how big the soil patch is compared to the drain. Bigger n = farther to travel = slower.</li>
+<li><b>T<sub>r</sub></b>: "time factor", a dimensionless clock. Faster-draining soil (c<sub>h</sub>) and more time push it up; a bigger patch (d<sub>e</sub>²) pulls it down. Same idea as T<sub>v</sub> for vertical flow, with H replaced by d<sub>e</sub>.</li>
+<li><b>m (or F(n))</b>: a geometry penalty from Barron's solution; grows roughly like ln n. Just plug in.</li>
+<li><b>U<sub>r</sub> = 1 − e<sup>−8T<sub>r</sub>/m</sup></b>: consolidation creeps towards 100% exponentially. U = fraction of settlement already done.</li>
+<li><b>Combining</b>: work with the fraction <i>not yet</i> done. If vertical flow alone leaves 84% undone and radial alone leaves 18.5% undone, both together leave 0.84 × 0.185 = 15.5% undone → U = 84.5%.</li>
+<li><b>c<sub>h</sub>/c<sub>v</sub> = k<sub>h</sub>/k<sub>v</sub></b>: c = k/(m<sub>v</sub>γ<sub>w</sub>) and m<sub>v</sub> is the same in both directions, so the ratio of c equals the ratio of k. That's how A3 Q5 gets c<sub>h</sub> = 4.5c<sub>v</sub>.</li>
+<li><b>Smear</b>: driving the mandrel remoulds a ring of clay around the drain, lowering k<sub>h</sub> there and slowing things. Both assignment questions say ignore it.</li></ul></div>
+<div class="grid2">
+<div class="fx w">
+<div class="f"><span class="lab">Influence (equivalent) diameter, s = spacing</span>
+<math display="block"><msub><mi>d</mi><mi>e</mi></msub><mo>=</mo><mn>1.13</mn><mi>s</mi><mtext> (square)</mtext></math>
+<math display="block"><msub><mi>d</mi><mi>e</mi></msub><mo>=</mo><mn>1.05</mn><mi>s</mi><mtext> (triangular)</mtext></math></div>
+<div class="f"><span class="lab">PVD equivalent drain diameter (a = width, b = thickness)</span>
+<math display="block"><msub><mi>d</mi><mi>w</mi></msub><mo>=</mo><mfrac><mrow><mn>2</mn><mo>(</mo><mi>a</mi><mo>+</mo><mi>b</mi><mo>)</mo></mrow><mi>π</mi></mfrac><mspace width="1.2em"/><mi>n</mi><mo>=</mo><mfrac><msub><mi>d</mi><mi>e</mi></msub><msub><mi>d</mi><mi>w</mi></msub></mfrac></math></div>
+<div class="f"><span class="lab">Radial time factor; c<sub>h</sub>/c<sub>v</sub> = k<sub>h</sub>/k<sub>v</sub></span>
+<math display="block"><msub><mi>T</mi><mi>r</mi></msub><mo>=</mo><mfrac><mrow><msub><mi>c</mi><mi>h</mi></msub><mi>t</mi></mrow><msubsup><mi>d</mi><mi>e</mi><mn>2</mn></msubsup></mfrac></math></div>
+<div class="f"><span class="lab">Barron, equal strain, no smear</span>
+<math display="block"><msub><mi>U</mi><mi>r</mi></msub><mo>=</mo><mn>1</mn><mo>−</mo><mi>exp</mi><mo>(</mo><mfrac><mrow><mo>−</mo><mn>8</mn><msub><mi>T</mi><mi>r</mi></msub></mrow><mi>m</mi></mfrac><mo>)</mo></math>
+<math display="block"><mi>m</mi><mo>=</mo><mfrac><msup><mi>n</mi><mn>2</mn></msup><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn></mrow></mfrac><mi>ln</mi><mi>n</mi><mo>−</mo><mfrac><mrow><mn>3</mn><msup><mi>n</mi><mn>2</mn></msup><mo>−</mo><mn>1</mn></mrow><mrow><mn>4</mn><msup><mi>n</mi><mn>2</mn></msup></mrow></mfrac></math>
+<span class="note">For large n, m ≈ ln n − 0.75</span></div>
+<div class="f"><span class="lab">Vertical flow (Terzaghi), H<sub>d</sub> = drainage path</span>
+<math display="block"><msub><mi>T</mi><mi>v</mi></msub><mo>=</mo><mfrac><mrow><msub><mi>c</mi><mi>v</mi></msub><mi>t</mi></mrow><msubsup><mi>H</mi><mi>d</mi><mn>2</mn></msubsup></mfrac></math>
+<math display="block"><msub><mi>T</mi><mi>v</mi></msub><mo>=</mo><mfrac><mi>π</mi><mn>4</mn></mfrac><msubsup><mi>U</mi><mi>v</mi><mn>2</mn></msubsup><mtext> (U ≤ 60%)</mtext></math>
+<math display="block"><msub><mi>T</mi><mi>v</mi></msub><mo>=</mo><mn>1.781</mn><mo>−</mo><mn>0.933</mn><msub><mi>log</mi><mn>10</mn></msub><mo>(</mo><mn>100</mn><mo>−</mo><mi>U</mi><mo>%</mo><mo>)</mo></math><span class="note">(for U &gt; 60%)</span></div>
+<div class="f"><span class="lab">Combined (Carrillo)</span>
+<math display="block"><mn>1</mn><mo>−</mo><mi>U</mi><mo>=</mo><mo>(</mo><mn>1</mn><mo>−</mo><msub><mi>U</mi><mi>v</mi></msub><mo>)</mo><mo>(</mo><mn>1</mn><mo>−</mo><msub><mi>U</mi><mi>r</mi></msub><mo>)</mo></math></div>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 440 270" role="img" aria-label="Sand drain cross section: surcharge on a sand blanket over clay, vertical sand drains collect water radially and send it up to the blanket">
+<rect x="20" y="28" width="400" height="30" fill="var(--soil2)" stroke="currentColor"/>
+<text class="t" x="220" y="48" text-anchor="middle">Surcharge / preload fill</text>
+<rect x="20" y="58" width="400" height="18" fill="#e9d58f" stroke="currentColor"/>
+<text class="t" x="300" y="71">Sand blanket</text>
+<rect x="20" y="76" width="400" height="150" class="sf" opacity=".6"/>
+<text class="ts" x="30" y="150">Soft clay</text>
+<rect x="20" y="226" width="400" height="22" fill="#e9d58f" stroke="currentColor"/>
+<text class="t" x="220" y="241" text-anchor="middle">Sand / or impervious base</text>
+<g fill="#f0e2a8" stroke="currentColor"><rect x="122" y="76" width="16" height="150"/><rect x="222" y="76" width="16" height="150"/><rect x="322" y="76" width="16" height="150"/></g>
+<g class="wl" stroke-width="1.6" marker-end="url(#aw)">
+<line x1="172" y1="130" x2="142" y2="130"/><line x1="188" y1="130" x2="218" y2="130"/><line x1="272" y1="170" x2="242" y2="170"/><line x1="288" y1="170" x2="318" y2="170"/>
+<line x1="230" y1="200" x2="230" y2="84"/><line x1="130" y1="200" x2="130" y2="84"/><line x1="330" y1="200" x2="330" y2="84"/>
+<line x1="380" y1="67" x2="425" y2="67"/></g>
+<text class="tw" x="160" y="122">radial flow</text>
+<line x1="138" y1="258" x2="222" y2="258" stroke="currentColor" marker-start="url(#ar)" marker-end="url(#ar)"/><text class="t" x="180" y="268" text-anchor="middle">s</text>
+<text class="t" x="20" y="16">Drains: 200-600 mm dia, 1.5-6 m spacing; PVD 100 × 4 mm</text>
+</svg>
+<figcaption><span class="draw">Draw</span>Sand drains with preload. Drains shorten the drainage path from H (vertical) to about s/2 (radial), and k<sub>h</sub> &gt; k<sub>v</sub> helps too.</figcaption>
+</figure>
+<figure>
+<svg viewBox="0 0 440 190" role="img" aria-label="Square pattern gives influence circle diameter 1.13s, triangular pattern gives hexagon with equivalent diameter 1.05s">
+<g transform="translate(20 20)">
+<text class="ts" x="0" y="0">Square: de = 1.13 s</text>
+<rect x="40" y="25" width="120" height="120" fill="none" stroke="currentColor" stroke-dasharray="4 3"/>
+<circle cx="100" cy="85" r="68" class="wf" stroke="var(--water)" opacity=".8"/>
+<g fill="currentColor"><circle cx="40" cy="25" r="5"/><circle cx="160" cy="25" r="5"/><circle cx="40" cy="145" r="5"/><circle cx="160" cy="145" r="5"/><circle cx="100" cy="85" r="5"/></g>
+<text class="t" x="100" y="165" text-anchor="middle">s</text>
+</g>
+<g transform="translate(240 20)">
+<text class="ts" x="0" y="0">Triangular: de = 1.05 s</text>
+<polygon points="100,30 152,60 152,120 100,150 48,120 48,60" class="wf" stroke="var(--water)"/>
+<g fill="currentColor"><circle cx="100" cy="90" r="5"/><circle cx="100" cy="30" r="5"/><circle cx="152" cy="60" r="5"/><circle cx="152" cy="120" r="5"/><circle cx="100" cy="150" r="5"/><circle cx="48" cy="120" r="5"/><circle cx="48" cy="60" r="5"/></g>
+<text class="t" x="110" y="64">s</text>
+</g>
+</svg>
+<figcaption><span class="draw">Draw</span>Drain patterns and zone of influence. Triangular gives more uniform consolidation; square is easier to lay out.</figcaption>
+</figure>
+</div>
+</div>
+<div class="grid2">
+<div><h3>Sand drains: installation</h3>
+<ul><li><b>Displacement:</b> closed-end mandrel driven or vibrated, filled with sand, withdrawn. Fast but causes smear and disturbance.</li><li><b>Non-displacement:</b> jetting, rotary or continuous-flight auger, hole filled with sand. Less disturbance.</li><li><b>Sandwicks:</b> geotextile sock filled with sand (≈ 65 mm), avoids necking. <b>PVDs:</b> band drain (core + filter) pushed in by mandrel, anchor plate at tip.</li><li>Sand blanket on top, then preload / surcharge; monitor with piezometers and settlement plates.</li></ul></div>
+<div><h3>Design parameters</h3>
+<ul><li>Drain diameter and type; spacing and pattern (n = d<sub>e</sub>/d<sub>w</sub>)</li><li>Length / depth of the clay layer, drainage boundaries</li><li>c<sub>h</sub>, c<sub>v</sub>, k<sub>h</sub>/k<sub>v</sub>; required U and time available</li><li>Smear zone and well resistance; filter criteria; sand blanket thickness; surcharge magnitude and stages</li></ul>
+<h3>Advantages / disadvantages</h3>
+<ul><li><b>+</b> Large cut in consolidation time, earlier strength gain, cheap per m, PVDs fast to install</li><li><b>−</b> Smear and disturbance, well resistance, drains can kink or neck under large settlement, needs surcharge and time, useless in very thin or organic layers with high secondary compression</li></ul></div>
+</div>
+<h3>Worked numericals</h3>
+<div class="ans"><b>A3 Q4, PVD square 2 m</b> (the "permeabilities" in m²/year are really c<sub>v</sub> = 2, c<sub>h</sub> = 3).
+d<sub>w</sub> = 2(100+4)/π = 66.2 mm. d<sub>e</sub> = 1.13×2 = 2.26 m. n = 2260/66.2 = 34.1. m = 1.0009×ln 34.1 − 0.75 = 3.533 − 0.750 = 2.78.
+T<sub>r</sub> = 3×1/2.26² = 0.587. U<sub>r</sub> = 1 − e<sup>−8×0.587/2.78</sup> = 1 − 0.185 = 0.815.
+Vertical: one-way drainage, H<sub>d</sub> = 10 m, T<sub>v</sub> = 2×1/100 = 0.02, U<sub>v</sub> = √(4×0.02/π) = 0.16.
+U = 1 − (0.84)(0.185) = <b>0.845 ≈ 84.5%</b> after 1 year.</div>
+<div class="ans"><b>A3 Q5, sandwicks triangular 2 m.</b> d<sub>e</sub> = 1.05×2 = 2.10 m, d<sub>w</sub> = 0.10 m, n = 21. m = 1.0023×3.045 − 0.749 = 2.30.
+c<sub>h</sub> = 4.5 c<sub>v</sub> = 1.35×10<sup>−2</sup> cm²/s = 1.35×10<sup>−6</sup> m²/s.
+U<sub>r</sub> = 0.9 → 8T<sub>r</sub>/m = ln 10 = 2.303 → T<sub>r</sub> = 2.303×2.30/8 = 0.663.
+t = T<sub>r</sub> d<sub>e</sub>²/c<sub>h</sub> = 0.663×4.41/1.35×10<sup>−6</sup> = 2.16×10<sup>6</sup> s = <b>≈ 25 days</b>.</div>
+</div></section>
+
+<!-- ============ GROUTING ============ -->
+<section class="band" id="grouting"><div class="wrap">
+<h2>4. Grouting</h2>
+<div class="why"><h3>Understand first</h3>
+<p>Grouting = drilling holes and pumping a liquid into the ground that later sets hard. Purpose: make soil or rock <b>stronger</b> and/or <b>watertight</b> (stop seepage under dams, into tunnels, excavations).</p>
+<p>There are three ways the grout can act:</p>
+<ul><li><b>Permeation:</b> grout flows into the gaps between grains without moving them, like water soaking into sand, then sets. Only works if the gaps are big enough for the grout.</li>
+<li><b>Compaction grouting:</b> very stiff grout is forced in as a growing bulb that shoves the surrounding loose soil aside, densifying it.</li>
+<li><b>Jet grouting:</b> a high-pressure jet cuts up the soil and mixes it with cement as the rod rotates and rises, making a column of "soilcrete". Works in any soil because it doesn't rely on gaps.</li></ul>
+<p><b>Groutability ratio:</b> cement grout is a suspension of real particles (~0.01-0.1 mm). The pore openings in soil are roughly D<sub>15</sub>/5 wide. Put the soil's fine end (D<sub>15</sub>) over the grout's coarse end (D<sub>85</sub>): if the ratio is &gt; 25 the biggest grout particles slip through; below 11 they clog the surface. That's why cement grout only works in gravels and coarse sand, while <b>chemical grouts</b> (true solutions, no particles, e.g. sodium silicate) reach fine sands and coarse silts.</p>
+<p><b>Why stages?</b> A long hole can't be grouted in one shot: grout would rush out of the weakest zone and pressure near the surface would heave the ground. So the hole is grouted in 3-6 m lengths (stages), isolated by a <b>packer</b> (an inflatable seal). Downstage works from the top so the top is sealed before you use high pressure deeper; upstage drills once and works upward for speed.</p></div>
+<div class="grid2">
+<div>
+<div class="fx">
+<div class="f"><span class="lab">Groutability ratio (soil vs grout particle size)</span>
+<math display="block"><msub><mi>N</mi><mn>1</mn></msub><mo>=</mo><mfrac><msub><mi>D</mi><mrow><mn>15</mn><mo>,</mo><mtext>soil</mtext></mrow></msub><msub><mi>D</mi><mrow><mn>85</mn><mo>,</mo><mtext>grout</mtext></mrow></msub></mfrac><mspace width="1em"/><msub><mi>N</mi><mn>2</mn></msub><mo>=</mo><mfrac><msub><mi>D</mi><mrow><mn>10</mn><mo>,</mo><mtext>soil</mtext></mrow></msub><msub><mi>D</mi><mrow><mn>95</mn><mo>,</mo><mtext>grout</mtext></mrow></msub></mfrac></math>
+<span class="note">N<sub>1</sub> &gt; 25 groutable, &lt; 11 not · N<sub>2</sub> &gt; 11 groutable, &lt; 6 not</span></div>
+</div>
+<h3>Characteristics of grouts</h3>
+<ul><li><b>Rheology / viscosity:</b> decides penetration; chemicals are near water-thin, cement is a suspension</li><li><b>Particle size:</b> must pass the soil pores (groutability ratio)</li><li><b>Setting / gel time:</b> controllable, long enough to place, short enough to stay put</li><li><b>Stability:</b> low bleeding and segregation (bentonite added to cement grout)</li><li><b>Strength and permanence / durability</b> after setting; resistance to washout and chemical attack</li><li><b>Toxicity</b> and cost</li></ul>
+<h3>Types (one line each)</h3>
+<ul><li><b>Permeation:</b> fills voids without disturbing soil (gravels, sands)</li><li><b>Compaction:</b> stiff grout bulb displaces and densifies loose soil</li><li><b>Jet:</b> high-pressure jet erodes and mixes soil into soilcrete columns (all soils)</li><li><b>Fracture / hydrofracture:</b> grout lenses split the soil, used for heave and settlement control</li></ul>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 440 290" role="img" aria-label="Descending stage grouting drills and grouts from the top down stage by stage; ascending drills to full depth and grouts from the bottom up moving the packer upward">
+<text class="ts" x="110" y="18" text-anchor="middle">Descending (downstage)</text>
+<text class="ts" x="330" y="18" text-anchor="middle">Ascending (upstage)</text>
+<rect x="10" y="34" width="420" height="246" class="sf" opacity=".35"/>
+<line x1="10" y1="34" x2="430" y2="34" stroke="currentColor"/>
+<!-- descending: 3 holes showing steps -->
+<g>
+<rect x="40" y="34" width="12" height="70" fill="var(--bg)" stroke="currentColor"/><ellipse cx="46" cy="70" rx="22" ry="32" class="wf" opacity=".9"/><rect x="40" y="34" width="12" height="70" fill="none" stroke="currentColor"/>
+<text class="t" x="46" y="128" text-anchor="middle">1</text>
+<rect x="104" y="34" width="12" height="140" fill="var(--bg)" stroke="currentColor"/><ellipse cx="110" cy="70" rx="22" ry="32" fill="var(--soil3)"/><ellipse cx="110" cy="140" rx="22" ry="32" class="wf"/><rect x="104" y="34" width="12" height="140" fill="none" stroke="currentColor"/><rect x="100" y="100" width="20" height="8" fill="currentColor"/>
+<text class="t" x="110" y="196" text-anchor="middle">2</text>
+<rect x="168" y="34" width="12" height="210" fill="var(--bg)" stroke="currentColor"/><ellipse cx="174" cy="70" rx="22" ry="32" fill="var(--soil3)"/><ellipse cx="174" cy="140" rx="22" ry="32" fill="var(--soil3)"/><ellipse cx="174" cy="210" rx="22" ry="32" class="wf"/><rect x="168" y="34" width="12" height="210" fill="none" stroke="currentColor"/><rect x="164" y="170" width="20" height="8" fill="currentColor"/>
+<text class="t" x="174" y="264" text-anchor="middle">3</text>
+</g>
+<!-- ascending -->
+<g>
+<rect x="260" y="34" width="12" height="210" fill="var(--bg)" stroke="currentColor"/><ellipse cx="266" cy="210" rx="22" ry="32" class="wf"/><rect x="260" y="34" width="12" height="210" fill="none" stroke="currentColor"/><rect x="256" y="170" width="20" height="8" fill="currentColor"/>
+<text class="t" x="266" y="264" text-anchor="middle">1</text>
+<rect x="324" y="34" width="12" height="210" fill="var(--bg)" stroke="currentColor"/><ellipse cx="330" cy="210" rx="22" ry="32" fill="var(--soil3)"/><ellipse cx="330" cy="140" rx="22" ry="32" class="wf"/><rect x="324" y="34" width="12" height="210" fill="none" stroke="currentColor"/><rect x="320" y="100" width="20" height="8" fill="currentColor"/>
+<text class="t" x="330" y="264" text-anchor="middle">2</text>
+<rect x="388" y="34" width="12" height="210" fill="var(--bg)" stroke="currentColor"/><ellipse cx="394" cy="210" rx="22" ry="32" fill="var(--soil3)"/><ellipse cx="394" cy="140" rx="22" ry="32" fill="var(--soil3)"/><ellipse cx="394" cy="70" rx="22" ry="32" class="wf"/><rect x="388" y="34" width="12" height="210" fill="none" stroke="currentColor"/>
+<text class="t" x="394" y="264" text-anchor="middle">3</text>
+</g>
+<line x1="220" y1="34" x2="220" y2="280" stroke="currentColor" stroke-dasharray="4 4"/>
+<text class="t" x="14" y="284">■ packer</text><text class="tw" x="80" y="284">blue = stage being grouted</text>
+</svg>
+<figcaption><span class="draw">Draw</span>Stage grouting. Descending: drill a stage, grout, let it set, re-drill through it, grout the next deeper stage. Ascending: drill full depth once, grout bottom stage with packer, lift packer, repeat.</figcaption>
+</figure>
+<div class="scroll"><table>
+<thead><tr><th></th><th>Descending</th><th>Ascending</th></tr></thead>
+<tbody>
+<tr><td>Advantages</td><td>Upper zone sealed first, so higher pressure possible below without surface leaks; hole stays stable; each stage tested</td><td>Faster and cheaper: one drilling, continuous operation</td></tr>
+<tr><td>Disadvantages</td><td>Slow, repeated re-drilling and waiting for set; costlier</td><td>Needs a stable hole; grout can bypass the packer up through fissures; lower pressure limit near surface</td></tr>
+</tbody></table></div>
+</div>
+</div>
+
+<div class="grid2">
+<div>
+<figure>
+<svg viewBox="0 0 440 240" role="img" aria-label="Under a dam, a deep curtain of grout holes at the upstream heel blocks seepage while shallow closely spaced blanket holes cover the whole base">
+<rect x="0" y="120" width="440" height="120" class="sf" opacity=".45"/>
+<line x1="0" y1="120" x2="440" y2="120" stroke="currentColor"/>
+<rect x="0" y="50" width="120" height="70" class="wf"/><line x1="0" y1="50" x2="120" y2="50" class="wl" stroke-width="2"/>
+<text class="tw" x="10" y="44">Reservoir</text>
+<polygon points="110,120 160,20 200,20 330,120" fill="var(--soil2)" stroke="currentColor" stroke-width="1.5"/>
+<text class="t" x="185" y="80" text-anchor="middle">Dam</text>
+<g stroke="var(--soil)" stroke-width="3">
+<line x1="160" y1="120" x2="160" y2="150"/><line x1="185" y1="120" x2="185" y2="150"/><line x1="210" y1="120" x2="210" y2="150"/><line x1="235" y1="120" x2="235" y2="150"/><line x1="260" y1="120" x2="260" y2="150"/><line x1="285" y1="120" x2="285" y2="150"/><line x1="310" y1="120" x2="310" y2="150"/></g>
+<text class="ts" x="230" y="168" text-anchor="middle">Blanket (consolidation) grouting</text>
+<g stroke="var(--water)" stroke-width="3.5"><line x1="128" y1="120" x2="128" y2="232"/><line x1="138" y1="120" x2="138" y2="232"/></g>
+<text class="tw" x="40" y="190">Curtain</text><text class="tw" x="40" y="205">grouting</text>
+<path d="M20,150 C60,150 100,170 124,190" class="wl" stroke-width="1.6" stroke-dasharray="5 3" marker-end="url(#aw)"/>
+<text class="t" x="20" y="142">seepage cut off</text>
+</svg>
+<figcaption><span class="draw">Draw</span>Curtain vs blanket grouting under a dam.</figcaption>
+</figure>
+</div>
+<div>
+<h3>Curtain vs blanket (A5 Q2, Q4)</h3>
+<ul><li><b>Curtain grouting</b> is the answer to "vertical seepage barrier beneath hydraulic structures": one to three rows of deep holes at the upstream heel, grouted to form an impervious vertical screen. Reduces seepage and uplift under dams and weirs.</li><li><b>Blanket (consolidation) grouting:</b> shallow (5-15 m), closely spaced holes on a grid over the whole foundation area. Seals and stiffens the fractured top rock, improves bearing, and gives a cap so curtain grout can be pumped at higher pressure.</li><li>Order on site: blanket first, then curtain.</li></ul>
+</div>
+</div>
+
+<h3>Arora tables (prof asked to add these)</h3>
+<div class="scroll"><table class="stack">
+<thead><tr><th>Factor</th><th>Permeation grouting</th><th>Deep mixing</th></tr></thead>
+<tbody>
+<tr><td>Soil</td><td>Coarse grained only; not silts</td><td>Sands, silts and clays</td></tr>
+<tr><td>Depth</td><td>Large (rotary drilled holes)</td><td>Limited: auger torque rises with depth</td></tr>
+<tr><td>Lateral extent</td><td>A few metres from the hole</td><td>Only the mixing tool diameter</td></tr>
+<tr><td>Speed</td><td>Slow, stage by stage</td><td>Fast, continuous while withdrawing</td></tr>
+<tr><td>Uniformity</td><td>Uncertain: grout follows high permeability, high pressure may fracture soil</td><td>Good: mechanical mixing</td></tr>
+</tbody></table></div>
+<div class="scroll" style="margin-top:14px"><table class="stack">
+<thead><tr><th>Factor</th><th>Permeation (cement)</th><th>Permeation (chemical)</th><th>Jet (cement)</th></tr></thead>
+<tbody>
+<tr><td>Soils</td><td>Gravels, coarse sands</td><td>Gravels, sands, coarse silts</td><td>Sandy gravels to clays (most versatile)</td></tr>
+<tr><td>Output rate</td><td>Slow, in stages</td><td>Slow, in stages</td><td>Rapid, one continuous operation</td></tr>
+<tr><td>Uniformity</td><td>Uniform, or travels along high k</td><td>Uniform, or travels along high k</td><td>Uniform cylindrical columns</td></tr>
+<tr><td>Grout quantity</td><td>Low, fills voids only (&lt; 1 kN cement/m³)</td><td>Low, voids only</td><td>High, partly replaces soil (1-6 kN/m³)</td></tr>
+<tr><td>Unit cost of grout</td><td>Low</td><td>High</td><td>Low</td></tr>
+<tr><td>Equipment capital cost</td><td>Moderate</td><td>Moderate</td><td>High</td></tr>
+</tbody></table></div>
+</div></section>
+
+<!-- ============ CEMENT / LIME ============ -->
+<section class="band" id="stab"><div class="wrap">
+<h2>5. Cement and lime stabilisation</h2>
+<div class="why"><h3>Understand first</h3>
+<p><b>Cement</b> works like making very weak concrete in place: mix cement into soil, compact, cure. Cement hydrates and glues grains together. Works best where there are grains to glue (granular soils); in fat clays it's hard to mix and the clay coats the cement.</p>
+<p><b>Lime</b> works mainly by changing clay chemistry. Why clay is troublesome: clay plates carry negative charge and hold a cloud of water and cations around them (the "double layer"). With sodium (Na<sup>+</sup>, single charge) the cloud is thick: the clay swells, is very plastic, and sticky. Lime supplies <b>Ca<sup>2+</sup></b>, which has double the charge and neutralises the plates with a thinner cloud. Plates then clump together (flocculate), so the soil turns crumbly and workable, the PI drops, and swelling reduces. Over months, lime also reacts with the silica and alumina in the clay itself (pozzolanic reaction) to form cementing gels, so strength keeps growing.</p>
+<p>So: <b>lime needs clay</b> to react with; sand has nothing for lime to work on → use cement there.</p></div>
+<div class="grid2">
+<div><h3>Factors affecting cement stabilisation</h3>
+<ul><li><b>Soil type:</b> best for well-graded granular soils; high-plasticity clays hard to mix, need more cement</li><li><b>Cement content:</b> strength rises with it (typically 5-14% by weight)</li><li><b>Water content</b> (near OMC for compaction and hydration)</li><li><b>Mixing:</b> thoroughness and delay between mixing and compaction (delay lowers strength)</li><li><b>Compaction</b> density achieved</li><li><b>Curing:</b> moisture and temperature, curing period</li><li><b>Deleterious matter:</b> organics and sulphates retard or attack hydration</li><li><b>Additives</b> (lime, fly ash, calcium chloride)</li></ul></div>
+<div><h3>Mechanism of lime stabilisation</h3>
+<ol style="padding-left:20px"><li><b>Cation exchange:</b> Ca<sup>2+</sup> replaces Na<sup>+</sup>, K<sup>+</sup> on clay surfaces, shrinking the diffuse double layer</li><li><b>Flocculation and agglomeration:</b> particles clump, soil turns friable; PI drops, workability up (immediate)</li><li><b>Carbonation:</b> lime + CO<sub>2</sub> → CaCO<sub>3</sub>, weak cementing</li><li><b>Pozzolanic reaction (long term):</b> Ca(OH)<sub>2</sub> + clay silica / alumina → CSH and CAH gels that cement particles; strength keeps rising for months</li></ol>
+<p><b>Most effective for clays</b> (medium to high plasticity, PI &gt; 10, e.g. black cotton soil): reduces swelling and PI. Poor for sands and silts that have no reactive clay minerals. Usual dose 2-8%.</p></div>
+</div>
+</div></section>
+
+<!-- ============ MECHANICAL ============ -->
+<section class="band" id="mech"><div class="wrap">
+<h2>6. Mechanical stabilisation</h2>
+<div class="why"><h3>Understand first</h3>
+<p>No chemicals: just blend two natural soils so the mix is better than either. Think of concrete: gravel and sand (<b>aggregate</b>) form a strong, frictional skeleton; a little clay (<b>binder</b>) fills the gaps and holds it together, like cement paste. Too little binder: loose and ravels. Too much: the gravel floats in clay and the mix becomes weak and sensitive to water.</p>
+<p><b>Fuller's curve</b> is the grading that packs densest (small particles exactly filling the gaps of larger ones).</p>
+<p><b>PI of a mix, why that formula:</b> plasticity comes only from the fine fraction (passing 425 µ). So each material's PI is weighted by how much fine material it actually adds: its share in the mix (X) times its % passing 425 µ (S). It's a weighted average of PI over the fines. A PI of 0 is replaced by 1 by convention (the prof's slide rule), otherwise the material would drop out of the numerator entirely.</p>
+<p><b>Proportioning formula:</b> mixing is linear. If a fraction x of B is mixed with (1−x) of A, % passing = A + x(B − A). Set it equal to the target E and solve: x = (E − A)/(B − A).</p></div>
+<div class="grid2">
+<div class="fx">
+<div class="f"><span class="lab">Fuller's maximum density grading (d = sieve size, D = max size)</span>
+<math display="block"><mi>p</mi><mo>=</mo><mn>100</mn><msup><mrow><mo>(</mo><mfrac><mi>d</mi><mi>D</mi></mfrac><mo>)</mo></mrow><mn>0.5</mn></msup></math></div>
+<div class="f"><span class="lab">PI of a mix (X, Y = % of each material; S = % passing 425 µ; P = PI; if P = 0 put 1)</span>
+<math display="block"><msub><mi>PI</mi><mtext>mix</mtext></msub><mo>=</mo><mfrac><mrow><mi>X</mi><msub><mi>S</mi><mn>1</mn></msub><msub><mi>P</mi><mn>1</mn></msub><mo>+</mo><mi>Y</mi><msub><mi>S</mi><mn>2</mn></msub><msub><mi>P</mi><mn>2</mn></msub></mrow><mrow><mi>X</mi><msub><mi>S</mi><mn>1</mn></msub><mo>+</mo><mi>Y</mi><msub><mi>S</mi><mn>2</mn></msub></mrow></mfrac></math>
+<span class="note">Same form for LL with L in place of P.</span></div>
+<div class="f"><span class="lab">Two-material proportioning on a key sieve (A, B = % passing, E = desired)</span>
+<math display="block"><mi>x</mi><mo>=</mo><mfrac><mrow><mi>E</mi><mo>−</mo><mi>A</mi></mrow><mrow><mi>B</mi><mo>−</mo><mi>A</mi></mrow></mfrac><mspace width="1em"/><mtext>(fraction of B)</mtext></math></div>
+</div>
+<div>
+<ul><li><b>Aggregates</b> (&gt; 75 µ): friction and incompressibility. <b>Binders</b> (&lt; 75 µ): cohesion and imperviousness, must not swell.</li><li>Stability depends on: aggregate strength, mineral composition (no Na sulphate / carbonate), gradation (fines fill voids, ideal ≈ 25% binder), plasticity, compaction near OMC.</li><li>Uses: road bases, sub-bases, surfacing, weak subgrades.</li></ul>
+<div class="ans"><b>A4 Q1, binder for PI = 6.</b> Road material: S<sub>1</sub> = 25 (passing 0.425 mm), P<sub>1</sub> = 0 → use 1. Binder: S<sub>2</sub> = 85, P<sub>2</sub> = 13.
+6 = (25X + 85×13 Y)/(25X + 85Y) → 25X + 1105Y = 150X + 510Y → 595Y = 125X → Y/X = 0.210.
+For 45 kg road material: binder = <b>0.210 × 45 ≈ 9.45 kg</b>.</div>
+</div>
+</div>
+</div></section>
+
+<!-- ============ DEWATERING ============ -->
+<section class="band" id="dewater"><div class="wrap">
+<h2>7. Dewatering</h2>
+<div class="why"><h3>Understand first</h3>
+<p>Dig below the water table and water pours in, slopes slump, and in fine sands the base can "boil" (quick condition: upward flow lifts the grains). So you <b>lower the water table first</b>, around and below the excavation. The whole topic is: <b>how easily does water flow out of this soil?</b> (permeability k). Read the method table from top to bottom as k gets smaller:</p>
+<ul><li><b>Gravel / coarse sand:</b> water flows freely, so just let it collect in a sump and pump it.</li>
+<li><b>Sands:</b> ring the excavation with small filtered pipes (well points) connected to a suction pump. Suction can only lift water about 5-6 m in practice (atmospheric pressure limits it to ~10 m in theory), so for deeper digs you add another ring lower down: <b>multistage</b>. Or use deep wells with submersible pumps that push rather than suck.</li>
+<li><b>Silty fine sands:</b> water is held by capillary tension and won't drain by gravity alone, so seal the well point and apply <b>vacuum</b> to increase the pull (gradient).</li>
+<li><b>Silts and clays:</b> k is so tiny that no practical gradient works. <b>Electro-osmosis:</b> clay particles are negatively charged, so the water next to them is full of positive ions. Apply DC current: the positive ions migrate to the negative electrode (cathode) and drag the water with them. Make the cathode a well point and pump the water away. The electro-osmotic k<sub>e</sub> is roughly the same for all soils, unlike the ordinary k, which is why it beats ordinary drainage in clay.</li></ul>
+<p><b>Sichardt R</b> tells you how far out the lowered water table spreads: more drawdown and more permeable soil → wider cone. Matters because neighbouring buildings inside that cone can settle.</p></div>
+<div class="scroll"><table class="stack">
+<thead><tr><th>Method</th><th>Soil (k, m/s)</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Sump / open pumping</td><td>Gravels, coarse sands; stiff clays</td><td>Cheapest; risk of piping and slope erosion in fine sands</td></tr>
+<tr><td>Well points</td><td>Sands, sandy gravels (≈ 10<sup>−3</sup> to 10<sup>−5</sup>)</td><td>Suction lift limits one stage to about 5-6 m drawdown</td></tr>
+<tr><td>Vacuum well points</td><td>Silty fine sands, sandy silts (≈ 10<sup>−5</sup> to 10<sup>−7</sup>)</td><td>Sealed filter holds vacuum, raises the gradient</td></tr>
+<tr><td>Deep wells (submersible pumps)</td><td>Deep, thick permeable layers</td><td>Large drawdown, wide spacing, no lift limit</td></tr>
+<tr><td>Electro-osmosis</td><td><b>Silts and clays</b> (&lt; 10<sup>−7</sup>)</td><td>The answer for cohesive soils; also raises strength</td></tr>
+</tbody></table></div>
+
+<div class="grid2">
+<div>
+<figure>
+<svg viewBox="0 0 440 250" role="img" aria-label="Single stage well point system: header pipe on the ground, riser pipes down to well points, drawdown curve lowered below excavation base">
+<rect x="0" y="40" width="440" height="210" class="sf" opacity=".4"/>
+<polygon points="130,40 175,150 265,150 310,40" fill="var(--bg)" stroke="currentColor"/>
+<text class="t" x="220" y="100" text-anchor="middle">Excavation</text>
+<line x1="0" y1="40" x2="440" y2="40" stroke="currentColor"/>
+<line x1="0" y1="80" x2="440" y2="80" class="wl" stroke-width="1.6" stroke-dasharray="7 4"/><text class="tw" x="6" y="74">Original WT</text>
+<path d="M0,84 C70,90 100,120 118,175 C160,178 280,178 322,175 C340,120 370,90 440,84" class="wl" stroke-width="2.2"/>
+<text class="tw" x="180" y="194">Lowered WT</text>
+<g stroke="currentColor" stroke-width="2.5"><line x1="118" y1="34" x2="118" y2="175"/><line x1="322" y1="34" x2="322" y2="175"/></g>
+<g class="wt"><rect x="113" y="168" width="10" height="26" rx="3"/><rect x="317" y="168" width="10" height="26" rx="3"/></g>
+<rect x="60" y="28" width="320" height="8" fill="currentColor"/><text class="t" x="20" y="22">Header pipe → pump</text>
+<text class="t" x="330" y="150">Riser</text><text class="tw" x="334" y="200">Well point</text><text class="t" x="334" y="214">(filter screen)</text>
+</svg>
+<figcaption><span class="draw">Draw</span>Well point system. Installed by jetting, at 0.75-2 m spacing, connected by swing pipes to a header and a vacuum-assisted pump.</figcaption>
+</figure>
+<figure>
+<svg viewBox="0 0 440 250" role="img" aria-label="Multistage well points: stepped excavation with a second ring of well points on a lower berm for each additional 5 metres of drawdown">
+<rect x="0" y="30" width="440" height="220" class="sf" opacity=".4"/>
+<polygon points="40,30 80,90 120,90 160,170 280,170 320,90 360,90 400,30" fill="var(--bg)" stroke="currentColor"/>
+<line x1="0" y1="30" x2="440" y2="30" stroke="currentColor"/>
+<line x1="0" y1="55" x2="440" y2="55" class="wl" stroke-dasharray="7 4"/><text class="tw" x="4" y="50">Original WT</text>
+<g stroke="currentColor" stroke-width="2.5"><line x1="40" y1="26" x2="40" y2="120"/><line x1="400" y1="26" x2="400" y2="120"/><line x1="100" y1="86" x2="100" y2="195"/><line x1="340" y1="86" x2="340" y2="195"/></g>
+<g class="wt"><rect x="35" y="114" width="10" height="20" rx="3"/><rect x="395" y="114" width="10" height="20" rx="3"/><rect x="95" y="190" width="10" height="20" rx="3"/><rect x="335" y="190" width="10" height="20" rx="3"/></g>
+<path d="M0,60 C20,80 30,110 40,124 C60,128 80,130 100,198 C150,202 290,202 340,198 C360,130 380,128 400,124 C410,110 420,80 440,60" class="wl" stroke-width="2.2"/>
+<text class="ts" x="130" y="84">Stage 1 berm</text><text class="ts" x="170" y="226">Stage 2 lowers WT below base</text>
+<text class="t" x="410" y="160" text-anchor="end">≈ 5 m</text><text class="t" x="410" y="230" text-anchor="end">≈ 5 m</text>
+</svg>
+<figcaption><span class="draw">Draw</span>Multistage well points: needed because suction lift caps one stage at about 5-6 m. Each extra 4.5-6 m of drawdown needs another ring on a lower berm.</figcaption>
+</figure>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 440 250" role="img" aria-label="Electro-osmosis: DC source connects anode rods (positive) and cathode well points (negative) in clay; pore water moves to the cathode and is pumped out">
+<rect x="0" y="60" width="440" height="190" class="sf" opacity=".55"/>
+<line x1="0" y1="60" x2="440" y2="60" stroke="currentColor"/>
+<text class="ts" x="10" y="240">Clay / silt</text>
+<rect x="190" y="8" width="60" height="28" fill="var(--bg)" stroke="currentColor"/><text class="t" x="220" y="27" text-anchor="middle">DC</text>
+<polyline points="190,22 100,22 100,60" fill="none" stroke="currentColor"/><polyline points="250,22 340,22 340,60" fill="none" stroke="currentColor"/>
+<text class="t" x="70" y="18">+ </text><text class="t" x="350" y="18">−</text>
+<rect x="95" y="60" width="10" height="150" fill="currentColor"/><text class="t" x="40" y="140">Anode</text><text class="t" x="24" y="155">(steel rod)</text>
+<rect x="334" y="60" width="12" height="150" class="wt"/><text class="tw" x="355" y="140">Cathode</text><text class="tw" x="355" y="155">well point</text>
+<g class="wl" stroke-width="1.8" marker-end="url(#aw)"><line x1="120" y1="100" x2="320" y2="100"/><line x1="120" y1="140" x2="320" y2="140"/><line x1="120" y1="180" x2="320" y2="180"/></g>
+<text class="tw" x="220" y="125" text-anchor="middle">pore water flows to cathode</text>
+<line x1="340" y1="60" x2="340" y2="44" class="wl" stroke-width="2" marker-end="url(#aw)"/><text class="tw" x="360" y="50">pumped out</text>
+</svg>
+<figcaption><span class="draw">Draw</span>Electro-osmosis (Casagrande). Cations in the diffuse layer drag water toward the cathode. Typical 50-100 V DC, electrodes 3-10 m apart.</figcaption>
+</figure>
+<div class="fx w">
+<div class="f"><span class="lab">Electro-osmotic seepage velocity (k<sub>e</sub> ≈ 5×10<sup>−5</sup> cm²/s per V, nearly constant across soils)</span>
+<math display="block"><mi>v</mi><mo>=</mo><msub><mi>k</mi><mi>e</mi></msub><mfrac><mi>E</mi><mi>L</mi></mfrac></math></div>
+<div class="f"><span class="lab">Sichardt radius of influence (s = drawdown in m, k in m/s, R in m)</span>
+<math display="block"><mi>R</mi><mo>=</mo><mn>3000</mn><mi>s</mi><msqrt><mi>k</mi></msqrt></math></div>
+</div>
+<h3>Vacuum well points (A4 Q3)</h3>
+<ul><li>For silty fine sands where gravity flow is too slow.</li><li><b>Installation:</b> jet a hole, place well point and riser, fill around it with a coarse sand filter, then seal the top 1-1.5 m with clay or bentonite so a vacuum holds in the filter. Pump keeps the header under vacuum.</li><li>Vacuum adds to the hydraulic gradient, pulling water from fine soils.</li></ul>
+<h3>Field control parameters (A4 Q6)</h3>
+<ul><li>Groundwater level and drawdown (piezometers / observation wells)</li><li>Discharge rate and fines (sand) in discharge: signals piping or filter failure</li><li>Settlement of the site and neighbouring structures</li><li>Soil permeability, aquifer thickness, radius of influence</li><li>Pump vacuum and performance, standby power and pumps</li><li>Disposal of pumped water; uplift on the excavation base</li></ul>
+</div>
+</div>
+</div></section>
+
+
+<section class="band qa" id="qa"><div class="wrap">
+<h2>8. Questions and answers</h2>
+<p>Every assignment question, answered the way you'd write it in the exam, plus likely extras. Read the question, answer it in your head (or on paper), then open it to check.</p>
+<div class="btnrow"><button class="btn" id="openall" type="button">Open all answers</button><button class="btn" id="closeall" type="button">Close all</button></div>
+<h3>Assignment 1: Compaction</h3>
+<details><summary><span class="qn">A1·1</span><span>Explain suitability number. Find S<sub>N</sub> for backfill with D<sub>50</sub> = 1 mm, D<sub>20</sub> = 0.5 mm, D<sub>10</sub> = 0.08 mm and rate it.</span></summary><div class="a"><p>Suitability number (Brown, 1977) rates a granular soil as <b>backfill for vibroflotation</b>. Backfill is poured down beside the vibrator and must sink fast and drain freely, so coarse, clean sand is ideal and fines are harmful.</p><p>S<sub>N</sub> = 1.7 √(3/D<sub>50</sub>² + 1/D<sub>20</sub>² + 1/D<sub>10</sub>²), D in mm. Lower S<sub>N</sub> = better.</p><p>Rating: 0-10 excellent, 10-20 good, 20-30 fair, 30-50 poor, &gt; 50 unsuitable.</p><p>Calculation: 3/1 + 1/0.25 + 1/0.0064 = 3 + 4 + 156.25 = 163.25. √163.25 = 12.78. S<sub>N</sub> = 1.7 × 12.78 = <b>21.7 → fair backfill</b>.</p></div></details>
+<details><summary><span class="qn">A1·2</span><span>Discuss the properties of soil compacted dry of optimum and wet of optimum.</span></summary><div class="a"><p>The difference comes from <b>soil structure</b>: dry of OMC, clay plates lack water to slide, so they lock in a random edge-to-face (flocculated) arrangement; wet of OMC they align parallel (dispersed).</p><ul><li><b>Permeability:</b> dry side higher (open flocculated pores); wet side lower</li><li><b>Shear strength:</b> dry side higher but brittle; wet side lower, ductile</li><li><b>Swelling:</b> dry side swells more (water-deficient, sucks water in); wet side less</li><li><b>Shrinkage:</b> dry side less; wet side more</li><li><b>Construction pore pressure:</b> dry side lower; wet side higher</li><li><b>Compressibility:</b> dry side lower at low stress (but structure collapses at high stress); wet side higher at low stress</li><li><b>Stress-strain:</b> dry side stiff, high modulus; wet side flexible, tolerates deformation without cracking</li></ul><p>Draw the compaction curve marking dry and wet sides, with sketches of flocculated vs dispersed structure.</p></div></details>
+<details><summary><span class="qn">A1·3</span><span>How will you control compaction in the field?</span></summary><div class="a"><ul><li><b>Before:</b> lab Proctor test on the borrow soil gives MDD and OMC; specify relative compaction (usually ≥ 95% of MDD) and moisture range (OMC ± 2%)</li><li><b>Placement:</b> spread in uniform loose lifts (150-300 mm), remove oversize and organic matter</li><li><b>Moisture adjustment:</b> sprinkle water if dry, aerate / scarify if wet; check w by calcium carbide meter, sand bath, alcohol burning, Proctor needle, nuclear gauge</li><li><b>Rolling:</b> suitable roller for the soil, fixed number of passes established from a trial strip</li><li><b>Density check:</b> sand replacement, core cutter, rubber balloon, water displacement or nuclear method at specified frequency</li><li><b>Compute</b> γ<sub>d</sub> = γ/(1+w) and RC = γ<sub>d,field</sub>/γ<sub>d,max</sub> × 100; if below spec, re-roll or rework the layer before placing the next</li></ul></div></details>
+<details><summary><span class="qn">A1·4</span><span>What is the effect of compaction on engineering properties? How do you decide whether to compact dry or wet of optimum?</span></summary><div class="a"><ul><li>Density and shear strength increase; bearing capacity increases</li><li>Permeability decreases</li><li>Compressibility and settlement decrease</li><li>Stability of slopes and embankments improves</li><li>Swelling may increase (dry side), shrinkage may increase (wet side)</li><li>Liquefaction potential of sands reduces</li></ul><p><b>Decision depends on what the structure needs:</b></p><ul><li><b>Dry of optimum</b> where strength and stiffness matter: pavement subgrades, foundations, retaining wall backfill (strength + free drainage)</li><li><b>Wet of optimum</b> where watertightness and flexibility matter: dam cores, canal and landfill liners (low k, tolerates settlement without cracking); also for expansive clays to reduce later swelling</li></ul></div></details>
+<details><summary><span class="qn">A1·5</span><span>What are the factors that affect compaction in the laboratory?</span></summary><div class="a"><ul><li><b>Water content:</b> lubricates particles up to OMC, then occupies space</li><li><b>Compactive effort:</b> more energy → higher MDD at lower OMC</li><li><b>Soil type:</b> well-graded coarse soils reach high MDD at low OMC; clays give low MDD, high OMC, flat curves; uniform sands show little peak</li><li><b>Method of compaction:</b> impact, kneading, static or vibratory give different curves for the same energy</li><li><b>Admixtures:</b> lime, cement, salts change OMC and MDD</li><li><b>Recompaction:</b> reusing the same sample crushes particles and gives higher densities, so fresh samples are preferred</li><li><b>Mould size / layer thickness</b></li></ul></div></details>
+<details><summary><span class="qn">A1·6</span><span>What is the zero air voids line?</span></summary><div class="a"><p>The curve of dry density vs water content for the soil with <b>no air at all</b> (S = 100%): γ<sub>d</sub> = Gγ<sub>w</sub>/(1 + wG). It is the theoretical maximum dry density at each water content. Compaction cannot expel all air, so the compaction curve always lies to the left of and below it, approaching it on the wet side. Lines for 5% and 10% air voids, γ<sub>d</sub> = (1 − n<sub>a</sub>)Gγ<sub>w</sub>/(1 + wG), are drawn parallel to it. Used to check that test results are physically possible.</p></div></details>
+<details><summary><span class="qn">A1·7</span><span>Describe the Standard and Modified Proctor tests. How do you decide which test to conduct?</span></summary><div class="a"><p><b>Procedure (common):</b> take about 3 kg of soil passing 4.75 mm, add water, compact in the 1000 ml mould in layers with the rammer, trim, weigh, take a water content sample. Repeat at 4-6 increasing water contents. Plot γ<sub>d</sub> vs w; the peak gives MDD and OMC; draw the ZAV line.</p><ul><li><b>Standard (IS 2720 Part 7):</b> 2.6 kg rammer, 310 mm fall, 3 layers × 25 blows, about 600 kJ/m³</li><li><b>Modified (IS 2720 Part 8):</b> 4.89 kg rammer, 450 mm fall, 5 layers × 25 blows, about 2700 kJ/m³ (4.5 times)</li></ul><p><b>Choice:</b> match the field energy. Modified for heavy loads and heavy compaction plant (airfield pavements, highways, heavy embankments); Standard for ordinary fills and light equipment.</p></div></details>
+<details><summary><span class="qn">A1·8</span><span>Embankment of 10<sup>6</sup> m³ at e = 0.80, borrow pits A, B, C with e = 0.90, 1.50, 1.80 and cost 0.25, 0.23, 0.18 Rs/m³. Which pit is most economical?</span></summary><div class="a"><p>Solids volume is constant: V<sub>s</sub> = 10<sup>6</sup>/1.80 = 5.556 × 10<sup>5</sup> m³.</p><ul><li>A: 1.90 V<sub>s</sub> = 10.56 × 10<sup>5</sup> m³ → Rs 2.64 lakh</li><li>B: 2.50 V<sub>s</sub> = 13.89 × 10<sup>5</sup> m³ → Rs 3.19 lakh</li><li>C: 2.80 V<sub>s</sub> = 15.56 × 10<sup>5</sup> m³ → Rs 2.80 lakh</li></ul><p><b>Pit A is most economical</b> even though its rate is highest, because it needs the least excavation.</p></div></details>
+<details><summary><span class="qn">A1·9</span><span>Compaction test data given (mould 1000 cc, 1000 g, G = 2.70). Find OMC, MDD, ZAV line and S at MDD.</span></summary><div class="a"><p>γ (g/cc) = (total − 1000)/1000: 1.925, 2.095, 2.150, 2.125, 2.070. γ<sub>d</sub> = γ/(1+w): 1.750, 1.871, 1.881, 1.830, 1.751.</p><p><b>OMC ≈ 14%, MDD ≈ 1.88 g/cc.</b> ZAV: γ<sub>d</sub> = 2.7/(1 + 2.7w) → 2.04 (12%), 1.96 (14%), 1.89 (16%), 1.82 (18%). At MDD, e = 2.70/1.881 − 1 = 0.435, S = 0.143 × 2.70/0.435 = <b>88.7%</b>. See the plotted curve in section 1.</p></div></details>
+<h3>Assignment 2: Field compaction</h3>
+<details><summary><span class="qn">A2·1</span><span>What types of compactors are recommended for different types of soil?</span></summary><div class="a"><ul><li>Smooth wheel roller: gravel, sand, crushed rock, well-graded sand and low-plasticity silt; not uniform sand or soft clay</li><li>Sheepsfoot / padfoot (tamping) roller: cohesive soils, silty and clayey soils</li><li>Pneumatic tyred roller: both cohesive and cohesionless soils (most versatile)</li><li>Grid roller: weathered rock, well-graded coarse soils</li><li>Vibratory roller / vibratory plate: cohesionless granular soils</li><li>Rammers and tampers: all soils, confined areas</li><li>Impact roller: loose fills and deep layers</li></ul></div></details>
+<details><summary><span class="qn">A2·2</span><span>How would you estimate the output of a roller?</span></summary><div class="a"><p>Output (compacted m³/h) = W × S × L × 1000 × E / N</p><ul><li>W = effective rolling width (m), allowing for overlap</li><li>S = rolling speed (km/h), × 1000 to get m/h</li><li>L = compacted lift thickness (m)</li><li>N = number of passes needed (from a trial strip)</li><li>E = job efficiency (about 0.75 for turning, delays)</li></ul><p>Logic: width × speed = area per hour; × thickness = volume per hour; each strip needs N passes so divide by N.</p></div></details>
+<details><summary><span class="qn">A2·3</span><span>How does a sheepsfoot roller compact the earth?</span></summary><div class="a"><ul><li>Steel drum with rows of projecting feet / lugs (17.5-23 cm long); drum ballasted with water or wet sand; weight 50-80 kN; speed 6-10 km/h</li><li>Only the feet touch the soil, so weight is concentrated on a small area: very high contact pressure</li><li>Feet penetrate the loose lift and compact it <b>from the bottom up</b> with pressure plus kneading, breaking up clods</li><li>As the layer densifies, the feet penetrate less and the drum rises: rolling continues until the feet no longer sink in fully, called <b>walk-out</b></li><li>Compacts layers of about 30 cm; best for cohesive soils; leaves the surface loose and dimpled, which helps bonding with the next lift</li></ul><p>Draw the sheepsfoot sketch from section 2.</p></div></details>
+<details><summary><span class="qn">A2·4</span><span>What factors must be kept in mind for desired compaction in the field?</span></summary><div class="a"><ul><li>Water content near OMC</li><li>Lift (layer) thickness</li><li>Number of passes</li><li>Type of roller matched to soil</li><li>Contact pressure / weight of roller (static pressure = weight / contact length)</li><li>Rolling speed</li><li>Soil type and gradation, removal of oversize and organics</li><li>Uniform coverage and overlap; drainage of the area during work</li></ul></div></details>
+<details><summary><span class="qn">A2·5</span><span>What methods are adopted for measuring water content and density in the field?</span></summary><div class="a"><p><b>Water content:</b> oven drying (reference, slow), calcium carbide / rapid moisture meter (CaC<sub>2</sub> + water → acetylene gas pressure), sand bath, alcohol burning, Proctor needle (penetration resistance vs w calibration), nuclear moisture gauge.</p><p><b>Density:</b> sand replacement (granular / gravelly soils), core cutter (soft fine soils, no gravel), rubber balloon, water displacement (cohesive lumps), nuclear densometer (fast, non-destructive).</p></div></details>
+<details><summary><span class="qn">A2·6</span><span>Which rollers suit (i) cohesive soils and (ii) cohesionless soils?</span></summary><div class="a"><p><b>(i) Cohesive:</b> sheepsfoot, padfoot / tamping and pneumatic tyred rollers: they deliver high pressure and kneading that breaks lumps and remoulds the clay. Vibration does little because clay particles are bonded and the water can't escape quickly.</p><p><b>(ii) Cohesionless:</b> vibratory rollers and vibratory plates (high frequency, low amplitude shaking lets grains settle into a denser packing), smooth wheel rollers for finishing, pneumatic rollers. Sheepsfoot is useless here: feet just shove the sand aside.</p></div></details>
+<details><summary><span class="qn">A2·7</span><span>What are grid rollers? For which soil are they used?</span></summary><div class="a"><p>A roller whose drum is a heavy steel grid / mesh instead of a solid surface. Weight about 5 t, 15 t ballasted, speed 5-24 km/h. The grid concentrates pressure, crushes oversize particles and breaks clods, pushing fines down. Used for <b>weathered rocks and well-graded coarse soils</b>, in road subgrades and sub-bases.</p></div></details>
+<details><summary><span class="qn">A2·8</span><span>What are impact rollers? For which soil are they most suitable?</span></summary><div class="a"><p>Rollers with a <b>non-circular (pentagonal)</b> drum. As it rotates, the mass is lifted and falls on each face, delivering impact blows (10-25 kJ) continuously, like dynamic compaction on wheels, combined with static pressure and kneading. Reaches much greater depth (1-3 m) than ordinary rollers, breaks lumps, levels ruts, and works over a wider range of moisture contents. Most suitable for <b>loose fills, collapsible and dry sandy soils, and thick layers</b>, for example large earthworks and proof-rolling.</p></div></details>
+<h3>Assignment 3: Vertical drains</h3>
+<details><summary><span class="qn">A3·1</span><span>What are sand drains? How are they installed? How is the average degree of consolidation estimated?</span></summary><div class="a"><p>Vertical columns of sand (200-600 mm dia, 1.5-6 m c/c) installed through soft saturated clay to shorten the drainage path. Water flows <b>radially</b> to the drains and up to a sand blanket, so a preload / surcharge consolidates the clay in months instead of years.</p><p><b>Installation:</b> displacement method: closed-end mandrel driven / vibrated, filled with sand, withdrawn (fast, causes smear). Non-displacement: jetting, rotary drilling or continuous-flight auger, then sand filling (less disturbance). Sand blanket placed on top, then surcharge; monitored with piezometers and settlement plates.</p><p><b>Average degree:</b> radial: U<sub>r</sub> = 1 − exp(−8T<sub>r</sub>/m), T<sub>r</sub> = c<sub>h</sub>t/d<sub>e</sub>², m = F(n), n = d<sub>e</sub>/d<sub>w</sub>. Vertical: U<sub>v</sub> from T<sub>v</sub> = c<sub>v</sub>t/H<sub>d</sub>². Combined (Carrillo): (1 − U) = (1 − U<sub>v</sub>)(1 − U<sub>r</sub>).</p><p>Draw the sand drain section from section 3.</p></div></details>
+<details><summary><span class="qn">A3·2</span><span>What are the various parameters for the design of sand drains?</span></summary><div class="a"><ul><li>Diameter of drain d<sub>w</sub> (or equivalent diameter of PVD)</li><li>Spacing s and pattern (square / triangular) → d<sub>e</sub> = 1.13s or 1.05s</li><li>Length / depth of penetration through the compressible layer</li><li>Soil properties: c<sub>h</sub>, c<sub>v</sub>, k<sub>h</sub>/k<sub>v</sub>, compressibility</li><li>Required degree of consolidation and time available</li><li>Smear zone (reduced k around drain) and well resistance of the drain</li><li>Filter / sand gradation, sand blanket thickness (about 0.3-1 m)</li><li>Magnitude and staging of surcharge load</li></ul></div></details>
+<details><summary><span class="qn">A3·3</span><span>What are the advantages and disadvantages of vertical drains?</span></summary><div class="a"><p><b>Advantages:</b></p><ul><li>Drastically shortens consolidation time (path from H to about s/2; time ∝ path²)</li><li>Uses higher horizontal permeability</li><li>Faster strength gain, so embankments can be raised faster and more safely</li><li>Reduces post-construction settlement</li><li>PVDs are cheap, quick to install, uniform quality</li></ul><p><b>Disadvantages:</b></p><ul><li>Smear and disturbance reduce k near the drain</li><li>Well resistance; sand drains may neck or be discontinuous, PVDs can kink under large settlement</li><li>Need surcharge and waiting time anyway</li><li>Ineffective for secondary compression (organic soils, peat)</li><li>Displacement installation can disturb sensitive clays</li></ul></div></details>
+<details><summary><span class="qn">A3·4</span><span>PVDs 100 × 4 mm, square 2 m, clay 10 m, c<sub>v</sub> = 2 and c<sub>h</sub> = 3 m²/yr, impervious base. U after 1 year, no smear?</span></summary><div class="a"><p>d<sub>w</sub> = 2(100+4)/π = 66.2 mm; d<sub>e</sub> = 2.26 m; n = 34.1; m = 2.78. T<sub>r</sub> = 0.587 → U<sub>r</sub> = 81.5%. H<sub>d</sub> = 10 m, T<sub>v</sub> = 0.02 → U<sub>v</sub> = 16%. U = 1 − 0.84 × 0.185 = <b>84.5%</b>. Full steps in section 3.</p></div></details>
+<details><summary><span class="qn">A3·5</span><span>Sandwicks 10 cm dia, triangular 2 m c/c, c<sub>v</sub> = 3 × 10<sup>−3</sup> cm²/s, k<sub>h</sub> = 4.5k<sub>v</sub>. Time for 90% radial consolidation?</span></summary><div class="a"><p>d<sub>e</sub> = 2.10 m, n = 21, m = 2.30, c<sub>h</sub> = 1.35 × 10<sup>−6</sup> m²/s. T<sub>r</sub> = 2.303 × 2.30/8 = 0.663. t = 0.663 × 4.41/1.35 × 10<sup>−6</sup> = 2.16 × 10<sup>6</sup> s ≈ <b>25 days</b>.</p></div></details>
+<h3>Assignment 4: Mechanical stabilisation and dewatering</h3>
+<details><summary><span class="qn">A4·1</span><span>Road material (PI 0) + binder (PI 13). Binder needed for 45 kg of road material to get PI = 6?</span></summary><div class="a"><p>PI<sub>mix</sub> = (X S<sub>1</sub>P<sub>1</sub> + Y S<sub>2</sub>P<sub>2</sub>)/(X S<sub>1</sub> + Y S<sub>2</sub>), S = % passing 425 µ, PI 0 → use 1. S<sub>1</sub> = 25, S<sub>2</sub> = 85: 6 = (25X + 1105Y)/(25X + 85Y) → Y/X = 125/595 = 0.21. Binder = 0.21 × 45 = <b>9.45 kg</b>.</p></div></details>
+<details><summary><span class="qn">A4·2</span><span>What are well points? Why is a multistage well point system required? Explain with sketch.</span></summary><div class="a"><p><b>Well point:</b> a small-diameter (50-75 mm) perforated pipe, about 1 m long, with a filter screen, jetted into the ground. Many are installed in a line around the excavation at 0.75-2 m spacing, each connected by a riser and swing pipe to a common header pipe and a combined vacuum + centrifugal pump. Suitable for sands and sandy gravels.</p><p><b>Multistage:</b> the pump lifts water by suction, and atmospheric pressure limits suction lift; after losses a single stage can lower the water table only about 5-6 m. For deeper excavations a second ring is installed on a berm lower down (and a third if needed), each stage giving about 4.5-6 m more drawdown.</p><p>Draw single and multistage sketches from section 7.</p></div></details>
+<details><summary><span class="qn">A4·3</span><span>What are vacuum well points? For which soils are they most effective? How are they installed?</span></summary><div class="a"><p>Well points in which a <b>vacuum is maintained in the filter zone</b>, adding to the hydraulic gradient driving water to the well point. Effective in <b>silty fine sands and sandy silts</b> (k ≈ 10<sup>−5</sup> to 10<sup>−7</sup> m/s) where water is held by capillarity and won't drain by gravity.</p><p><b>Installation:</b> jet a hole (about 250-300 mm) with a casing, insert the well point and riser, fill the annulus with coarse sand filter up to near the top, seal the top 1-1.5 m with clay / bentonite so the vacuum is held, connect to header and vacuum pump. Spacing closer than ordinary well points.</p></div></details>
+<details><summary><span class="qn">A4·4</span><span>Which dewatering technique is most suitable for cohesive soil? Explain with sketch.</span></summary><div class="a"><p><b>Electro-osmosis.</b> Clays and silts have permeability below about 10<sup>−7</sup> m/s, so gravity, suction or vacuum drainage are too slow. A DC field moves water regardless of the low hydraulic permeability (see A4·5 and the sketch in section 7).</p></div></details>
+<details><summary><span class="qn">A4·5</span><span>For which soils is electro-osmosis used? Explain with sketch.</span></summary><div class="a"><p>Used for <b>silts, silty clays and clays</b> (very low k). Clay particles carry negative surface charge, so pore water near them contains excess positive cations. When DC voltage (about 50-100 V) is applied between <b>anodes</b> (steel rods) and <b>cathodes</b> (well points), the cations migrate to the cathode and drag pore water with them. Water collecting at the cathode is pumped out.</p><ul><li>Flow velocity v = k<sub>e</sub> × (E/L); k<sub>e</sub> ≈ 5 × 10<sup>−5</sup> cm²/s per V, nearly the same for all soils</li><li>Also reduces pore pressure and increases shear strength (stabilises slopes, excavations)</li><li>Drawbacks: high power cost, corrosion of anodes</li></ul></div></details>
+<details><summary><span class="qn">A4·6</span><span>What field control parameters should be considered while designing a dewatering system?</span></summary><div class="a"><ul><li>Soil profile, permeability and aquifer thickness (pumping tests)</li><li>Initial water table and required drawdown below excavation base</li><li>Radius of influence (Sichardt R = 3000 s√k) and effect on nearby structures</li><li>Rate of discharge and pump capacity, with standby pumps and power</li><li>Piezometric levels monitored during pumping</li><li>Fines content in discharge (sign of piping / filter failure)</li><li>Settlement of adjacent ground and buildings</li><li>Bottom heave / uplift and slope stability</li><li>Disposal of discharged water; duration of dewatering</li></ul></div></details>
+<h3>Assignment 5: Grouting and chemical stabilisation</h3>
+<details><summary><span class="qn">A5·1</span><span>Explain ascending and descending stage grouting with sketches; advantages and disadvantages.</span></summary><div class="a"><p><b>Descending (downstage):</b> drill the first stage (3-6 m), grout it, let it set, re-drill through the set grout to the next stage, grout with packer seated at the top of that stage, repeat downward.</p><p><b>Ascending (upstage):</b> drill the full depth at once, set the packer above the bottom stage and grout it, raise the packer one stage, grout, repeat upward.</p><p><b>Descending</b> + upper zone sealed first so higher pressures can be used below without surface leakage, hole stable, each stage tested. − Slow and costly (repeated drilling, setting time).</p><p><b>Ascending</b> + faster, cheaper, one drilling operation, continuous. − Needs a stable hole that won't collapse; grout can bypass the packer through fissures; limited pressure near the surface.</p><p>Draw the stage grouting sketch from section 4.</p></div></details>
+<details><summary><span class="qn">A5·2</span><span>Which grouting method is widely used for making vertical seepage barriers beneath hydraulic structures? Explain with sketch.</span></summary><div class="a"><p><b>Curtain grouting.</b> One to three rows of closely spaced, deep holes (often down to 0.3-0.7 of the reservoir head, or to an impervious stratum) along the upstream heel of a dam or weir. Holes are grouted in stages using split-spacing (primary holes first, then secondary and tertiary in between) until the grout take is low. The grouted zone forms a continuous, nearly impervious vertical screen that cuts seepage and reduces uplift under the structure. Blanket grouting of the top rock is normally done first so the curtain can be grouted at higher pressure. Draw the dam sketch from section 4.</p></div></details>
+<details><summary><span class="qn">A5·3</span><span>Explain the characteristics of grouts.</span></summary><div class="a"><ul><li><b>Rheology / viscosity:</b> governs penetration and pumping pressure; Newtonian chemical solutions penetrate finer pores than Bingham cement suspensions</li><li><b>Particle size:</b> must satisfy groutability ratio (D<sub>15 soil</sub>/D<sub>85 grout</sub> &gt; 25)</li><li><b>Setting / gel time:</b> must be controllable</li><li><b>Stability:</b> low bleeding and sedimentation; bentonite added to cement grout</li><li><b>Strength</b> after setting</li><li><b>Permanence / durability:</b> resistance to leaching, washout, chemical attack, creep</li><li><b>Toxicity and environmental safety</b></li><li><b>Cost</b></li></ul><p>Types: suspensions (cement, clay, cement-bentonite), solutions / chemical (sodium silicate, resins), emulsions (bitumen).</p></div></details>
+<details><summary><span class="qn">A5·4</span><span>Difference between curtain grouting and blanket grouting. Where and when are they used?</span></summary><div class="a"><table><thead><tr><th></th><th>Curtain</th><th>Blanket (consolidation)</th></tr></thead><tbody><tr><td>Purpose</td><td>Vertical seepage barrier</td><td>Strengthen and seal top foundation rock</td></tr><tr><td>Holes</td><td>1-3 rows, deep</td><td>Grid over whole base, shallow (5-15 m)</td></tr><tr><td>Location</td><td>Upstream heel of dam / weir</td><td>Entire foundation area</td></tr><tr><td>Pressure</td><td>Higher</td><td>Lower (near surface)</td></tr><tr><td>Sequence</td><td>After blanket</td><td>First</td></tr></tbody></table><p>Used for dams, barrages, weirs and other hydraulic structures on fissured rock or permeable foundations; also tunnels and cofferdams.</p></div></details>
+<details><summary><span class="qn">A5·5</span><span>What factors affect cement stabilisation?</span></summary><div class="a"><ul><li>Soil type (best for well-graded granular, poor for high-plasticity clays and organics)</li><li>Cement content (5-14%)</li><li>Moisture content and compaction density</li><li>Mixing efficiency and delay between mixing and compaction</li><li>Curing conditions and period</li><li>Presence of organic matter and sulphates</li><li>Additives (lime, fly ash, CaCl<sub>2</sub>)</li><li>Freeze-thaw and wet-dry durability requirements</li></ul></div></details>
+<details><summary><span class="qn">A5·6</span><span>Explain the mechanism of lime stabilisation. For which soils is it most effective?</span></summary><div class="a"><ol style="padding-left:20px"><li><b>Cation exchange:</b> Ca<sup>2+</sup> from lime replaces Na<sup>+</sup>, K<sup>+</sup> on clay surfaces; diffuse double layer shrinks</li><li><b>Flocculation and agglomeration:</b> particles clump; PI falls, workability and texture improve (immediate, hours)</li><li><b>Carbonation:</b> Ca(OH)<sub>2</sub> + CO<sub>2</sub> → CaCO<sub>3</sub>, weak cementation</li><li><b>Pozzolanic reaction:</b> Ca(OH)<sub>2</sub> + clay silica and alumina → calcium silicate and aluminate hydrates (CSH, CAH) that bind particles; long-term strength gain over months</li></ol><p><b>Most effective for fine-grained clayey soils</b> (PI &gt; 10, e.g. expansive black cotton soil): reduces plasticity, swelling and shrinkage, raises strength and CBR. Not effective for sands and non-plastic silts that lack reactive clay minerals. Usual dose 2-8%.</p></div></details>
+<h3>Likely extra questions</h3>
+<details><summary><span class="qn">X·1</span><span>What is ground improvement? State objectives and classify methods.</span></summary><div class="a"><p>Modifying the in-situ properties of weak ground to meet project needs when replacing it or using deep foundations is costly.</p><p><b>Objectives:</b> increase shear strength and bearing capacity, reduce compressibility and settlement, reduce or increase permeability, prevent liquefaction, control swelling.</p><p><b>Classification:</b> mechanical (compaction, vibroflotation, dynamic compaction), hydraulic (preloading, vertical drains, dewatering, electro-osmosis), chemical / physical (grouting, cement, lime, mechanical blending), inclusions (stone columns, geosynthetics).</p></div></details>
+<details><summary><span class="qn">X·2</span><span>Differentiate compaction and consolidation.</span></summary><div class="a"><table><thead><tr><th></th><th>Compaction</th><th>Consolidation</th></tr></thead><tbody><tr><td>Expels</td><td>Air</td><td>Water</td></tr><tr><td>Soil</td><td>Partially saturated</td><td>Saturated (clays)</td></tr><tr><td>Load</td><td>Dynamic, short</td><td>Static, sustained</td></tr><tr><td>Time</td><td>Instant</td><td>Months to years</td></tr><tr><td>Done</td><td>Deliberately, by machines</td><td>Naturally under structure load</td></tr></tbody></table></div></details>
+<details><summary><span class="qn">X·3</span><span>What is preloading? Why is it combined with vertical drains?</span></summary><div class="a"><p>Placing a temporary load (fill, sometimes more than the design load = surcharge) on soft clay before construction so primary consolidation happens in advance; the load is then removed and the structure built with little remaining settlement. Alone it is too slow for thick clays because time ∝ H². Vertical drains shorten the drainage path so the preload achieves the settlement within the construction schedule; staged loading also lets clay gain strength to avoid failure.</p></div></details>
+<details><summary><span class="qn">X·4</span><span>What is the groutability ratio? Why can't cement grout be used in fine sands?</span></summary><div class="a"><p>N = D<sub>15</sub> (soil) / D<sub>85</sub> (grout); &gt; 25 groutable, &lt; 11 not. Also D<sub>10</sub>/D<sub>95</sub>: &gt; 11 groutable, &lt; 6 not. Cement particles (up to about 0.1 mm) are larger than the pore throats of fine sands, so they filter out at the hole wall and form a cake instead of penetrating. Chemical grouts (true solutions) or microfine cement are used for finer soils.</p></div></details>
+<details><summary><span class="qn">X·5</span><span>What is smear effect and well resistance in vertical drains?</span></summary><div class="a"><p><b>Smear:</b> installing a drain with a mandrel remoulds a ring of clay around it (about 2-3 times the mandrel size), lowering k<sub>h</sub> there and slowing radial consolidation. <b>Well resistance:</b> the drain itself has finite discharge capacity, so with long drains or kinked / silted PVDs, water flow up the drain is restricted. Both make actual consolidation slower than Barron's ideal solution.</p></div></details>
+<details><summary><span class="qn">X·6</span><span>Write short notes on rammers and vibratory plate compactors.</span></summary><div class="a"><p><b>Rammers:</b> impact compaction for small, confined areas (trenches, behind walls); hand type 3-5 kg, machine 30-150 kg, base 15-20 cm square, 500-750 blows/min; suit cohesive and semi-cohesive soils.</p><p><b>Vibratory plate:</b> large base plate vibrated by an engine-driven eccentric weight, low amplitude, high frequency; compacts granular soils and bituminous mixes in thin layers; gives a level finish.</p></div></details>
+<details><summary><span class="qn">X·7</span><span>Compare well points and deep wells.</span></summary><div class="a"><ul><li>Well points: shallow, closely spaced, suction lift limited to about 5-6 m per stage; sands; quick to install</li><li>Deep wells: 150-500 mm dia, submersible pumps at the bottom push water up, no suction limit; large drawdowns (20-30 m+) in thick permeable strata; widely spaced; costlier per well</li></ul></div></details>
+
+</div></section>
+<!-- ============ RECALL ============ -->
+<section class="band" id="recall"><div class="wrap">
+<h2>Last 30 minutes: recall checklist</h2>
+<div class="grid2">
+<div><h3>Write from memory</h3>
+<ul><li>γ<sub>d</sub>, ZAV, Se = wG, borrow pit ratio</li><li>Suitability number + rating bands</li><li>Roller output Q</li><li>d<sub>e</sub> (1.13s, 1.05s), d<sub>w</sub> for PVD, n, T<sub>r</sub>, m, U<sub>r</sub></li><li>T<sub>v</sub> two forms, Carrillo combination</li><li>Groutability N<sub>1</sub>, N<sub>2</sub> limits</li><li>PI of mix (with the "zero → 1" rule), Fuller</li></ul></div>
+<div><h3>Draw once, fast (8 sketches)</h3>
+<ol style="padding-left:20px"><li>Compaction curve + ZAV</li><li>Sheepsfoot roller</li><li>Sand drain section with preload</li><li>Square / triangular drain patterns</li><li>Ascending vs descending grouting</li><li>Curtain + blanket under a dam</li><li>Single and multistage well points</li><li>Electro-osmosis</li></ol></div>
+</div>
+<p class="note">Exam tactics: every "explain with neat sketch" answer gets the sketch first, labelled, then 4-6 points. For numericals, write the formula, then numbers, then the unit and a one-line conclusion ("Pit A is most economical"). Skipped on purpose: IS 15284 (stone columns) isn't in any assignment.</p>
+</div></section>
+<script>{const set=o=>document.querySelectorAll('.qa details').forEach(d=>d.open=o);document.getElementById('openall').addEventListener('click',()=>set(true));document.getElementById('closeall').addEventListener('click',()=>set(false));}</script>
+</body>
+</html>
