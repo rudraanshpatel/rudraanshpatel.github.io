@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-22T06:59:23Z",
-  "count": 4123,
+  "updated": "2026-11-24T22:32:32Z",
+  "count": 4124,
   "problems": [
     {
       "id": 1,
@@ -28862,6 +28862,13 @@
       "slug": "minimum-cost-to-delete-array",
       "difficulty": "Hard",
       "premium": false
+    },
+    {
+      "id": 4124,
+      "title": "Minimum Operations to Make Mountain Array II",
+      "slug": "minimum-operations-to-make-mountain-array-ii",
+      "difficulty": "Hard",
+      "premium": true
     }
   ]
 }
