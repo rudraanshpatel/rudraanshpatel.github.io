@@ -28,7 +28,7 @@ h3{font-size:19px;font-weight:600;margin:26px 0 8px}
 .top{background:var(--soil);color:#fff8f0}
 .top p{max-width:62ch;margin:10px 0 0;color:#f6e7d6}
 html{scroll-padding-top:64px}
-nav.scroll{display:flex;gap:6px;overflow-x:auto;padding:10px max(5vw,16px);border-bottom:1px solid var(--line);background:var(--bg)}
+nav.scroll{display:flex;gap:6px;overflow-x:auto;overscroll-behavior-x:contain;padding:10px max(5vw,16px);border-bottom:1px solid var(--line);background:var(--bg)}
 @media(min-width:900px){nav.scroll{position:sticky;top:0;z-index:5}}
 nav a{flex:none;color:var(--ink);text-decoration:none;padding:10px 14px;border-radius:99px;background:var(--soil2);font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center}
 nav a:focus-visible,nav a:hover{outline:2px solid var(--water)}
@@ -48,7 +48,8 @@ nav a:focus-visible,nav a:hover{outline:2px solid var(--water)}
 .f:last-child{border-bottom:0}
 .f .lab{font-size:14px;color:var(--mut);font-weight:600}
 math{font-size:1.18em}
-math[display=block]{margin:4px 0;overflow-x:auto;overflow-y:hidden;padding:2px 0}
+math[display=block]{margin:4px 0;padding:2px 0;max-width:100%}
+@media(max-width:420px){math{font-size:1.05em}}
 ul{padding-left:20px;margin:6px 0}li{margin:3px 0}
 .ans{background:var(--hi);border-radius:8px;padding:10px 14px;margin:10px 0}
 .ans b{white-space:nowrap}
@@ -59,7 +60,7 @@ figcaption{font-size:14.5px;color:var(--mut);margin-top:6px}
 table{border-collapse:collapse;width:100%;font-size:15px;background:var(--bg)}
 th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
 th{font-family:Archivo;font-weight:600;font-size:14px;background:var(--soil2)}
-.scroll{overflow-x:auto}
+@media(max-width:700px){.scroll{overflow-x:auto;overscroll-behavior-x:contain}}
 .note{font-size:14.5px;color:var(--mut)}
 .why{background:var(--water2);border-radius:10px;padding:14px 18px;margin:16px 0 8px;border:1px solid light-dark(#c9def3,#24425f)}
 .why h3{margin:0 0 6px;color:var(--water)}
